@@ -12,8 +12,9 @@ a=int(input("number1:"));
 b=int(input("number2:"));
 if 1<=a<=20 and 1<=b<=20:
     print(a+b);
-else:
+elif a/2=0:
+    print(b-a);
+else
  print("you can not sum a,b -- does not subscribe in rang");
-
 
 

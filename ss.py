@@ -12,9 +12,9 @@ a=int(input("number1:"));
 b=int(input("number2:"));
 if 1<=a<=20 and 1<=b<=20:
     print(a+b);
-elif a/2=0:
+elif a % 2==0 and 20<=b<100:
     print(b-a);
-else
+else:
  print("you can not sum a,b -- does not subscribe in rang");
 
 

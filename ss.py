@@ -1,3 +1,25 @@
+
+# -*- coding: utf-8 -*-
+import sys
+import os
+
+# تنظیم encoding برای Windows
+if os.name == 'nt':  # Windows
+    import subprocess
+    subprocess.run('chcp 65001', shell=True, capture_output=True)
+    sys.stdout.reconfigure(encoding='utf-8')
+    sys.stderr.reconfigure(encoding='utf-8')
+
+fruits = {"apple", "banana", "cherry", "orange"}
+other_fruits = {"موز", "سیب", "انگور", "گیلاس", "لیمو"}
+
+union = fruits.union(other_fruits)
+print("اتحاد:", union)
+
+intersection = fruits.intersection(other_fruits)
+print("اشتراک:", intersection)
+
+
 print ("hello sajad");
 name ="sajad"
 print (name);a = 28  
@@ -108,7 +130,106 @@ person = {
 all_items = person.items()
 print(f"آیتم‌های دیکشنری: {all_items}")
 
-# بهترین روش برای پیمایش روی دیکشنری
+# بهترین روش برای پیمایش روی دیکشنری# مجموعه با چند عدد
+my_set = {1, 2, 3}
+print(my_set)  # خروجی: {1, 2, 3}
+
+# مجموعه از رشته‌ها# ایجاد مجموعه
+fruits = {"سیب", "موز", "سیب", "پرتقال"}  # "سیب" تکراری حذف می‌شود
+print(fruits)  # خروجی ممکن: {'پرتقال', 'سیب', 'موز'} (ترتیب نامشخص)
+
+# اضافه کردن
+fruits.add("کیوی")
+print(fruits)  # خروجی ممکن: {'کیوی', 'پرتقال', 'سیب', 'موز'}
+
+# حذف
+fruits.remove("موز")
+print(fruits)  # خروجی ممکن: {'کیوی', 'پرتقال', 'سیب'}
+
+# عملیات مجموعه‌ای
+other_fruits = {"انگور", "پرتقال", "هلو"}
+union = fruits.union(other_fruits)
+print(union)  # خروجی ممکن: {'کیوی', 'انگور', 'پرتقال', 'هلو', 'سیب'}
+
+intersection = fruits.intersection(other_fruits)
+print(intersection)  # خروجی ممکن: {'پرتقال'}
+fruit_set = {"apple", "banana", "orange"}
+print(fruit_set)  # خروجی: {'apple', 'banana', 'orange'}
+
+# ساخت مجموعه از یک لیست (تبدیل لیست به مجموعه)
+numbers = [1, 2, 2, 3, 4]
+unique_numbers = set(numbers)
+print(unique_numbers)  # خروجی: {1, 2, 3, 4}
 print("\nپیمایش روی کلید و مقدار:")
 for key, value in person.items():
     print(f"کلید: {key}, مقدار: {value}")
+#  please explain about set in python?
+# ایجاد مجموعه
+fruits = {"سیب", "موز", "سیب", "پرتقال"}  # "سیب" تکراری حذف می‌شود
+print(fruits)  # خروجی ممکن: {'پرتقال', 'سیب', 'موز'} (ترتیب نامشخص)
+
+# اضافه کردن
+fruits.add("کیوی")
+print(fruits)  # خروجی ممکن: {'کیوی', 'پرتقال', 'سیب', 'موز'}
+
+# حذف
+fruits.remove("موز")
+print(fruits)  # خروجی ممکن: {'کیوی', 'پرتقال', 'سیب'}
+
+# عملیات مجموعه‌ای
+other_fruits = {"انگور", "پرتقال", "هلو"}
+union = fruits.union(other_fruits)
+print(union)  # خروجی ممکن: {'کیوی', 'انگور', 'پرتقال', 'هلو', 'سیب'}
+
+intersection = fruits.intersection(other_fruits)
+print(intersection)  # خروجی ممکن: {'پرتقال'}
+
+my_set = {1, 2, 3}
+print(f"مجموعه اولیه: {my_set}")
+
+# افزودن یک عنصر
+my_set.add(4)
+print(f"پس از افزودن 4: {my_set}")
+
+# افزودن عنصری که از قبل وجود دارد (بدون تغییر)
+my_set.add(2)
+print(f"پس از افزودن 2 (موجود): {my_set}")
+
+print("-" * 20)
+
+# حذف یک عنصر با remove()
+my_set.remove(3)
+print(f"پس از حذف 3 با remove(): {my_set}")
+
+# تلاش برای حذف عنصر ناموجود با remove() (اگر فعال شود خطا می‌دهد)
+# try:
+#     my_set.remove(10)
+# except KeyError as e:
+#     print(f"خطا هنگام حذف 10 با remove(): {e}")
+
+print("-" * 20)
+
+# حذف یک عنصر با discard()
+my_set.discard(1)
+print(f"پس از حذف 1 با discard(): {my_set}")
+
+# تلاش برای حذف عنصر ناموجود با discard() (بدون خطا)
+my_set.discard(10)
+print(f"پس از حذف 10 با discard() (ناموجود): {my_set}")
+
+print("-" * 20)
+
+# حذف یک عنصر دلخواه با pop()
+# توجه: خروجی pop می‌تواند در هر بار اجرا متفاوت باشد چون مجموعه‌ها ترتیب ندارند
+if my_set: # مطمئن می‌شویم مجموعه خالی نیست قبل از pop
+    popped_element = my_set.pop()
+    print(f"پس از pop(): {my_set}, عنصر حذف شده: {popped_element}")
+else:
+    print("مجموعه خالی است، نمی‌توان pop کرد.")
+
+
+print("-" * 20)
+
+# خالی کردن مجموعه با clear()
+my_set.clear()
+print(f"پس از clear(): {my_set}")

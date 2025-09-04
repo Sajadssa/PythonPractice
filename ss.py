@@ -233,3 +233,61 @@ print("-" * 20)
 # خالی کردن مجموعه با clear()
 my_set.clear()
 print(f"پس از clear(): {my_set}")
+for i in range(5):        # 0 تا 4
+    print(i)
+for i in range(2, 7):     # 2 تا 6
+    print(i)
+for i in range(10, 0, -2):  # 10, 8, 6, ...
+    print(i)
+    names = ["Ali", "Sara", "Reza"];
+    for i, name in enumerate(names, start=1):
+        print(i, name)
+        a = [1, 2, 3]
+        b = [10, 20, 30]
+        for x, y in zip(a, b):
+            print(x, y)
+            user = {"name": "Ali", "age": 25}
+            for k, v in user.items():
+                print(k, v)
+# فقط کلیدها: for k in user: یا user.keys()
+# فقط مقدارها: for v in user.values():
+
+for x in range(10):
+    if x == 3:
+        break
+    print(x)   # 0,1,2
+    
+    for x in range(5):
+        if x % 2 == 0:
+            continue
+    print(x)   # 1,3
+    nums = [2, 4, 6, 8]
+    target = 5
+    for n in nums:
+        if n == target:
+         print("Found")
+         break
+    else:
+         print("Not found")  # چون break نشده
+     for i in range(1, 4):
+        for j in range(1, 4):
+            print(i * j, end=" ")
+        print()
+
+squares = [x*x for x in range(6)]           # [0,1,4,9,16,25]
+odds = [x for x in range(10) if x % 2 == 1] # [1,3,5,7,9]
+d = {x: x*x for x in range(3)}  # {0:0, 1:1, 2:4}
+gen = (x*x for x in range(10))
+for v in gen:
+    print(v)
+    
+jobs_data = [
+{'job_title': 'Data Scientist', 'job_skills': ['Python', 'Machine Learning'], 'remote': True},
+{'job_title': 'Data Analyst', 'job_skills': ['Excel', 'SQL'], 'remote': False},
+{'job_title': 'Machine Learning Engineer', 'job_skills': ['Python', 'TensorFlow', 'Keras'], 'remote': True},
+{'job_title': 'Software Developer', 'job_skills': ['Java', 'C++'], 'remote': True},
+{'job_title': 'Data Scientist', 'job_skills': ['R', 'Statistics'], 'remote': False}
+]
+filtered_jobs = list(filter(lambda job: job['remote']  and 'Python' in job['job_skills'], jobs_data)) 
+print(filtered_jobs)   
+    

@@ -289,5 +289,61 @@ jobs_data = [
 {'job_title': 'Data Scientist', 'job_skills': ['R', 'Statistics'], 'remote': False}
 ]
 filtered_jobs = list(filter(lambda job: job['remote']  and 'Python' in job['job_skills'], jobs_data)) 
-print(filtered_jobs)   
-    
+print(filtered_jobs)  
+import pandas as pd
+contents = pd.read_csv('sample_data/california_housing_test.csv')
+contents
+
+# Common Third Party Libraries for Data Nerds
+# • Pandas
+# • NumPy
+# · Matplotlib
+# • Seaborn
+# • SciPy
+# Scikit-learn
+
+class LukesList:
+    def __init__(self):
+        """Initialize an empty list."""
+        self._items = []
+
+    def add(self, item):
+        """Add an item to the end of the list."""
+        self._items.append(item)
+
+    def __getitem__(self, index):
+        """Retrieve an item by index."""
+        return self._items[index]
+
+    def __setitem__(self, index, value):
+        """Set an item at a specific index."""
+        self._items[index] = value
+
+    def __repr__(self):
+        """Return a string representation of the list."""
+        return str(self._items)
+
+    def __len__(self):
+        """Return the length of the list."""
+        return len(self._items)
+
+my_list = LukesList()
+
+
+class BaseSalary:
+    def __init__(self, base_salary, bonus_rate=0.1, symbol="$"):
+        self.base_salary = base_salary
+        self.bonus_rate = bonus_rate
+        self.symbol = symbol
+        self.total_salary = base_salary * (1 + bonus_rate)
+        self.bonus = self.total_salary - base_salary
+
+    def __repr__(self):
+        return f'{self.symbol}{self.base_salary:,.2f}'
+
+    def calculate_salary(self):
+        return f'{self.symbol}{self.total_salary:,.2f}'
+
+    @staticmethod
+    def calculate_bonus(total_salary, base_salary):
+        return (total_salary - base_salary) / base_salary

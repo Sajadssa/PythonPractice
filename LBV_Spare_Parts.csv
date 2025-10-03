@@ -1,0 +1,16 @@
+﻿Sect,No.,Description,Equipment,Manufacturer,Part Number,Material,Qty
+4,4,Seats/Ball/Stem,Ball Valve,"BJ8075-1 Rev0, Ball 16"" #900",7/4/5,AISI 410 + PEEK / AISI 410 + ENP / 17-4PH,1
+2,2,Seats/Ball/Stem,Ball Valve,"BJ8075-2 Rev0, Ball 12"" #900",7/4/5,AISI 410 + PEEK / AISI 410 + ENP / 17-4PH,1
+4,4,O-ring Seal Kit & Gasket,Ball Valve,"BJ8075-1 Rev0, Ball 16"" #900",33/74/246 OF BOM,Viton/Graphite,4
+2,2,O-ring Seal Kit & Gasket,Ball Valve,"BJ8075-2 Rev0, Ball 12"" #900",33/74/246 OF BOM,Viton/Graphite,2
+,6,Seal Kit,Actuator,GAS OVER OIL,-,-,2
+,6,Pressure Transducer,Actuator,GAS OVER OIL,-,-,2
+,12,Pressure Gauge,Actuator,GAS OVER OIL,-,-,3
+,6,Solenoid Valve,Actuator,GAS OVER OIL,-,-,2
+,6,Proximity Switch,Actuator,GAS OVER OIL,-,-,2
+,-,Special Tools,Actuator,GAS OVER OIL,-,-,1
+,6,Hand Pump,Actuator,GAS OVER OIL,-,-,2
+,6,Pilot Solenoid Valve,Actuator,GAS OVER OIL,-,-,2
+,12,Speed regulating valve,Actuator,GAS OVER OIL,-,-,4
+,6,Nitrogen Bottle,Actuator,GAS OVER OIL,-,-,4
+,,,,,,,

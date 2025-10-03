@@ -1,0 +1,10 @@
+﻿Item_No,Description,Unit,QTY_BOM,QTY_Spare,Model,Manufacturer,Remark
+1,"SFP GbE Transceiver 1G LX, SingleMode 1310nm, 10km, LC duplex",SET,4,34,MS100210D,MICROSENS,
+2,HDD,SET,1,1,10TB,WD,
+3,PS For L3 Switch,SET,1,1,MS400990-AC,MICROSENS,
+4,"Access Switch, layer 2, 4 SFP 1G, 9x10/100/1000 Base-T",SET,1,19,MS652119PM-V2,MICROSENS,
+5,"SFP Transceiver, Gigabit Ethernet, Digital Diagnostic 1310 nm Singlemode, 1000Base-SX, LC duplex, 10km support",SET,6,56,MS100210DX,MICROSENS,
+6,"Access Switch, layer 2, 4 SFP, 24x10/100/1000 Base-T, POE support, rack mount",SET,1,19,MS400835M,MICROSENS,
+7,"FO Patch Panel 12 Port SC, Duplex with all accessories",SET,2,12,NB446,NIKBORESH,
+8,"S/FTP, CAT6 Port Patch Panel, Loaded",SET,2,16,24 port Cat6-FTP Patch Panel,LEGRAND,
+9,Fiber Optic Patch Cord,SET,20,*,SM LC-LC DX 3M,LEGRAND,

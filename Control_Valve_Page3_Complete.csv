@@ -1,0 +1,6 @@
+﻿Item_No,Equipment_Class,Equipment_Reg_Tag,Equipment_PO_No,Reference_Serial_No,Total_Identical_Parts,Parts_Per_Unit,Description,Drawing_Ref,Manufacturer_Real_Part_No,Material,Classification,MESC_No,Recommended_Manufacturer,Recommended_Contractor_IGC,Commissioning_Spares,Two_Years_Spare,Quantity_Supplied_PASARGAD,Unit,Unit_Price_USD,Total_Price_USD,Remarks
+1,Set,,,,,1,"Seat for Body (12"", 900#)",,,AISI410+STL,,,1,,1,,-,,-,,
+2,Set,,,,,1,"Stem/Plug for Body (12"", 900#)",,,A276-XM19 (UNS S20910) / AISI410+STL,,,1,,1,,-,,-,,
+3,Set,,,,,1,"Stem(Gland) Packing & Gasket/O-Ring (12"", 900#)",,,RTFE & 316+Graphoil,,,1,,1,1,1,,1,,
+4,Set,,,,,1,Positioner,,,SS,,,1,,1,,-,,-,,
+5,Set,,,,,1,Air Set,,,SS,,,1,,1,,-,,-,,

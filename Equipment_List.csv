@@ -1,0 +1,38 @@
+﻿Item,Equipment/Description,Manufacturer,Qty
+1,"MCCB, Adjustable, 4-POLE, IN=100A, AC50/60HZ, 16KA, TRIP UNIT : TMD",ABB,1
+2,"MCCB, Adjustable, 4-POLE, IN=80A, AC50/60HZ, 16KA, TRIP UNIT : TMD",ABB,2
+3,"MCCB, Adjustable, 4-POLE, IN=63A, AC50/60HZ, 16KA, TRIP UNIT : TMD",ABB,6
+4,"MCCB, Adjustable, 4-POLE, IN=40A, AC50/60HZ, 16KA, TRIP UNIT : TMD",ABB,3
+5,"MCCB, Adjustable, 4-POLE, IN=32A, AC50/60HZ, 16KA, TRIP UNIT : TMD",ABB,8
+6,"MCCB, Adjustable, 4-POLE, IN=25A, AC50/60HZ, 16KA, TRIP UNIT : TMD",ABB,19
+7,Shunt Trip For MCCB,ABB,6
+8,"Motor Protection Circuit Breaker, 3P, 6.3-10A",Siemens-ABB,1
+9,"Motor Protection Circuit Breaker, 3P, 4-6.3A",Siemens-ABB,3
+10,"Motor Protection Circuit Breaker, 3P, 2.5-4A",Siemens-ABB,4
+11,"Motor Protection Circuit Breaker, 3P, 1.6-2A",Siemens-ABB,19
+12,"Motor Protection Circuit Breaker, 3P, 0.63-1A",Siemens-ABB,18
+13,"MCB 1P - 32-40A AC -10kA, Curve C",ETI/RAAD,28
+14,"MCB 1P - 16-25A AC -10kA, Curve C",ETI/RAAD,8
+15,"MCB 1P - 10A AC -10kA, Curve C",ETI/RAAD,50
+16,"MCB 3P - 10A AC -10kA, Curve B",ETI/RAAD,61
+17,"MCB 1P - 10-16A AC -10kA, Curve B",ETI/RAAD,81
+18,"RCBO 2P - 16A AC -10kA, 30mA",ETI/RAAD,58
+19,Contactor 3P - 18.5kW - 40A - 230V AC,Siemens-ABB,1
+20,Contactor 3P - 11kW - 25A - 230V AC,Siemens-ABB,8
+21,Contactor 3P - 4kW - 9A - 230V AC,Siemens-ABB,14
+22,Photocell 230VAC,,
+23,Fuse Disconnector 3P -32A - With Cylindrical Fuse,ETI,
+24,Fuse Disconnector 1P 32A - With Cylindrical Fuse 2A,ETI,98
+25,Signal Lamp - LED,Raad,99
+26,Push Button,,25
+27,"CT:0-X:/5A, 50 Hz, Cl:1.5, 2ln",Mag-Electric,98
+28,"AMMETER 96x96mm (Scale 90°), Input 5A, 50 Hz,",Iskra,98
+29,"Voltmeter, 96x96mm (Scale 90°), Input with PT (400v/1.73 /110/1.73), Cl.1.5, End scale value 0-500 V",Iskra,33
+30,Rotary Switch 4pole - 2 Position 0-1 - 25A,TRS,8
+31,Rotary Switch 2pole - 2 Position 0-1 - 16A,TRS,19
+32,Rotary Switch 1pole - 3 Position A-0-H - 16A,TRS,24
+33,Voltage Rotary Switch 1pole - 7 Position,TRS,33
+34,Terminal - RTP4,Raad,580
+35,Terminal - RTP16,Raad,60
+36,Micro Switch & Lighting,CNTD- Pars Shoa,33
+37,Thermostat & Heater,EFA - Satba,5

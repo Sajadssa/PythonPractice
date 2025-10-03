@@ -1,0 +1,6 @@
+﻿Sheet_No,Item_No,Equipment_Class,Equipment_Req_No_Tag_No,Manufacturer_Model,Manufacturer_Serial_No,Total_No_Identical_Parts,Number_Parts_Per_Unit,Description,Drawing_Ref_No,Manufacturers_Real_Part_No,Material,Classification_Parts,MESC_Code,Recommended_Manufacturer,Recommended_Contractor,Operational_Spares_Two_Years,Unit,Unit_Price_USD,Total_Price_USD,Remarks
+7,1,No,Multiple Tags (see below),,,,4,"GASKET,2"",150#, FOR NOZZLE (V & E), SPIRAL WOUND ""Outer Ring ""C.S"" & Inner Ring ""S.S 316"" 4.5mm. ASME B16.20","SJEC-DGNRDD-ENME-DWDD-0002, SJEC-DGNRDD-ENME-DWDD-0002",,"Outer Ring ""C.S"" & Inner Ring ""S.S 316""",,,0,0,52,No,0,,
+7,2,No,Multiple Tags (see below),,,,2,"GASKET, O.D.660,I.D. 600, THK.3,","SJEC-DGNRDD-ENME-DWDD-0002, SJEC-DGNRDD-ENME-DWDD-0002",,NON-ASBESTOS,,,0,0,26,No,0,,
+7,3,No,Multiple Tags (see below),,,,2,STUD BOLT M16x85 (ASME B 18.2.1),"SJEC-DGNRDD-ENME-DWDD-0002, SJEC-DGNRDD-ENME-DWDD-0002",,SA-193-B7M,,,0,0,26,No,0,,
+7,4,No,Multiple Tags (see below),,,,4,STUD BOLT M16x90 (ASME B 18.2.1),"SJEC-DGNRDD-ENME-DWDD-0002, SJEC-DGNRDD-ENME-DWDD-0002",,SA-193-B7M,,,0,0,52,No,0,,
+7,5,No,Multiple Tags (see below),,,,12,HEX NUT M16 (ASME B18.2.2),"SJEC-DGNRDD-ENME-DWDD-0002, SJEC-DGNRDD-ENME-DWDD-0002",,SA-194-2H,,,0,0,156,No,0,,

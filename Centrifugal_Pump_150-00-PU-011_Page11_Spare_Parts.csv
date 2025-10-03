@@ -1,0 +1,15 @@
+﻿Item_No,Description,Drawing_Ref_No,Manufacturers_Part_No,Material,Unit,Number_of_Parts_Per_Unit,Quantity_to_be_Supplied,Total_Quantity,Category
+1,Impeller,SJEC-DGNRCU-ENMA-DWEQ-0010,21-230-126.01,C95800,Pcs,1,1,4,Pump
+2,Shaft,SJEC-DGNRCU-ENMA-DWEQ-0010,21-210-002.01,A576 Gr 1045,Pcs,1,1,4,Pump
+3,Shaft Sleeve,-,21-220-702.01,A276 Type 420,Pcs,1,1,4,Pump
+4,Impeller Wearing,SJEC-DGNRCU-ENMA-DWEQ-0010,21-502-222.02,STD,Pcs,3,3,12,Pump
+5,Deep groove ball bearing,SJEC-DGNRCU-ENMA-DWEQ-0010,21-320-308.00,STD,Pcs,3,3,12,Pump
+6,Casing Wearing,SJEC-DGNRCU-ENMA-DWEQ-0010,21-502-288.02,C95800,Pcs,1,1,4,Pump
+7,Paper Gasket,SJEC-DGNRCU-ENMA-DWEQ-0010,21-400-019.01,Fiber,Pcs,1,1,4,Pump
+8,Paper Gasket,SJEC-DGNRCU-ENMA-DWEQ-0010,21-400-018.01,Fiber,Pcs,1,1,4,Pump
+9,Mechanical Seal Component,-,22-433-043.01,Multi Material,Pcs,1,1,4,Pump
+10,Mechanical Seal Assembly,-,21-433-753.02,STD,Pcs,1,1,4,Pump
+11,"Bearings of Motors, D side",SJEC-DGNRCU-ENMA-DSEQ-0002,22-320-310.00,STD,Pcs,1,1,4,Motor
+12,"Bearings of Motors, N side",SJEC-DGNRCU-ENMA-DSEQ-0002,22-320-309.00,STD,Pcs,1,1,4,Motor
+13,Fan for Motor,-,-,-,Pcs,1,1,4,Motor
+14,Oil Seal Ring for Motors,-,-,-,Pcs,1,1,4,Motor

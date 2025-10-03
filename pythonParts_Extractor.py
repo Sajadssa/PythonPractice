@@ -1,209 +1,1146 @@
 import pandas as pd
-from openpyxl import Workbook
-from openpyxl.styles import Font, Alignment, Border, Side, PatternFill
+from datetime import datetime
 
-# داده‌های استخراج شده از تصویر - با تعداد دقیق
-data = {
-    'Row': list(range(1, 47)),  # 46 ردیف
-    'Qty': [
-        38, 57, 26, 19, 31, 38, 26, 14, 19, 71, 
-        38, 19, 11, 11, 6, 11, 6, 19, 19, 19, 
-        19, 19, 19, 19, 57, 76, 38, 114, 38, 19, 
-        38, 19, 171, 144, 133, 171, 114, 114, 38, 38, 
-        76, 38, 114, 114, 114, 114
-    ],
-    'Description of Parts': [
-        'Pressure Gauge (0 - 250 Bar)',
-        'Pressure Gauge (0 - 400 Bar)',
-        'Pressure Gauge (0 - 10,000 PSI)',
-        'Pressure Transmitter (0 - 25 Bar)',
-        'Pressure Transmitter (0 - 300 Bar)',
-        'Pressure Transmitter (0 - 600 Bar)',
-        'Pressure Transmitter (0 - 1000 Bar)',
-        'High Pressure Filter (1/4", 10,000 Psi)',
-        'Repair Kit for High Pressure Filter',
-        'Element for High Pressure Filter',
-        'Return Filter',
-        'Strainer Y Type',
-        'Interface Valve',
-        'Hydraulic Regulator (1/4", 0 - 150 PSI)',
-        'Hydraulic Regulator (1/2", 50 - 6000 PSI)',
-        'Repair Kit for Hydraulic Regulator 6000 Psi & 150 Psi',
-        'Hydraulic Regulator (1/4", 200 - 10,000 PSI)',
-        'Hydraulic Regulator (1/2", 200 - 10,000 PSI)',
-        'Repair Kit for Hydraulic Regulator (200 - 10,000 PSI)',
-        'Pilot Valve (1/4", 10 Bar)',
-        'Flow Line Pilot Valve (1/4", 6000 Psi)',
-        'Flow Control Valve (1/4", 1000 Psi)',
-        'Push Button (ESD Line Charge)',
-        'Push Button (Emergency Stop)',
-        'Level Transmitter',
-        'Level Switch',
-        'Level Gauge (Gauge Glass)',
-        'Complete Assembled Electro Pump (SSSV & SSV)',
-        'Complete Assembled Electro Pump (HIPPS & ESDV)',
-        'Pump (SSSV & SSV)',
-        'Pump (HIPPS & ESDV)',
-        'Electro Motor',
-        'Coupling for Electro Pump',
-        'Hand Pump (10,000 Psi)',
-        'Hand Pump (5000 Psi)',
-        'Power Line Controller',
-        'Signal Lamp (Green)',
-        'Signal Lamp (Red)',
-        'Signal Lamp (Yellow)',
-        'Selector Switch (2 Position)',
-        'Selector Switch (3 Position)',
-        'Contactor',
-        'MCB 3 Phase (2 A)',
-        'MCB 1 Phase (2 A)',
-        'MCCB (5 A)',
-        'MPCB (2.8-4 A)'
-    ],
-    'Material (see Note 4 above)': [
-        'SS 316', 'SS 316', 'SS 316', 'SS 316', 'SS 316', 'SS 316', 'SS 316',
-        'SS 316', 'SS 316', 'SS 316', 'SS 316', 'SS 316', 'SS 316', 'SS 316',
-        'SS 316', 'SS 316', 'SS 316', 'SS 316', 'SS 316', 'SS 316', 'SS 316',
-        'SS 316', 'SS 316', 'SS 316', 'SS 316', 'SS 316', 'SS 316', 'SS 316',
-        'SS 316', 'SS 316', 'SS 316', 'SS 316', 'SS 316', 'SS 316', 'SS 316',
-        'Electrical Component', 'Electrical Component', 'Electrical Component',
-        'Electrical Component', 'Electrical Component', 'Electrical Component',
-        'Electrical Component', 'Electrical Component', 'Electrical Component',
-        'Electrical Component', 'Electrical Component'
-    ],
-    'Recommended by Manufacturer for 19 MPD': [
-        '4 No.', '5 No.', '3 No.', '2 No.', '2 No.', '2 No.', '2 No.',
-        '5 No.', '5 No.', '5 No.', '2 No.', '3 No.', '4 No.', '3 No.',
-        '3 No.', '5 No.', '3 No.', '3 No.', '2 No.', '4 No.', '4 No.',
-        '4 No.', '1 No.', '1 No.', '1 No.', '1 No.', '4 No.', '1 No.',
-        '1 No.', '1 No.', '1 No.', '2 No.', '2 No.', '1 No.', '1 No.',
-        '3 No.', '5 No.', '10 No.', '8 No.', '2 No.', '8 No.', '5 No.',
-        '3 No.', '3 No.', '3 No.', '6 No.'
-    ]
+# ==================== اطلاعات کلی سند ====================
+document_info = {
+    'Document_No': 'SJEC-DPRFFM-ENIN-LISP-0001-V05',
+    'Title': 'Spare Parts List (Commissioning & Two-Years) - Fiscal Metering System',
+    'Project': 'Sepehr-Jufair Field Development And Production Operations',
+    'Contract_No': 'SJ-CN-SC-99-0060',
+    'PO_No': 'SJEC-DPRFFM-ENIN-ORPU-0001',
+    'Pages_Extracted': '14, 15, 16, 17',
+    'Revision': 'V05',
+    'Status': 'NA (Not Approved)',
+    'Extraction_Date': datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 }
 
-# بررسی و نمایش تعداد عناصر
-print("="*60)
-print("بررسی تعداد عناصر در هر ستون:")
-print("="*60)
-for key, value in data.items():
-    print(f"{key}: {len(value)} آیتم")
+# ==================== صفحه 14: TABLE-2 (ادامه Control System) ====================
+page_14_control_system = [
+    {'Page': 14, 'Table': 'TABLE-2', 'Section': 'Control System',
+     'Item_No': 3, 'Category': 'DI (Digital Input)',
+     'Items': 'SIMATIC S7-300, DIGITAL INPUT SM 321, OPTICALLY ISOLATED 32DI, 24 V DC, 40PIN',
+     'Description': 'Digital Input Module SM 321',
+     'Model': '6ES7321-1BL00-0AA0',
+     'Specification': 'Optically isolated, 32DI, 24V DC, 40-pin',
+     'MTO_QTY': 1,
+     'Unit': 'EA',
+     'Procedure': '25% (min. 1)',
+     'Total_QTY': 1,
+     'Remarks': 'SIMATIC S7-300 Digital Input Module'},
+    
+    {'Page': 14, 'Table': 'TABLE-2', 'Section': 'Control System',
+     'Item_No': 4, 'Category': 'DO (Digital Output)',
+     'Items': 'SIMATIC S7-300, Digital output SM 322, isolated, 32 DO, 24 V DC, 0.5A, 1x 40-pole, Total current 4 A/group (16 A/module)',
+     'Description': 'Digital Output Module SM 322',
+     'Model': '6ES7322-1BL00-0AA0',
+     'Specification': 'Isolated, 32DO, 24V DC, 0.5A, 40-pole, 4A/group (16A/module)',
+     'MTO_QTY': 1,
+     'Unit': 'EA',
+     'Procedure': '25% (min. 1)',
+     'Total_QTY': 1,
+     'Remarks': 'SIMATIC S7-300 Digital Output Module'},
+    
+    {'Page': 14, 'Table': 'TABLE-2', 'Section': 'Control System',
+     'Item_No': 5, 'Category': 'AI (Analog Input)',
+     'Items': 'SIMATIC S7-300, Analog input SM 331, isolated, 8 AI, Resolution 9/12/14 bits, U/I/thermocouple/resistor, alarm, diagnostics, 1x 20-pole Removing/inserting with active backplane bus',
+     'Description': 'Analog Input Module SM 331',
+     'Model': '6ES7331-7KF02-0AB0',
+     'Specification': 'Isolated, 8AI, 9/12/14 bits, U/I/TC/RTD, 20-pole',
+     'MTO_QTY': 1,
+     'Unit': 'EA',
+     'Procedure': '25% (min. 1)',
+     'Total_QTY': 1,
+     'Remarks': 'SIMATIC S7-300 Analog Input Module'},
+    
+    {'Page': 14, 'Table': 'TABLE-2', 'Section': 'Control System',
+     'Item_No': 6, 'Category': 'F-DI (Fail-safe Digital Input)',
+     'Items': 'SIMATIC S7, Digital input SM 326, F-DI 24x24 V DC, Fail-safe digital input for SIMATIC S7 F-systems with diagnostic alarm, up to Category 4 (EN 954-1)/ SIL3 (IEC61508)/PLE (ISO13849), 1x 40-pole',
+     'Description': 'Fail-safe Digital Input Module SM 326',
+     'Model': '6ES7326-1BK02-0AB0',
+     'Specification': 'F-DI 24x24V DC, Cat.4/SIL3/PLE, 40-pole',
+     'MTO_QTY': 1,
+     'Unit': 'EA',
+     'Procedure': '25% (min. 1)',
+     'Total_QTY': 1,
+     'Remarks': 'SIMATIC S7 Fail-safe Digital Input'},
+    
+    {'Page': 14, 'Table': 'TABLE-2', 'Section': 'Control System',
+     'Item_No': 7, 'Category': 'F-DO (Fail-safe Digital Output)',
+     'Items': 'SIMATIC S7, digital output SM 326, F-DO10x 24 V DC/2A PP, fail-safe digital output for SIMATIC S7F systems, with diagnostic alarm, LVV, up to Category 4 (EN 954-1)/ SIL3 (IEC61508)/PLE (ISO13849), 1x 40-pole',
+     'Description': 'Fail-safe Digital Output Module SM 326',
+     'Model': '6ES7326-2BF10-0AB0',
+     'Specification': 'F-DO 10x24V DC/2A, Cat.4/SIL3/PLE, 40-pole',
+     'MTO_QTY': 1,
+     'Unit': 'EA',
+     'Procedure': '25% (min. 1)',
+     'Total_QTY': 1,
+     'Remarks': 'SIMATIC S7 Fail-safe Digital Output'},
+    
+    {'Page': 14, 'Table': 'TABLE-2', 'Section': 'Control System',
+     'Item_No': 8, 'Category': 'F-AI (Fail-safe Analog Input)',
+     'Items': 'SIMATIC S7, Analog input SM 336, 6 AI; 15 bit; fail-safe analog inputs for SIMATIC Safety, with HART support, up to Category 4 (EN 954-1)/ SIL3 (IEC61508)/PLE (ISO13849), 1x 20-pole',
+     'Description': 'Fail-safe Analog Input Module SM 336',
+     'Model': '6ES7336-4GE00-0AB0',
+     'Specification': '6AI, 15-bit, HART support, Cat.4/SIL3/PLE, 20-pole',
+     'MTO_QTY': 1,
+     'Unit': 'EA',
+     'Procedure': '25% (min. 1)',
+     'Total_QTY': 1,
+     'Remarks': 'SIMATIC S7 Fail-safe Analog Input with HART'},
+    
+    {'Page': 14, 'Table': 'TABLE-2', 'Section': 'Control System',
+     'Item_No': 9, 'Category': 'Bus Extender Module',
+     'Items': 'Bus Extender Module',
+     'Description': 'Bus Extender Module',
+     'Model': '—',
+     'Specification': '—',
+     'MTO_QTY': '—',
+     'Unit': '—',
+     'Procedure': '—',
+     'Total_QTY': '—',
+     'Remarks': 'Not specified'},
+    
+    {'Page': 14, 'Table': 'TABLE-2', 'Section': 'Control System',
+     'Item_No': 10, 'Category': 'Sync Module',
+     'Items': 'SIMATIC S7-400H, SYNC SUBMODULE V6 FOR PATCH CABLES UP TO 10M',
+     'Description': 'Sync Submodule for S7-400H',
+     'Model': '6ES7960-1AA06-0XA0',
+     'Specification': 'V6, for patch cables up to 10m',
+     'MTO_QTY': 4,
+     'Unit': 'EA',
+     'Procedure': '25% (min. 1)',
+     'Total_QTY': 1,
+     'Remarks': 'SIMATIC S7-400H Sync Submodule'},
+    
+    {'Page': 14, 'Table': 'TABLE-2', 'Section': 'Control System',
+     'Item_No': 11, 'Category': 'Communication Module and Dongles',
+     'Items': 'Communications processor CP 443-1; 2x 10/100 Mbit/s (IE switch); RJ45 ports; ISO; TCP; UDP; PROFINET IO controller; S7 communication; Open communication (SEND/ RECEIVE); S7 routing; IP configuration via DHCP/ Block; IP Access Control List; Time synchronization; extended web diagnostics; Fast Start-up; Support for PROFIenergy',
+     'Description': 'Communications Processor CP 443-1',
+     'Model': '6GK7443-1EX30-0XE0',
+     'Specification': '2x10/100Mbit/s, RJ45, PROFINET IO, S7 comm., DHCP, ACL',
+     'MTO_QTY': 2,
+     'Unit': 'EA',
+     'Procedure': '25% (min. 1)',
+     'Total_QTY': 1,
+     'Remarks': 'SIMATIC CP 443-1 Communication Processor'},
+    
+    {'Page': 14, 'Table': 'TABLE-2', 'Section': 'Control System',
+     'Item_No': 12, 'Category': 'Internal Cable and Connectors',
+     'Items': 'SIMATIC S7-400H, PATCH CABLE FO 1M FOR SYNC-MODULE',
+     'Description': 'Fiber Optic Patch Cable 1m',
+     'Model': '6ES7960-1AA04-5AA0',
+     'Specification': '1 meter fiber optic patch cable for sync module',
+     'MTO_QTY': 2,
+     'Unit': 'EA',
+     'Procedure': '25% (min. 1)',
+     'Total_QTY': 1,
+     'Remarks': 'S7-400H patch cable for sync module'},
+    
+    {'Page': 14, 'Table': 'TABLE-2', 'Section': 'Control System',
+     'Item_No': 13, 'Category': 'Terminal and Accessory',
+     'Items': 'Terminal and Accessory',
+     'Description': 'Terminals and accessories',
+     'Model': '—',
+     'Specification': 'Various terminals and accessories',
+     'MTO_QTY': 450,
+     'Unit': 'LOT',
+     'Procedure': '25% (min. 1)',
+     'Total_QTY': 113,
+     'Remarks': 'Terminal blocks and accessories'},
+    
+    {'Page': 14, 'Table': 'TABLE-2', 'Section': 'Control System',
+     'Item_No': 14, 'Category': 'Fuse',
+     'Items': 'Fuse',
+     'Description': 'Fuses for control system',
+     'Model': '—',
+     'Specification': 'Various ratings',
+     'MTO_QTY': 250,
+     'Unit': 'LOT',
+     'Procedure': '25% (min. 1)',
+     'Total_QTY': 63,
+     'Remarks': 'Control system fuses'},
+    
+    {'Page': 14, 'Table': 'TABLE-2', 'Section': 'Control System',
+     'Item_No': 15, 'Category': 'Relay',
+     'Items': 'PLC-INTERFACE, consisting of basic terminal block PLC-BSC.../21 with screw connection and plug-in miniature relay with power contact, for assembly on DIN rail NS 35/7,5, 1 changeover contact, input voltage 24 V DC',
+     'Description': 'PLC Interface Relay',
+     'Model': 'PHOENIX/2966171',
+     'Specification': 'DIN rail mount, 24V DC, 1 changeover contact',
+     'MTO_QTY': 18,
+     'Unit': 'EA',
+     'Procedure': '25% (min. 1)',
+     'Total_QTY': 5,
+     'Remarks': 'Phoenix PLC interface relay'},
+    
+    {'Page': 14, 'Table': 'TABLE-2', 'Section': 'Control System',
+     'Item_No': 16, 'Category': 'Circuit Breaker',
+     'Items': 'CIRCUIT BREAKER AC(1,2) POLE',
+     'Description': 'Circuit breaker AC 1 or 2 pole',
+     'Model': '—',
+     'Specification': 'AC circuit breaker, 1 or 2 pole',
+     'MTO_QTY': 12,
+     'Unit': 'EA',
+     'Procedure': '25% (min. 1)',
+     'Total_QTY': 3,
+     'Remarks': 'AC circuit breaker'},
+    
+    {'Page': 14, 'Table': 'TABLE-2', 'Section': 'Control System',
+     'Item_No': 17, 'Category': 'Switch',
+     'Items': 'SCALANCE X212-2, managed IE switch, 12x 10/100 Mbit/s RJ45 ports, 2x 100 Mbit/s multimode BFOC, LED diagnostics, error-signaling contact with set button, redundant power supply, PROFINET IO device, network management, redundancy manager integrated, incl. electron. manual on CD-ROM, C-plug optional',
+     'Description': 'SCALANCE X212-2 Managed Switch',
+     'Model': '6GK5212-2BB00-2AA3',
+     'Specification': '12xRJ45 10/100Mbit/s, 2xBFOC 100Mbit/s, redundant PS',
+     'MTO_QTY': 2,
+     'Unit': 'EA',
+     'Procedure': '25% (min. 1)',
+     'Total_QTY': 1,
+     'Remarks': 'SCALANCE managed Industrial Ethernet switch'},
+    
+    {'Page': 14, 'Table': 'TABLE-2', 'Section': 'Control System',
+     'Item_No': 18, 'Category': 'Selector Switch',
+     'Items': 'Selector Switch',
+     'Description': 'Selector switch',
+     'Model': '—',
+     'Specification': '—',
+     'MTO_QTY': '—',
+     'Unit': '—',
+     'Procedure': '—',
+     'Total_QTY': '—',
+     'Remarks': 'Not specified'},
+    
+    {'Page': 14, 'Table': 'TABLE-2', 'Section': 'Control System',
+     'Item_No': 19, 'Category': 'Barrier (AI)',
+     'Items': '2-channel isolated barrier < 24 V DC supply (Power Rail) < Input 2-wire and 3-wire SMART transmitters and 2-wire SMART current sources < Output 0/4 mA ... 20 mA < Terminals with test points',
+     'Description': '2-channel AI isolated barrier',
+     'Model': 'GMI/ D5014D',
+     'Specification': '24V DC, 2/3-wire SMART, 0/4-20mA output, test points',
+     'MTO_QTY': 24,
+     'Unit': 'EA',
+     'Procedure': '25% (min. 1)',
+     'Total_QTY': 6,
+     'Remarks': 'GMI 2-channel isolated barrier for AI'},
+]
 
-# بررسی یکسان بودن تعداد
-lengths = [len(v) for v in data.values()]
-if len(set(lengths)) == 1:
-    print(f"\n✓ همه ستون‌ها {lengths[0]} آیتم دارند - آماده ایجاد DataFrame")
-else:
-    print("\n✗ خطا: تعداد آیتم‌ها یکسان نیست!")
-    print("جزئیات:")
-    for key, value in data.items():
-        print(f"  {key}: {len(value)}")
-    exit(1)
+# ==================== صفحه 15: TABLE-2 (ادامه) ====================
+page_15_barriers_and_accessories = [
+    {'Page': 15, 'Table': 'TABLE-2', 'Section': 'Control System',
+     'Item_No': 20, 'Category': 'Barrier (AO)',
+     'Items': '< 1-channel isolated barrier < 24 V DC supply (Power Rail) < Current output up to 650 Ω load < HART I/P and valve positioner < Line fault detection (LFD) < Accuracy 0.1 %',
+     'Description': '1-channel AO isolated barrier',
+     'Model': 'GMI/ D5020S',
+     'Specification': '24V DC, up to 650Ω load, HART, LFD, 0.1% accuracy',
+     'MTO_QTY': 3,
+     'Unit': 'EA',
+     'Procedure': '25% (min. 1)',
+     'Total_QTY': 1,
+     'Remarks': 'GMI 1-channel isolated barrier for AO'},
+    
+    {'Page': 15, 'Table': 'TABLE-2', 'Section': 'Control System',
+     'Item_No': 21, 'Category': 'Bus Connector',
+     'Items': 'DP, BUS CONNECTOR FOR PROFIBUS UP TO 12 MBIT/S 90 DEGREE ANGLE CABLE OUTLET, IPCD TECHNOLOGY FAST CONNECT, WITHOUT PG SOCKET 15,8 X 59 X 35,6 MM (WXHXD), LKZ: DE',
+     'Description': 'PROFIBUS DP Bus Connector',
+     'Model': '6ES7972-0BA52-0XA0',
+     'Specification': 'Up to 12Mbit/s, 90° angle, IPCD fast connect, no PG socket',
+     'MTO_QTY': 'Lot',
+     'Unit': 'LOT',
+     'Procedure': '25% (min. 1)',
+     'Total_QTY': '25%',
+     'Remarks': 'PROFIBUS DP bus connector'},
+    
+    {'Page': 15, 'Table': 'TABLE-2', 'Section': 'Control System',
+     'Item_No': 22, 'Category': 'Gateway',
+     'Items': 'Gateway',
+     'Description': 'Gateway',
+     'Model': '—',
+     'Specification': '—',
+     'MTO_QTY': '—',
+     'Unit': '—',
+     'Procedure': '—',
+     'Total_QTY': '—',
+     'Remarks': 'Not specified'},
+    
+    {'Page': 15, 'Table': 'TABLE-2', 'Section': 'Control System',
+     'Item_No': 23, 'Category': 'Push Button',
+     'Items': 'Push Button',
+     'Description': 'Push button',
+     'Model': '—',
+     'Specification': '—',
+     'MTO_QTY': '—',
+     'Unit': '—',
+     'Procedure': '—',
+     'Total_QTY': '—',
+     'Remarks': 'Not specified'},
+    
+    {'Page': 15, 'Table': 'TABLE-2', 'Section': 'Control System',
+     'Item_No': 24, 'Category': 'Lamp',
+     'Items': 'Lamp',
+     'Description': 'Lamp',
+     'Model': '—',
+     'Specification': '—',
+     'MTO_QTY': '—',
+     'Unit': '—',
+     'Procedure': '—',
+     'Total_QTY': '—',
+     'Remarks': 'Not specified'},
+    
+    {'Page': 15, 'Table': 'TABLE-2', 'Section': 'Control System',
+     'Item_No': 25, 'Category': 'Battery & Fuse',
+     'Items': 'Battery & Fuse',
+     'Description': 'Battery and fuse',
+     'Model': '—',
+     'Specification': '—',
+     'MTO_QTY': '—',
+     'Unit': '—',
+     'Procedure': '—',
+     'Total_QTY': '—',
+     'Remarks': 'Not specified'},
+    
+    {'Page': 15, 'Table': 'TABLE-2', 'Section': 'Control System',
+     'Item_No': 26, 'Category': 'Cabinet Fan & Filters',
+     'Items': 'Cabinet Fan & Filters',
+     'Description': 'Cabinet fan and filters',
+     'Model': '—',
+     'Specification': '—',
+     'MTO_QTY': 2,
+     'Unit': 'EA',
+     'Procedure': '25% (min. 1)',
+     'Total_QTY': 1,
+     'Remarks': 'Cabinet cooling fan and filters'},
+    
+    {'Page': 15, 'Table': 'TABLE-2', 'Section': 'Control System',
+     'Item_No': 27, 'Category': 'Alarm Module (Monitor Switch)',
+     'Items': 'Alarm Module (Monitor Switch)',
+     'Description': 'Alarm module / monitor switch',
+     'Model': '—',
+     'Specification': '—',
+     'MTO_QTY': '—',
+     'Unit': '—',
+     'Procedure': '—',
+     'Total_QTY': '—',
+     'Remarks': 'Not specified'},
+    
+    {'Page': 15, 'Table': 'TABLE-2', 'Section': 'Control System',
+     'Item_No': 28, 'Category': 'Label for Cable',
+     'Items': 'Label for Cable',
+     'Description': 'Cable labels',
+     'Model': '—',
+     'Specification': '—',
+     'MTO_QTY': '—',
+     'Unit': '—',
+     'Procedure': '—',
+     'Total_QTY': '—',
+     'Remarks': 'Not specified'},
+    
+    {'Page': 15, 'Table': 'TABLE-2', 'Section': 'Control System',
+     'Item_No': 29, 'Category': 'Voltmeter',
+     'Items': 'Voltmeter',
+     'Description': 'Voltmeter',
+     'Model': '—',
+     'Specification': '—',
+     'MTO_QTY': '—',
+     'Unit': '—',
+     'Procedure': '—',
+     'Total_QTY': '—',
+     'Remarks': 'Not specified'},
+    
+    {'Page': 15, 'Table': 'TABLE-2', 'Section': 'Control System',
+     'Item_No': 30, 'Category': 'Amp. Meter',
+     'Items': 'Amp. Meter',
+     'Description': 'Ampere meter',
+     'Model': '—',
+     'Specification': '—',
+     'MTO_QTY': '—',
+     'Unit': '—',
+     'Procedure': '—',
+     'Total_QTY': '—',
+     'Remarks': 'Not specified'},
+]
 
-print("="*60)
+# ==================== صفحه 15: TABLE-3 Spare Parts for Piping ====================
+page_15_piping_gaskets = [
+    {'Page': 15, 'Table': 'TABLE-3', 'Section': 'Spare Parts for Piping',
+     'Item_No': 1, 'Category': 'Gasket',
+     'Items': 'GASKET, RF, SPIRAL WOUND/WINDING: C.S FILLER: GRAPHITE/ IR: SS316L/OR: CS, Thk. 4.5mm, ASME B16.20',
+     'Description': 'Spiral wound gasket with graphite filler',
+     'Size': '20"', 'Rating': '300#',
+     'Specification': 'RF, C.S winding, Graphite filler, SS316L IR, CS OR, 4.5mm thick, ASME B16.20',
+     'MTO_QTY': 4,
+     'Unit': 'EA',
+     'Procedure': 'For each size, type 10% (Min. 1)',
+     'Spare_QTY': 1,
+     'Remarks': '20" 300# spiral wound gasket'},
+    
+    {'Page': 15, 'Table': 'TABLE-3', 'Section': 'Spare Parts for Piping',
+     'Item_No': 1, 'Category': 'Gasket',
+     'Items': 'GASKET, RF, SPIRAL WOUND/WINDING: C.S FILLER: GRAPHITE/ IR: SS316L/OR: CS, Thk. 4.5mm, ASME B16.20',
+     'Description': 'Spiral wound gasket with graphite filler',
+     'Size': '16"', 'Rating': '300#',
+     'Specification': 'RF, C.S winding, Graphite filler, SS316L IR, CS OR, 4.5mm thick, ASME B16.20',
+     'MTO_QTY': 8,
+     'Unit': 'EA',
+     'Procedure': 'For each size, type 10% (Min. 1)',
+     'Spare_QTY': 1,
+     'Remarks': '16" 300# spiral wound gasket'},
+    
+    {'Page': 15, 'Table': 'TABLE-3', 'Section': 'Spare Parts for Piping',
+     'Item_No': 1, 'Category': 'Gasket',
+     'Items': 'GASKET, RF, SPIRAL WOUND/WINDING: C.S FILLER: GRAPHITE/ IR: SS316L/OR: CS, Thk. 4.5mm, ASME B16.20',
+     'Description': 'Spiral wound gasket with graphite filler',
+     'Size': '12"', 'Rating': '300#',
+     'Specification': 'RF, C.S winding, Graphite filler, SS316L IR, CS OR, 4.5mm thick, ASME B16.20',
+     'MTO_QTY': 2,
+     'Unit': 'EA',
+     'Procedure': 'For each size, type 10% (Min. 1)',
+     'Spare_QTY': 1,
+     'Remarks': '12" 300# spiral wound gasket'},
+    
+    {'Page': 15, 'Table': 'TABLE-3', 'Section': 'Spare Parts for Piping',
+     'Item_No': 1, 'Category': 'Gasket',
+     'Items': 'GASKET, RF, SPIRAL WOUND/WINDING: C.S FILLER: GRAPHITE/ IR: SS316L/OR: CS, Thk. 4.5mm, ASME B16.20',
+     'Description': 'Spiral wound gasket with graphite filler',
+     'Size': '8"', 'Rating': '300#',
+     'Specification': 'RF, C.S winding, Graphite filler, SS316L IR, CS OR, 4.5mm thick, ASME B16.20',
+     'MTO_QTY': 4,
+     'Unit': 'EA',
+     'Procedure': 'For each size, type 10% (Min. 1)',
+     'Spare_QTY': 1,
+     'Remarks': '8" 300# spiral wound gasket'},
+    
+    {'Page': 15, 'Table': 'TABLE-3', 'Section': 'Spare Parts for Piping',
+     'Item_No': 1, 'Category': 'Gasket',
+     'Items': 'GASKET, RF, SPIRAL WOUND/WINDING: C.S FILLER: GRAPHITE/ IR: SS316L/OR: CS, Thk. 4.5mm, ASME B16.20',
+     'Description': 'Spiral wound gasket with graphite filler',
+     'Size': '6"', 'Rating': '300#',
+     'Specification': 'RF, C.S winding, Graphite filler, SS316L IR, CS OR, 4.5mm thick, ASME B16.20',
+     'MTO_QTY': 50,
+     'Unit': 'EA',
+     'Procedure': 'For each size, type 10% (Min. 1)',
+     'Spare_QTY': 5,
+     'Remarks': '6" 300# spiral wound gasket'},
+    
+    {'Page': 15, 'Table': 'TABLE-3', 'Section': 'Spare Parts for Piping',
+     'Item_No': 1, 'Category': 'Gasket',
+     'Items': 'GASKET, RF, SPIRAL WOUND/WINDING: C.S FILLER: GRAPHITE/ IR: SS316L/OR: CS, Thk. 4.5mm, ASME B16.20',
+     'Description': 'Spiral wound gasket with graphite filler',
+     'Size': '3"', 'Rating': '300#',
+     'Specification': 'RF, C.S winding, Graphite filler, SS316L IR, CS OR, 4.5mm thick, ASME B16.20',
+     'MTO_QTY': 14,
+     'Unit': 'EA',
+     'Procedure': 'For each size, type 10% (Min. 1)',
+     'Spare_QTY': 2,
+     'Remarks': '3" 300# spiral wound gasket'},
+    
+    {'Page': 15, 'Table': 'TABLE-3', 'Section': 'Spare Parts for Piping',
+     'Item_No': 1, 'Category': 'Gasket',
+     'Items': 'GASKET, RF, SPIRAL WOUND/WINDING: C.S FILLER: GRAPHITE/ IR: SS316L/OR: CS, Thk. 4.5mm, ASME B16.20',
+     'Description': 'Spiral wound gasket with graphite filler',
+     'Size': '1-1/2"', 'Rating': '300#',
+     'Specification': 'RF, C.S winding, Graphite filler, SS316L IR, CS OR, 4.5mm thick, ASME B16.20',
+     'MTO_QTY': 31,
+     'Unit': 'EA',
+     'Procedure': 'For each size, type 10% (Min. 1)',
+     'Spare_QTY': 4,
+     'Remarks': '1-1/2" 300# spiral wound gasket'},
+    
+    {'Page': 15, 'Table': 'TABLE-3', 'Section': 'Spare Parts for Piping',
+     'Item_No': 1, 'Category': 'Gasket',
+     'Items': 'GASKET, RF, SPIRAL WOUND/WINDING: C.S FILLER: GRAPHITE/ IR: SS316L/OR: CS, Thk. 4.5mm, ASME B16.20',
+     'Description': 'Spiral wound gasket with graphite filler',
+     'Size': '1"', 'Rating': '300#',
+     'Specification': 'RF, C.S winding, Graphite filler, SS316L IR, CS OR, 4.5mm thick, ASME B16.20',
+     'MTO_QTY': 7,
+     'Unit': 'EA',
+     'Procedure': 'For each size, type 10% (Min. 1)',
+     'Spare_QTY': 1,
+     'Remarks': '1" 300# spiral wound gasket'},
+    
+    {'Page': 15, 'Table': 'TABLE-3', 'Section': 'Spare Parts for Piping',
+     'Item_No': 1, 'Category': 'Gasket',
+     'Items': 'GASKET, RF, SPIRAL WOUND/WINDING: C.S FILLER: GRAPHITE/ IR: SS316L/OR: CS, Thk. 4.5mm, ASME B16.20',
+     'Description': 'Spiral wound gasket with graphite filler',
+     'Size': '3/4"', 'Rating': '300#',
+     'Specification': 'RF, C.S winding, Graphite filler, SS316L IR, CS OR, 4.5mm thick, ASME B16.20',
+     'MTO_QTY': 11,
+     'Unit': 'EA',
+     'Procedure': 'For each size, type 10% (Min. 1)',
+     'Spare_QTY': 2,
+     'Remarks': '3/4" 300# spiral wound gasket'},
+    
+    {'Page': 15, 'Table': 'TABLE-3', 'Section': 'Spare Parts for Piping',
+     'Item_No': 1, 'Category': 'Gasket',
+     'Items': 'GASKET, RF, SPIRAL WOUND/WINDING: C.S FILLER: GRAPHITE/ IR: SS316L/OR: CS, Thk. 4.5mm, ASME B16.20',
+     'Description': 'Spiral wound gasket with graphite filler',
+     'Size': '1/2"', 'Rating': '300#',
+     'Specification': 'RF, C.S winding, Graphite filler, SS316L IR, CS OR, 4.5mm thick, ASME B16.20',
+     'MTO_QTY': 17,
+     'Unit': 'EA',
+     'Procedure': 'For each size, type 10% (Min. 1)',
+     'Spare_QTY': 2,
+     'Remarks': '1/2" 300# spiral wound gasket'},
+    
+    {'Page': 15, 'Table': 'TABLE-3', 'Section': 'Spare Parts for Piping',
+     'Item_No': 1, 'Category': 'Gasket',
+     'Items': 'GASKET, RF, SPIRAL WOUND/WINDING: C.S FILLER: GRAPHITE/ IR: SS316L/OR: CS, Thk. 4.5mm, ASME B16.20',
+     'Description': 'Spiral wound gasket with graphite filler',
+     'Size': '2"', 'Rating': '150#',
+     'Specification': 'RF, C.S winding, Graphite filler, SS316L IR, CS OR, 4.5mm thick, ASME B16.20',
+     'MTO_QTY': 40,
+     'Unit': 'EA',
+     'Procedure': 'For each size, type 10% (Min. 1)',
+     'Spare_QTY': 4,
+     'Remarks': '2" 150# spiral wound gasket'},
+    
+    {'Page': 15, 'Table': 'TABLE-3', 'Section': 'Spare Parts for Piping',
+     'Item_No': 1, 'Category': 'Gasket',
+     'Items': 'GASKET, RF, SPIRAL WOUND/WINDING: C.S FILLER: GRAPHITE/ IR: SS316L/OR: CS, Thk. 4.5mm, ASME B16.20',
+     'Description': 'Spiral wound gasket with graphite filler',
+     'Size': '1"', 'Rating': '150#',
+     'Specification': 'RF, C.S winding, Graphite filler, SS316L IR, CS OR, 4.5mm thick, ASME B16.20',
+     'MTO_QTY': 28,
+     'Unit': 'EA',
+     'Procedure': 'For each size, type 10% (Min. 1)',
+     'Spare_QTY': 3,
+     'Remarks': '1" 150# spiral wound gasket'},
+    
+    {'Page': 15, 'Table': 'TABLE-3', 'Section': 'Spare Parts for Piping',
+     'Item_No': 1, 'Category': 'Gasket',
+     'Items': 'GASKET, RF, SPIRAL WOUND/WINDING: C.S FILLER: GRAPHITE/ IR: SS316L/OR: CS, Thk. 4.5mm, ASME B16.20',
+     'Description': 'Spiral wound gasket with graphite filler',
+     'Size': '3/4"', 'Rating': '150#',
+     'Specification': 'RF, C.S winding, Graphite filler, SS316L IR, CS OR, 4.5mm thick, ASME B16.20',
+     'MTO_QTY': 5,
+     'Unit': 'EA',
+     'Procedure': 'For each size, type 10% (Min. 1)',
+     'Spare_QTY': 1,
+     'Remarks': '3/4" 150# spiral wound gasket'},
+    
+    {'Page': 15, 'Table': 'TABLE-3', 'Section': 'Spare Parts for Piping',
+     'Item_No': 1, 'Category': 'Gasket',
+     'Items': 'GASKET, RF, SPIRAL WOUND/WINDING: C.S FILLER: GRAPHITE/ IR: SS316L/OR: CS, Thk. 4.5mm, ASME B16.20',
+     'Description': 'Spiral wound gasket with graphite filler',
+     'Size': '1/2"', 'Rating': '150#',
+     'Specification': 'RF, C.S winding, Graphite filler, SS316L IR, CS OR, 4.5mm thick, ASME B16.20',
+     'MTO_QTY': 15,
+     'Unit': 'EA',
+     'Procedure': 'For each size, type 10% (Min. 1)',
+     'Spare_QTY': 2,
+     'Remarks': '1/2" 150# spiral wound gasket'},
+]
 
-# ایجاد DataFrame
-df = pd.DataFrame(data)
+# ==================== صفحه 16: TABLE-3 (ادامه Stud Bolts and Nuts) ====================
+page_16_stud_bolts = [
+    {'Page': 16, 'Table': 'TABLE-3', 'Section': 'Spare Parts for Piping',
+     'Item_No': 2, 'Category': 'Stud bolts and Nuts',
+     'Items': 'BOLT, STUD, ASME B18.2.1 AND ASME B18.2.2 ASTM A193 GR. B7M /ASTM A194 GR. 2HM (2WASHER & 2 NUTS)',
+     'Description': 'Stud bolts with washers and nuts',
+     'Size': '20"', 'Rating': '300#',
+     'Specification': 'ASME B18.2.1/B18.2.2, A193 GR.B7M/A194 GR.2HM, 2 washers & 2 nuts',
+     'MTO_QTY': 72,
+     'Unit': 'EA',
+     'Procedure': 'For each size, type 10% (Min. 1)',
+     'Spare_QTY': 7,
+     'Remarks': '20" 300# stud bolts set'},
+    
+    {'Page': 16, 'Table': 'TABLE-3', 'Section': 'Spare Parts for Piping',
+     'Item_No': 2, 'Category': 'Stud bolts and Nuts',
+     'Items': 'BOLT, STUD, ASME B18.2.1 AND ASME B18.2.2 ASTM A193 GR. B7M /ASTM A194 GR. 2HM (2WASHER & 2 NUTS)',
+     'Description': 'Stud bolts with washers and nuts',
+     'Size': '16"', 'Rating': '300#',
+     'Specification': 'ASME B18.2.1/B18.2.2, A193 GR.B7M/A194 GR.2HM, 2 washers & 2 nuts',
+     'MTO_QTY': 520,
+     'Unit': 'EA',
+     'Procedure': 'For each size, type 10% (Min. 1)',
+     'Spare_QTY': 52,
+     'Remarks': '16" 300# stud bolts set'},
+    
+    {'Page': 16, 'Table': 'TABLE-3', 'Section': 'Spare Parts for Piping',
+     'Item_No': 2, 'Category': 'Stud bolts and Nuts',
+     'Items': 'BOLT, STUD, ASME B18.2.1 AND ASME B18.2.2 ASTM A193 GR. B7M /ASTM A194 GR. 2HM (2WASHER & 2 NUTS)',
+     'Description': 'Stud bolts with washers and nuts',
+     'Size': '12"', 'Rating': '300#',
+     'Specification': 'ASME B18.2.1/B18.2.2, A193 GR.B7M/A194 GR.2HM, 2 washers & 2 nuts',
+     'MTO_QTY': 32,
+     'Unit': 'EA',
+     'Procedure': 'For each size, type 10% (Min. 1)',
+     'Spare_QTY': 3,
+     'Remarks': '12" 300# stud bolts set'},
+    
+    {'Page': 16, 'Table': 'TABLE-3', 'Section': 'Spare Parts for Piping',
+     'Item_No': 2, 'Category': 'Stud bolts and Nuts',
+     'Items': 'BOLT, STUD, ASME B18.2.1 AND ASME B18.2.2 ASTM A193 GR. B7M /ASTM A194 GR. 2HM (2WASHER & 2 NUTS)',
+     'Description': 'Stud bolts with washers and nuts',
+     'Size': '8"', 'Rating': '300#',
+     'Specification': 'ASME B18.2.1/B18.2.2, A193 GR.B7M/A194 GR.2HM, 2 washers & 2 nuts',
+     'MTO_QTY': 48,
+     'Unit': 'EA',
+     'Procedure': 'For each size, type 10% (Min. 1)',
+     'Spare_QTY': 5,
+     'Remarks': '8" 300# stud bolts set'},
+    
+    {'Page': 16, 'Table': 'TABLE-3', 'Section': 'Spare Parts for Piping',
+     'Item_No': 2, 'Category': 'Stud bolts and Nuts',
+     'Items': 'BOLT, STUD, ASME B18.2.1 AND ASME B18.2.2 ASTM A193 GR. B7M /ASTM A194 GR. 2HM (2WASHER & 2 NUTS)',
+     'Description': 'Stud bolts with washers and nuts',
+     'Size': '6"', 'Rating': '300#',
+     'Specification': 'ASME B18.2.1/B18.2.2, A193 GR.B7M/A194 GR.2HM, 2 washers & 2 nuts',
+     'MTO_QTY': 552,
+     'Unit': 'EA',
+     'Procedure': 'For each size, type 10% (Min. 1)',
+     'Spare_QTY': 55,
+     'Remarks': '6" 300# stud bolts set'},
+    
+    {'Page': 16, 'Table': 'TABLE-3', 'Section': 'Spare Parts for Piping',
+     'Item_No': 2, 'Category': 'Stud bolts and Nuts',
+     'Items': 'BOLT, STUD, ASME B18.2.1 AND ASME B18.2.2 ASTM A193 GR. B7M /ASTM A194 GR. 2HM (2WASHER & 2 NUTS)',
+     'Description': 'Stud bolts with washers and nuts',
+     'Size': '3"', 'Rating': '300#',
+     'Specification': 'ASME B18.2.1/B18.2.2, A193 GR.B7M/A194 GR.2HM, 2 washers & 2 nuts',
+     'MTO_QTY': 48,
+     'Unit': 'EA',
+     'Procedure': 'For each size, type 10% (Min. 1)',
+     'Spare_QTY': 5,
+     'Remarks': '3" 300# stud bolts set'},
+    
+    {'Page': 16, 'Table': 'TABLE-3', 'Section': 'Spare Parts for Piping',
+     'Item_No': 2, 'Category': 'Stud bolts and Nuts',
+     'Items': 'BOLT, STUD, ASME B18.2.1 AND ASME B18.2.2 ASTM A193 GR. B7M /ASTM A194 GR. 2HM (2WASHER & 2 NUTS)',
+     'Description': 'Stud bolts with washers and nuts',
+     'Size': '1-1/2"', 'Rating': '300#',
+     'Specification': 'ASME B18.2.1/B18.2.2, A193 GR.B7M/A194 GR.2HM, 2 washers & 2 nuts',
+     'MTO_QTY': 68,
+     'Unit': 'EA',
+     'Procedure': 'For each size, type 10% (Min. 1)',
+     'Spare_QTY': 7,
+     'Remarks': '1-1/2" 300# stud bolts set'},
+    
+    {'Page': 16, 'Table': 'TABLE-3', 'Section': 'Spare Parts for Piping',
+     'Item_No': 2, 'Category': 'Stud bolts and Nuts',
+     'Items': 'BOLT, STUD, ASME B18.2.1 AND ASME B18.2.2 ASTM A193 GR. B7M /ASTM A194 GR. 2HM (2WASHER & 2 NUTS)',
+     'Description': 'Stud bolts with washers and nuts',
+     'Size': '1"', 'Rating': '300#',
+     'Specification': 'ASME B18.2.1/B18.2.2, A193 GR.B7M/A194 GR.2HM, 2 washers & 2 nuts',
+     'MTO_QTY': 12,
+     'Unit': 'EA',
+     'Procedure': 'For each size, type 10% (Min. 1)',
+     'Spare_QTY': 1,
+     'Remarks': '1" 300# stud bolts set'},
+    
+    {'Page': 16, 'Table': 'TABLE-3', 'Section': 'Spare Parts for Piping',
+     'Item_No': 2, 'Category': 'Stud bolts and Nuts',
+     'Items': 'BOLT, STUD, ASME B18.2.1 AND ASME B18.2.2 ASTM A193 GR. B7M /ASTM A194 GR. 2HM (2WASHER & 2 NUTS)',
+     'Description': 'Stud bolts with washers and nuts',
+     'Size': '3/4"', 'Rating': '300#',
+     'Specification': 'ASME B18.2.1/B18.2.2, A193 GR.B7M/A194 GR.2HM, 2 washers & 2 nuts',
+     'MTO_QTY': 28,
+     'Unit': 'EA',
+     'Procedure': 'For each size, type 10% (Min. 1)',
+     'Spare_QTY': 3,
+     'Remarks': '3/4" 300# stud bolts set'},
+    
+    {'Page': 16, 'Table': 'TABLE-3', 'Section': 'Spare Parts for Piping',
+     'Item_No': 2, 'Category': 'Stud bolts and Nuts',
+     'Items': 'BOLT, STUD, ASME B18.2.1 AND ASME B18.2.2 ASTM A193 GR. B7M /ASTM A194 GR. 2HM (2WASHER & 2 NUTS)',
+     'Description': 'Stud bolts with washers and nuts',
+     'Size': '1/2"', 'Rating': '300#',
+     'Specification': 'ASME B18.2.1/B18.2.2, A193 GR.B7M/A194 GR.2HM, 2 washers & 2 nuts',
+     'MTO_QTY': 56,
+     'Unit': 'EA',
+     'Procedure': 'For each size, type 10% (Min. 1)',
+     'Spare_QTY': 6,
+     'Remarks': '1/2" 300# stud bolts set'},
+    
+    {'Page': 16, 'Table': 'TABLE-3', 'Section': 'Spare Parts for Piping',
+     'Item_No': 2, 'Category': 'Stud bolts and Nuts',
+     'Items': 'BOLT, STUD, ASME B18.2.1 AND ASME B18.2.2 ASTM A193 GR. B7M /ASTM A194 GR. 2HM (2WASHER & 2 NUTS)',
+     'Description': 'Stud bolts with washers and nuts',
+     'Size': '2"', 'Rating': '150#',
+     'Specification': 'ASME B18.2.1/B18.2.2, A193 GR.B7M/A194 GR.2HM, 2 washers & 2 nuts',
+     'MTO_QTY': 88,
+     'Unit': 'EA',
+     'Procedure': 'For each size, type 10% (Min. 1)',
+     'Spare_QTY': 9,
+     'Remarks': '2" 150# stud bolts set'},
+    
+    {'Page': 16, 'Table': 'TABLE-3', 'Section': 'Spare Parts for Piping',
+     'Item_No': 2, 'Category': 'Stud bolts and Nuts',
+     'Items': 'BOLT, STUD, ASME B18.2.1 AND ASME B18.2.2 ASTM A193 GR. B7M /ASTM A194 GR. 2HM (2WASHER & 2 NUTS)',
+     'Description': 'Stud bolts with washers and nuts',
+     'Size': '1"', 'Rating': '150#',
+     'Specification': 'ASME B18.2.1/B18.2.2, A193 GR.B7M/A194 GR.2HM, 2 washers & 2 nuts',
+     'MTO_QTY': 92,
+     'Unit': 'EA',
+     'Procedure': 'For each size, type 10% (Min. 1)',
+     'Spare_QTY': 9,
+     'Remarks': '1" 150# stud bolts set'},
+    
+    {'Page': 16, 'Table': 'TABLE-3', 'Section': 'Spare Parts for Piping',
+     'Item_No': 2, 'Category': 'Stud bolts and Nuts',
+     'Items': 'BOLT, STUD, ASME B18.2.1 AND ASME B18.2.2 ASTM A193 GR. B7M /ASTM A194 GR. 2HM (2WASHER & 2 NUTS)',
+     'Description': 'Stud bolts with washers and nuts',
+     'Size': '3/4"', 'Rating': '150#',
+     'Specification': 'ASME B18.2.1/B18.2.2, A193 GR.B7M/A194 GR.2HM, 2 washers & 2 nuts',
+     'MTO_QTY': 12,
+     'Unit': 'EA',
+     'Procedure': 'For each size, type 10% (Min. 1)',
+     'Spare_QTY': 1,
+     'Remarks': '3/4" 150# stud bolts set'},
+    
+    {'Page': 16, 'Table': 'TABLE-3', 'Section': 'Spare Parts for Piping',
+     'Item_No': 2, 'Category': 'Stud bolts and Nuts',
+     'Items': 'BOLT, STUD, ASME B18.2.1 AND ASME B18.2.2 ASTM A193 GR. B7M /ASTM A194 GR. 2HM (2WASHER & 2 NUTS)',
+     'Description': 'Stud bolts with washers and nuts',
+     'Size': '1/2"', 'Rating': '150#',
+     'Specification': 'ASME B18.2.1/B18.2.2, A193 GR.B7M/A194 GR.2HM, 2 washers & 2 nuts',
+     'MTO_QTY': 60,
+     'Unit': 'EA',
+     'Procedure': 'For each size, type 10% (Min. 1)',
+     'Spare_QTY': 6,
+     'Remarks': '1/2" 150# stud bolts set'},
+]
 
-# ذخیره فایل ساده
-df.to_excel('WHCP_Parts_List_2_Simple.xlsx', index=False, engine='openpyxl')
-print("\n✓ فایل WHCP_Parts_List_2_Simple.xlsx ایجاد شد")
+# ==================== صفحه 16: TABLE-3 Valve Spare Parts ====================
+page_16_valve_spares = [
+    {'Page': 16, 'Table': 'TABLE-3', 'Section': 'Spare Parts for Piping',
+     'Item_No': 3, 'Category': 'Valve - BALL VALVE (MOV), FB',
+     'Items': 'Seat',
+     'Description': 'Ball valve MOV FB - Seat',
+     'Size': '6"', 'Rating': '300#, RF',
+     'Body_Material': 'A216 WCB',
+     'Ball_Material': 'AISI 410+ENP',
+     'Seat_Material': 'PEEK',
+     'Stem_Material': 'UNS S20910',
+     'Standard': 'NACE MR0175/ISO15156, CAST, API 6D',
+     'MTO_QTY': '1 set',
+     'Unit': 'SET',
+     'Procedure': '2 for each type, size and material',
+     'Spare_QTY': '2 Set',
+     'Remarks': 'Ball valve MOV complete spare set'},
+    
+    {'Page': 16, 'Table': 'TABLE-3', 'Section': 'Spare Parts for Piping',
+     'Item_No': 3, 'Category': 'Valve - BALL VALVE (MOV), FB',
+     'Items': 'Stem',
+     'Description': 'Ball valve MOV FB - Stem',
+     'Size': '6"', 'Rating': '300#, RF',
+     'Standard': 'NACE MR0175/ISO15156, CAST, API 6D',
+     'MTO_QTY': '1 set',
+     'Unit': 'SET',
+     'Procedure': '2 for each type, size and material',
+     'Spare_QTY': '2 Set',
+     'Remarks': 'Ball valve MOV stem'},
+    
+    {'Page': 16, 'Table': 'TABLE-3', 'Section': 'Spare Parts for Piping',
+     'Item_No': 3, 'Category': 'Valve - BALL VALVE (MOV), FB',
+     'Items': 'Packing',
+     'Description': 'Ball valve MOV FB - Packing',
+     'Size': '6"', 'Rating': '300#, RF',
+     'MTO_QTY': '1 set',
+     'Unit': 'SET',
+     'Procedure': '2 for each type, size and material',
+     'Spare_QTY': '2 Set',
+     'Remarks': 'Ball valve MOV packing'},
+    
+    {'Page': 16, 'Table': 'TABLE-3', 'Section': 'Spare Parts for Piping',
+     'Item_No': 3, 'Category': 'Valve - BALL VALVE (MOV), FB',
+     'Items': 'Gasket & O-Ring',
+     'Description': 'Ball valve MOV FB - Gasket & O-Ring',
+     'Size': '6"', 'Rating': '300#, RF',
+     'MTO_QTY': '1 set',
+     'Unit': 'SET',
+     'Procedure': '2 for each type, size and material',
+     'Spare_QTY': '2 Set',
+     'Remarks': 'Ball valve MOV gasket and O-ring'},
+    
+    {'Page': 16, 'Table': 'TABLE-3', 'Section': 'Spare Parts for Piping',
+     'Item_No': 3, 'Category': 'Valve - BALL VALVE (MOV), FB',
+     'Items': 'Seal',
+     'Description': 'Ball valve MOV FB - Seal',
+     'Size': '6"', 'Rating': '300#, RF',
+     'MTO_QTY': '1 set',
+     'Unit': 'SET',
+     'Procedure': '2 for each type, size and material',
+     'Spare_QTY': '2 Set',
+     'Remarks': 'Ball valve MOV seal'},
+    
+    {'Page': 16, 'Table': 'TABLE-3', 'Section': 'Spare Parts for Piping',
+     'Item_No': 3, 'Category': 'Valve - BALL VALVE (MOV), FB',
+     'Items': 'Electronic board of actuator',
+     'Description': 'Ball valve MOV FB - Electronic board',
+     'Size': '6"', 'Rating': '300#, RF',
+     'MTO_QTY': '1 set',
+     'Unit': 'SET',
+     'Procedure': '2 for each type, size and material',
+     'Spare_QTY': '2 Set',
+     'Remarks': 'Ball valve MOV actuator electronic board'},
+    
+    {'Page': 16, 'Table': 'TABLE-3', 'Section': 'Spare Parts for Piping',
+     'Item_No': 3, 'Category': 'Valve - BUTTERFLY BALL VALVE, LUG TYPE',
+     'Items': 'Seat',
+     'Description': 'Butterfly ball valve lug type - Seat',
+     'Size': '6"', 'Rating': '300#',
+     'MTO_QTY': '1 set',
+     'Unit': 'SET',
+     'Procedure': '2 for each type, size and material',
+     'Spare_QTY': '2 Set',
+     'Remarks': 'Butterfly valve complete spare set'},
+    
+    {'Page': 16, 'Table': 'TABLE-3', 'Section': 'Spare Parts for Piping',
+     'Item_No': 3, 'Category': 'Valve - BUTTERFLY BALL VALVE, LUG TYPE',
+     'Items': 'Stem',
+     'Description': 'Butterfly ball valve lug type - Stem',
+     'Size': '6"', 'Rating': '300#',
+     'MTO_QTY': '1 set',
+     'Unit': 'SET',
+     'Procedure': '2 for each type, size and material',
+     'Spare_QTY': '2 Set',
+     'Remarks': 'Butterfly valve stem'},
+    
+    {'Page': 16, 'Table': 'TABLE-3', 'Section': 'Spare Parts for Piping',
+     'Item_No': 3, 'Category': 'Valve - BUTTERFLY BALL VALVE, LUG TYPE',
+     'Items': 'Packing',
+     'Description': 'Butterfly ball valve lug type - Packing',
+     'Size': '6"', 'Rating': '300#',
+     'MTO_QTY': '1 set',
+     'Unit': 'SET',
+     'Procedure': '2 for each type, size and material',
+     'Spare_QTY': '2 Set',
+     'Remarks': 'Butterfly valve packing'},
+    
+    {'Page': 16, 'Table': 'TABLE-3', 'Section': 'Spare Parts for Piping',
+     'Item_No': 3, 'Category': 'Valve - BUTTERFLY BALL VALVE, LUG TYPE',
+     'Items': 'Gasket & O-Ring',
+     'Description': 'Butterfly ball valve lug type - Gasket & O-Ring',
+     'Size': '6"', 'Rating': '300#',
+     'MTO_QTY': '1 set',
+     'Unit': 'SET',
+     'Procedure': '2 for each type, size and material',
+     'Spare_QTY': '2 Set',
+     'Remarks': 'Butterfly valve gasket and O-ring'},
+    
+    {'Page': 16, 'Table': 'TABLE-3', 'Section': 'Spare Parts for Piping',
+     'Item_No': 3, 'Category': 'Valve - BUTTERFLY BALL VALVE, LUG TYPE',
+     'Items': 'Seal',
+     'Description': 'Butterfly ball valve lug type - Seal',
+     'Size': '6"', 'Rating': '300#',
+     'MTO_QTY': '1 set',
+     'Unit': 'SET',
+     'Procedure': '2 for each type, size and material',
+     'Spare_QTY': '2 Set',
+     'Remarks': 'Butterfly valve seal'},
+    
+    {'Page': 16, 'Table': 'TABLE-3', 'Section': 'Spare Parts for Piping',
+     'Item_No': 3, 'Category': 'Valve - BUTTERFLY BALL VALVE, LUG TYPE',
+     'Items': 'Air Filter Regulator',
+     'Description': 'Butterfly ball valve - Air filter regulator',
+     'Size': '6"', 'Rating': '300#',
+     'MTO_QTY': '1 set',
+     'Unit': 'SET',
+     'Procedure': '2 for each type, size and material',
+     'Spare_QTY': '2 Set',
+     'Remarks': 'Butterfly valve air filter regulator'},
+    
+    {'Page': 16, 'Table': 'TABLE-3', 'Section': 'Spare Parts for Piping',
+     'Item_No': 3, 'Category': 'Valve - BUTTERFLY BALL VALVE, LUG TYPE',
+     'Items': 'I/P Positioner',
+     'Description': 'Butterfly ball valve - I/P positioner',
+     'Size': '6"', 'Rating': '300#',
+     'MTO_QTY': '1 set',
+     'Unit': 'SET',
+     'Procedure': '2 for each type, size and material',
+     'Spare_QTY': '2 Set',
+     'Remarks': 'Butterfly valve I/P positioner'},
+    
+    {'Page': 16, 'Table': 'TABLE-3', 'Section': 'Spare Parts for Piping',
+     'Item_No': 3, 'Category': 'Valve - BALL VALVE (MOV), FB Complete',
+     'Items': 'BALL VALVE (MOV), FB, BODY: A216 WCB, BALL: AISI 410+ENP, SEAT: PEEK, STEM: UNS S20910, NACE MR0175/ ISO15156, CAST, API 6D',
+     'Description': 'Ball valve MOV complete unit',
+     'Size': '6"', 'Rating': '300#, RF',
+     'MTO_QTY': 7,
+     'Unit': 'EA',
+     'Procedure': '2% (Min. 2) for each size, type and material',
+     'Spare_QTY': 2,
+     'Remarks': 'Complete ball valve MOV assembly'},
+    
+    {'Page': 16, 'Table': 'TABLE-3', 'Section': 'Spare Parts for Piping',
+     'Item_No': 3, 'Category': 'Valve - BUTTERFLY BALL VALVE Complete',
+     'Items': 'BUTTERFLY BALL VALVE, LUG TYPE',
+     'Description': 'Butterfly ball valve complete unit',
+     'Size': '6"', 'Rating': '300#',
+     'MTO_QTY': 3,
+     'Unit': 'EA',
+     'Procedure': '2% (Min. 2) for each size, type and material',
+     'Spare_QTY': 2,
+     'Remarks': 'Complete butterfly valve assembly'},
+    
+    {'Page': 16, 'Table': 'TABLE-3', 'Section': 'Spare Parts for Piping',
+     'Item_No': 3, 'Category': 'Valve - BALL VALVE, SW',
+     'Items': 'BALL VALVE, SW, WITH 2 NIPPLES, BODY: A105N, BALL: ASTM A182 F316, SEAT: PEEK, STEM: ASTM A276 Gr.316, NACE MR0175/ ISO15156',
+     'Description': 'Ball valve socket weld with 2 nipples',
+     'Size': '1/2"', 'Rating': '800#',
+     'MTO_QTY': 25,
+     'Unit': 'EA',
+     'Procedure': '5% for each size, type and material',
+     'Spare_QTY': 2,
+     'Remarks': 'Socket weld ball valve 1/2" 800#'},
+    
+    {'Page': 16, 'Table': 'TABLE-3', 'Section': 'Spare Parts for Piping',
+     'Item_No': 3, 'Category': 'Valve - BALL VALVE, SW',
+     'Items': 'BALL VALVE, SW, WITH 2 NIPPLES, BODY: A105N, BALL: ASTM A182 F316, SEAT: PEEK, STEM: ASTM A276 Gr.316, NACE MR0175/ ISO15156',
+     'Description': 'Ball valve socket weld with 2 nipples',
+     'Size': '3/4"', 'Rating': '800#',
+     'MTO_QTY': 12,
+     'Unit': 'EA',
+     'Procedure': '5% for each size, type and material',
+     'Spare_QTY': 1,
+     'Remarks': 'Socket weld ball valve 3/4" 800#'},
+    
+    {'Page': 16, 'Table': 'TABLE-3', 'Section': 'Spare Parts for Piping',
+     'Item_No': 3, 'Category': 'Valve - BALL VALVE, SW',
+     'Items': 'BALL VALVE, SW, WITH 2 NIPPLES, BODY: A105N, BALL: ASTM A182 F316, SEAT: PEEK, STEM: ASTM A276 Gr.316, NACE MR0175/ ISO15156',
+     'Description': 'Ball valve socket weld with 2 nipples',
+     'Size': '1"', 'Rating': '800#',
+     'MTO_QTY': 18,
+     'Unit': 'EA',
+     'Procedure': '5% for each size, type and material',
+     'Spare_QTY': 2,
+     'Remarks': 'Socket weld ball valve 1" 800#'},
+    
+    {'Page': 16, 'Table': 'TABLE-3', 'Section': 'Spare Parts for Piping',
+     'Item_No': 3, 'Category': 'Valve - BALL VALVE, SCREWED',
+     'Items': 'BALL VALVE, SCREWED',
+     'Description': 'Ball valve screwed',
+     'Size': '1/2"', 'Rating': '800#',
+     'MTO_QTY': 3,
+     'Unit': 'EA',
+     'Procedure': '5% for each size, type and material',
+     'Spare_QTY': 1,
+     'Remarks': 'Screwed ball valve 1/2" 800#'},
+    
+    {'Page': 16, 'Table': 'TABLE-3', 'Section': 'Spare Parts for Piping',
+     'Item_No': 3, 'Category': 'Valve - BALL VALVE, SW (Gland packing & bonnet gasket)',
+     'Items': 'BALL VALVE, SW, WITH 2 NIPPLES, BODY: A105N, BALL: ASTM A182 F316, SEAT: PEEK, STEM: ASTM A276 Gr.316, NACE MR0175/ ISO15156 (Gland packing & bonnet gasket)',
+     'Description': 'Ball valve SW - Gland packing & bonnet gasket',
+     'Size': '1/2"', 'Rating': '800#',
+     'MTO_QTY': 25,
+     'Unit': 'EA',
+     'Procedure': '10%',
+     'Spare_QTY': 3,
+     'Remarks': 'Ball valve gland packing & gasket 1/2"'},
+    
+    {'Page': 16, 'Table': 'TABLE-3', 'Section': 'Spare Parts for Piping',
+     'Item_No': 3, 'Category': 'Valve - BALL VALVE, SW (Gland packing & bonnet gasket)',
+     'Items': 'BALL VALVE, SW, WITH 2 NIPPLES, BODY: A105N, BALL: ASTM A182 F316, SEAT: PEEK, STEM: ASTM A276 Gr.316, NACE MR0175/ ISO15156 (Gland packing & bonnet gasket)',
+     'Description': 'Ball valve SW - Gland packing & bonnet gasket',
+     'Size': '3/4"', 'Rating': '800#',
+     'MTO_QTY': 12,
+     'Unit': 'EA',
+     'Procedure': '10%',
+     'Spare_QTY': 1,
+     'Remarks': 'Ball valve gland packing & gasket 3/4"'},
+    
+    {'Page': 16, 'Table': 'TABLE-3', 'Section': 'Spare Parts for Piping',
+     'Item_No': 3, 'Category': 'Valve - BALL VALVE, SW (Gland packing & bonnet gasket)',
+     'Items': 'BALL VALVE, SW, WITH 2 NIPPLES, BODY: A105N, BALL: ASTM A182 F316, SEAT: PEEK, STEM: ASTM A276 Gr.316, NACE MR0175/ ISO15156 (Gland packing & bonnet gasket)',
+     'Description': 'Ball valve SW - Gland packing & bonnet gasket',
+     'Size': '1"', 'Rating': '800#',
+     'MTO_QTY': 18,
+     'Unit': 'EA',
+     'Procedure': '10%',
+     'Spare_QTY': 2,
+     'Remarks': 'Ball valve gland packing & gasket 1"'},
+    
+    {'Page': 16, 'Table': 'TABLE-3', 'Section': 'Spare Parts for Piping',
+     'Item_No': 3, 'Category': 'Valve - BALL VALVE, SCREWED (Gland packing & bonnet gasket)',
+     'Items': 'BALL VALVE, SCREWED (Gland packing & bonnet gasket)',
+     'Description': 'Ball valve screwed - Gland packing & bonnet gasket',
+     'Size': '1/2"', 'Rating': '800#',
+     'MTO_QTY': 3,
+     'Unit': 'EA',
+     'Procedure': '10%',
+     'Spare_QTY': 1,
+     'Remarks': 'Screwed ball valve gland packing & gasket'},
+    
+    {'Page': 16, 'Table': 'TABLE-3', 'Section': 'Spare Parts for Piping',
+     'Item_No': 3, 'Category': 'Valve - SWING CHECK VALVE',
+     'Items': 'SWING CHECK VALVE',
+     'Description': 'Swing check valve',
+     'Size': '2"', 'Rating': '150#',
+     'MTO_QTY': 2,
+     'Unit': 'EA',
+     'Procedure': '2% (Min. 2) for each size, type and material',
+     'Spare_QTY': 2,
+     'Remarks': 'Swing check valve 2" 150#'},
+    
+    {'Page': 16, 'Table': 'TABLE-3', 'Section': 'Spare Parts for Piping',
+     'Item_No': 3, 'Category': 'Valve - MANUAL BALL VALVE, FB',
+     'Items': 'MANUAL BALL VALVE, FB',
+     'Description': 'Manual ball valve flanged',
+     'Size': '3/4"', 'Rating': '300#',
+     'MTO_QTY': 1,
+     'Unit': 'EA',
+     'Procedure': '2% (Min. 2) for each size, type and material',
+     'Spare_QTY': 1,
+     'Remarks': 'Manual ball valve FB 3/4" 300#'},
+]
 
-# ایجاد فایل با فرمت‌بندی
-wb = Workbook()
-ws = wb.active
-ws.title = "Parts List"
+# ==================== صفحه 17: TABLE-3 (ادامه و پایان) و NOTES ====================
+page_17_valve_spares_continued = [
+    {'Page': 17, 'Table': 'TABLE-3', 'Section': 'Spare Parts for Piping',
+     'Item_No': 3, 'Category': 'Valve - MANUAL BALL VALVE, FB',
+     'Items': 'MANUAL BALL VALVE, FB',
+     'Description': 'Manual ball valve flanged',
+     'Size': '1"', 'Rating': '300#',
+     'MTO_QTY': 2,
+     'Unit': 'EA',
+     'Procedure': '5% for each size, type and material',
+     'Spare_QTY': 1,
+     'Remarks': 'Manual ball valve FB 1" 300#'},
+    
+    {'Page': 17, 'Table': 'TABLE-3', 'Section': 'Spare Parts for Piping',
+     'Item_No': 3, 'Category': 'Valve - MANUAL BALL VALVE, FB',
+     'Items': 'MANUAL BALL VALVE, FB',
+     'Description': 'Manual ball valve flanged',
+     'Size': '2"', 'Rating': '300#',
+     'MTO_QTY': 4,
+     'Unit': 'EA',
+     'Procedure': '2% (Min. 2) for each size, type and material',
+     'Spare_QTY': 2,
+     'Remarks': 'Manual ball valve FB 2" 300#'},
+    
+    {'Page': 17, 'Table': 'TABLE-3', 'Section': 'Spare Parts for Piping',
+     'Item_No': 3, 'Category': 'Valve - MANUAL BALL VALVE, FB',
+     'Items': 'MANUAL BALL VALVE, FB',
+     'Description': 'Manual ball valve flanged',
+     'Size': '3"', 'Rating': '300#',
+     'MTO_QTY': 2,
+     'Unit': 'EA',
+     'Procedure': '2% (Min. 2) for each size, type and material',
+     'Spare_QTY': 2,
+     'Remarks': 'Manual ball valve FB 3" 300#'},
+    
+    {'Page': 17, 'Table': 'TABLE-3', 'Section': 'Spare Parts for Piping',
+     'Item_No': 3, 'Category': 'Valve - MANUAL BALL VALVE, FB (Gland packing & bonnet gasket)',
+     'Items': 'MANUAL BALL VALVE, FB (Gland packing & bonnet gasket)',
+     'Description': 'Manual ball valve FB - Gland packing & bonnet gasket',
+     'Size': '3/4"', 'Rating': '300#',
+     'MTO_QTY': 1,
+     'Unit': 'EA',
+     'Procedure': '10%',
+     'Spare_QTY': 1,
+     'Remarks': 'Manual ball valve gland packing & gasket 3/4"'},
+    
+    {'Page': 17, 'Table': 'TABLE-3', 'Section': 'Spare Parts for Piping',
+     'Item_No': 3, 'Category': 'Valve - MANUAL BALL VALVE, FB (Gland packing & bonnet gasket)',
+     'Items': 'MANUAL BALL VALVE, FB (Gland packing & bonnet gasket)',
+     'Description': 'Manual ball valve FB - Gland packing & bonnet gasket',
+     'Size': '1"', 'Rating': '300#',
+     'MTO_QTY': 2,
+     'Unit': 'EA',
+     'Procedure': '10%',
+     'Spare_QTY': 1,
+     'Remarks': 'Manual ball valve gland packing & gasket 1"'},
+    
+    {'Page': 17, 'Table': 'TABLE-3', 'Section': 'Spare Parts for Piping',
+     'Item_No': 3, 'Category': 'Valve - MANUAL BALL VALVE, FB (Gland packing & bonnet gasket)',
+     'Items': 'MANUAL BALL VALVE, FB (Gland packing & bonnet gasket)',
+     'Description': 'Manual ball valve FB - Gland packing & bonnet gasket',
+     'Size': '2"', 'Rating': '300#',
+     'MTO_QTY': 4,
+     'Unit': 'EA',
+     'Procedure': '10%',
+     'Spare_QTY': 1,
+     'Remarks': 'Manual ball valve gland packing & gasket 2"'},
+    
+    {'Page': 17, 'Table': 'TABLE-3', 'Section': 'Spare Parts for Piping',
+     'Item_No': 3, 'Category': 'Valve - MANUAL BALL VALVE, FB (Gland packing & bonnet gasket)',
+     'Items': 'MANUAL BALL VALVE, FB (Gland packing & bonnet gasket)',
+     'Description': 'Manual ball valve FB - Gland packing & bonnet gasket',
+     'Size': '3"', 'Rating': '300#',
+     'MTO_QTY': 2,
+     'Unit': 'EA',
+     'Procedure': '10%',
+     'Spare_QTY': 1,
+     'Remarks': 'Manual ball valve gland packing & gasket 3"'},
+]
 
-# اضافه کردن اطلاعات بالای جدول
-ws.append(['Required on Site Date by PASARGAD:'])
-ws.append([''])
-ws.append(['Reminder: Attach to this form all parts lists and drawings as listed in column 9 and 10'])
-ws.append([''])
-ws.append(['Manufacturers Date:'])
-ws.append([''])
-ws.append(['Description of Parts to include all parts recommended to'])
-ws.append(['be kept for normal operation and slow wearing parts'])
-ws.append([''])
+# ==================== صفحه 17: NOTES ====================
+page_17_notes = [
+    {'Page': 17, 'Section': '6. NOTES', 'Note_No': 1,
+     'Note_Text': 'These items are excluded from our commission and 2-year spare parts.',
+     'Type': 'Exclusion',
+     'Remarks': 'Exclusion note for certain items'},
+    
+    {'Page': 17, 'Section': '6. NOTES', 'Note_No': 2,
+     'Note_Text': 'This document has been prepared based on the latest revision of each Metering skid P&ID.',
+     'Type': 'Reference',
+     'Remarks': 'Document preparation based on P&ID'},
+    
+    {'Page': 17, 'Section': '6. NOTES', 'Note_No': 3,
+     'Note_Text': 'This document has been prepared based on the latest revision of each Metering skid Power Cable List.',
+     'Type': 'Reference',
+     'Remarks': 'Document preparation based on Power Cable List'},
+    
+    {'Page': 17, 'Section': '6. NOTES', 'Note_No': 4,
+     'Note_Text': 'This document has been prepared based on the latest revision of each Metering skid Instrument Cable List.',
+     'Type': 'Reference',
+     'Remarks': 'Document preparation based on Instrument Cable List'},
+    
+    {'Page': 17, 'Section': '6. NOTES', 'Note_No': 5,
+     'Note_Text': 'This document has been prepared based on the latest revision of Control Panel Layout Drawing.',
+     'Type': 'Reference',
+     'Remarks': 'Document preparation based on Control Panel Layout'},
+]
 
-# ادغام سلول‌ها
-ws.merge_cells('A1:E1')
-ws.merge_cells('A3:E3')
-ws.merge_cells('A5:E5')
-ws.merge_cells('A7:E7')
-ws.merge_cells('A8:E8')
+# ==================== تبدیل به DataFrame ====================
+df_page_14_control = pd.DataFrame(page_14_control_system)
+df_page_15_barriers = pd.DataFrame(page_15_barriers_and_accessories)
+df_page_15_gaskets = pd.DataFrame(page_15_piping_gaskets)
+df_page_16_bolts = pd.DataFrame(page_16_stud_bolts)
+df_page_16_valves = pd.DataFrame(page_16_valve_spares)
+df_page_17_valves = pd.DataFrame(page_17_valve_spares_continued)
+df_page_17_notes = pd.DataFrame(page_17_notes)
 
-# فرمت‌بندی سطرهای بالایی
-for row_num in [1, 3, 5, 7, 8]:
-    cell = ws[f'A{row_num}']
-    if row_num == 1:
-        cell.font = Font(bold=True, size=11, color="FF0000")  # قرمز
-    else:
-        cell.font = Font(size=10)
-    cell.alignment = Alignment(horizontal='left', vertical='center', wrap_text=True)
+# ==================== ذخیره در فایل Excel ====================
+output_file = 'Fiscal_Metering_Pages_14_15_16_17_COMPLETE_EXTRACTION.xlsx'
 
-# اضافه کردن هدر جدول
-current_row = 10
-headers = ['Row', 'Qty', 'Description of Parts', 'Material (see Note 4 above)', 
-           'Recommended by Manufacturer for 19 MPD']
+with pd.ExcelWriter(output_file, engine='openpyxl') as writer:
+    # صفحه اول: اطلاعات کلی
+    pd.DataFrame([document_info]).T.to_excel(writer, sheet_name='Document Info', header=False)
+    
+    # صفحه 14
+    df_page_14_control.to_excel(writer, sheet_name='P14-Control System', index=False)
+    
+    # صفحه 15
+    df_page_15_barriers.to_excel(writer, sheet_name='P15-Barriers & Accessories', index=False)
+    df_page_15_gaskets.to_excel(writer, sheet_name='P15-Piping Gaskets', index=False)
+    
+    # صفحه 16
+    df_page_16_bolts.to_excel(writer, sheet_name='P16-Stud Bolts & Nuts', index=False)
+    df_page_16_valves.to_excel(writer, sheet_name='P16-Valve Spares', index=False)
+    
+    # صفحه 17
+    df_page_17_valves.to_excel(writer, sheet_name='P17-Valve Spares Cont', index=False)
+    df_page_17_notes.to_excel(writer, sheet_name='P17-NOTES', index=False)
 
-border = Border(
-    left=Side(style='thin'),
-    right=Side(style='thin'),
-    top=Side(style='thin'),
-    bottom=Side(style='thin')
-)
+print(f"✅ فایل '{output_file}' با موفقیت ایجاد شد!")
+print(f"\n📊 خلاصه استخراج صفحات 14، 15، 16 و 17:")
+print(f"\n   📄 صفحه 14 (TABLE-2 ادامه - Control System):")
+print(f"      • Control System Modules: {len(df_page_14_control)}")
 
-for col_num, header in enumerate(headers, 1):
-    cell = ws.cell(row=current_row, column=col_num)
-    cell.value = header
-    cell.fill = PatternFill(start_color="366092", end_color="366092", fill_type="solid")
-    cell.font = Font(bold=True, color="FFFFFF", size=10)
-    cell.alignment = Alignment(horizontal='center', vertical='center', wrap_text=True)
-    cell.border = border
+print(f"\n   📄 صفحه 15:")
+print(f"      • Barriers & Control Accessories: {len(df_page_15_barriers)}")
+print(f"      • TABLE-3 Piping Gaskets: {len(df_page_15_gaskets)}")
 
-# اضافه کردن داده‌ها
-for idx, row in df.iterrows():
-    current_row += 1
-    for col_num, col_name in enumerate(headers, 1):
-        cell = ws.cell(row=current_row, column=col_num)
-        cell.value = row[col_name]
-        cell.border = border
-        
-        # رنگ‌بندی برای Electrical Component
-        if col_num == 4 and 'Electrical Component' in str(row[col_name]):
-            cell.fill = PatternFill(start_color="FFFF99", end_color="FFFF99", fill_type="solid")
-        
-        cell.alignment = Alignment(horizontal='left', vertical='center', wrap_text=True)
+print(f"\n   📄 صفحه 16:")
+print(f"      • TABLE-3 Stud Bolts & Nuts: {len(df_page_16_bolts)}")
+print(f"      • TABLE-3 Valve Spare Parts: {len(df_page_16_valves)}")
 
-# تنظیم عرض ستون‌ها
-ws.column_dimensions['A'].width = 8
-ws.column_dimensions['B'].width = 8
-ws.column_dimensions['C'].width = 60
-ws.column_dimensions['D'].width = 30
-ws.column_dimensions['E'].width = 30
+print(f"\n   📄 صفحه 17:")
+print(f"      • TABLE-3 Valve Spares (ادامه): {len(df_page_17_valves)}")
+print(f"      • Section 6 - NOTES: {len(df_page_17_notes)}")
 
-# تنظیم ارتفاع سطر هدر
-ws.row_dimensions[10].height = 40
+total_rows = (len(df_page_14_control) + len(df_page_15_barriers) + 
+              len(df_page_15_gaskets) + len(df_page_16_bolts) + 
+              len(df_page_16_valves) + len(df_page_17_valves) + len(df_page_17_notes))
 
-# ذخیره فایل
-wb.save('WHCP_Parts_List_2_Formatted.xlsx')
-print("✓ فایل WHCP_Parts_List_2_Formatted.xlsx ایجاد شد")
-
-print("\n" + "="*60)
-print("📊 خلاصه نتایج:")
-print("="*60)
-print(f"✓ تعداد کل قطعات: {len(df)} قلم")
-print(f"✓ مجموع تعداد: {df['Qty'].sum()} عدد")
-
-# نمایش آمار جزئی‌تر
-print("\n📈 آمار براساس نوع متریال:")
-material_stats = df['Material (see Note 4 above)'].value_counts()
-for material, count in material_stats.items():
-    qty_sum = df[df['Material (see Note 4 above)'] == material]['Qty'].sum()
-    print(f"  • {material}: {count} قلم (مجموع {qty_sum} عدد)")
-
-print("\n" + "="*60)
-print("✅ فایل‌ها با موفقیت ایجاد شدند:")
-print("   1. WHCP_Parts_List_2_Simple.xlsx")
-print("   2. WHCP_Parts_List_2_Formatted.xlsx")
-print("="*60)
+print(f"\n📁 مجموع ردیف‌های استخراج شده: {total_rows}")
+print(f"📁 تعداد شیت‌های Excel: 8 شیت (7 شیت داده + 1 شیت اطلاعات کلی)")

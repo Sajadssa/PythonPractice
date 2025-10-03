@@ -1,0 +1,23 @@
+﻿Item,Description of Parts,Drawing/Ref. No.,Manufacturer,Real Part No.,Material,Qty
+1,"Stud Bolt 1/2""x70 mm for Tank",ASME B16.5,Farasazan Pick Gostar,,S.S.316,42
+2,"Nut 1/2"" for Tank",ASME B16.5,Farasazan Pick Gostar,,S.S.316,84
+3,Gasket for Tank Top Cover,SJEC-DGNRCB-ENMA-DWLO-0002,Iranian Company,,NBR,26
+4,Pump O-ring Set,SJEC-DGNRCB-ENMA-DWLO-0001,Prominent,,FPM,52
+5,Pump Diaphragm,SJEC-DGNRCB-ENMA-DWLO-0001,Prominent,,PTFE,52
+6,Pump Suction Delivery Valve,SJEC-DGNRCB-ENMA-DWLO-0001,Prominent,,S.S.316,52
+7,"GASKET 1/2"" #150",ASME B16.20,Atbin Ista,,S.S.316,52
+8,"Gasket 1"" #150",ASME B16.20,Atbin Ista,,S.S.316,39
+9,"GASKET 1/2"" #300",ASME B16.20,Atbin Ista,,S.S.316,26
+10,"Ball Valve 1/2"" Threaded",SJEC-DGNRCB-ENMA-DWLO-0001,UNIC,,S.S.410K,2
+11,"Ball Valve 1"" Flange #150",SJEC-DGNRCB-ENMA-DWLO-0001,FEVISA,,S.S.316,2
+12,"Tee 1"" SW #300",ASME B16.11,BOTHWELL,,S.S.316,1
+13,"Elbow 1"" SW #300",ASME B16.11,BOTHWELL,,S.S.316,1
+14,Circuit Breaker,SJEC-DGNRCB-ENMA-DIWI-0001,LS,,-,2
+15,Auxiliary Relay,SJEC-DGNRCB-ENMA-DIWI-0001,Finder,,-,33
+16,Push Button,SJEC-DGNRCB-ENMA-DIWI-0001,RAAD,,-,23
+17,Terminal Block,SJEC-DGNRCB-ENMA-DIWI-0001,RAAD,,-,65
+18,Pressure Gauge,SJEC-DGNRCB-ENMA-DIWI-0001,Niagara Sanat,,-,6
+19,Complete Head of Level Transmitter,SJEC-DGNRCB-ENMA-DSIN-0001,Eyvar Technic,,Aluminium,3
+20,Relief Valve Disc & Disc Holder,SJEC-DGNRCB-ENMA-DSIN-0001,VIRCO,,S.S.316,3
+21,Motor Bearing Set,SJEC-DGNRCB-ENMA-DSEQ-0003,SKF,,Antifriction,39
+22,Motor Fan,SJEC-DGNRCB-ENMA-DSEQ-0003,SIEMENS,,-,2

@@ -1,0 +1,28 @@
+﻿Item,Description,Material,Drawing,Total,Manufacturer,Contractor,Operational
+1,Seal Kit,HNBR/Teflon,BJ8071-1~19 Choke Valve,6,3/4/5,4,5
+2,Bonnet Gasket,SS316,BJ8071-1~19 Choke Valve,6,2,4,
+3,"Bean, 8/64""",AISI 410 + SOLID TC,BJ8071-1~6 Positive Choke,6,2,6,5
+4,"Bean, 16/64""",AISI 410 + SOLID TC,BJ8071-1~6 Positive Choke,6,2,6,5
+5,"Bean, 24/64""",AISI 410 + SOLID TC,BJ8071-1~6 Positive Choke,6,2,6,5
+6,"Bean, 32/64""",AISI 410 + SOLID TC,BJ8071-1~6 Positive Choke,6,2,6,5
+7,"Bean, 40/64""",AISI 410 + SOLID TC,BJ8071-1~6 Positive Choke,6,2,6,5
+8,"Bean, 48/64""",AISI 410 + SOLID TC,BJ8071-1~6 Positive Choke,6,2,6,5
+9,"Bean, 56/64""",AISI 410 + SOLID TC,BJ8071-1~6 Positive Choke,6,2,6,5
+10,"Bean, 96/64""",Solid TC,BJ8071-7~19 Adj. Choke,6,2,4,5
+11,"Bean, 116/64""",Solid TC,BJ8071-7~19 Adj. Choke,6,2,4,5
+12,Needle,AISI 410,BJ8071-7~19 Adj. Choke,6,16,2,
+13,Seal Kit,HNBR/Teflon,BJ8071-7~19 Adj. Choke,13,3/4/5,6,6
+14,Bonnet Gasket,SS316,BJ8071-7~19 Adj. Choke,13,3/4,4,
+15,Stem,AISI 410,BJ8071-20~25 Adj. Choke,13,16,2,5
+16,Seal Kit,HNBR/Teflon,BJ8071-20~25 Adj. Choke,6,3/4/5,6,5
+17,Bonnet Gasket,SS316,BJ8071-20~25 Adj. Choke,6,3/4,4,
+18,Seat,AISI 410 + SOLID TC,BJ8071-20~25 Adj. Choke,6,2,6,4
+19,"Bean, 28/64""",AISI 410 + SOLID TC,BJ8071-20~25 Adj. Choke,18,2,6,5
+20,"Bean, 36/64""",AISI 410 + SOLID TC,BJ8071-20~25 Adj. Choke,18,2,6,5
+21,"Bean, 44/64""",AISI 410 + SOLID TC,BJ8071-20~25 Adj. Choke,18,2,6,5
+22,"Bean, 64/64""",AISI 410 + SOLID TC,BJ8071-20~25 Adj. Choke,18,2,6,2
+23,"Bean, 72/64""",AISI 410 + SOLID TC,BJ8071-20~25 Adj. Choke,18,2,6,2
+24,Stem,AISI 410,BJ8071-26~38 Rev0 Adj. Choke,13,16,2,5
+25,Seal Kit,HNBR/Teflon,BJ8071-26~38 Rev0 Adj. Choke,13,3/4/5,6,6
+26,Bonnet Gasket,SS316,BJ8071-26~38 Rev0 Adj. Choke,13,7,4,
+27,Seat,AISI 410 + SOLID TC,BJ8071-26~38 Rev0 Adj. Choke,13,2,6,4

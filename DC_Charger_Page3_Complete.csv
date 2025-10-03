@@ -1,0 +1,12 @@
+﻿Item_No,Equipment_Class,Classification,Unit,Total_Installed,Description,Drawing_Ref,Manufacturer_Part_No,Material,Qty_2Years_Operation,Qty_Commissioning,Qty_Supplied_PASARGAD,Remarks
+1,21,Equipment Class,pcs.,26,"FUSE, 10*-38mm, 2A",SJEC-DGNRDC-ENEL-DIWI-0001,2620001,Multimaterial,8,,,
+2,21,Equipment Class,PCS.,2,"MCB, 40A, 2Pole, C curve (circuit breaker)",SJEC-DGNRDC-ENEL-DIWI-0001,2CDS252001R0404,Multimaterial,1,,,
+3,21,Equipment Class,PCS.,2,"MCB, 50A, 2Pole, C Curve (circuit breaker)",SJEC-DGNRDC-ENEL-DIWI-0001,2CDS252001R0504,Multimaterial,1,,,
+4,21,Equipment Class,PCS.,5,"MCB, 10A, 2Pole, C curve (circuit breaker)",SJEC-DGNRDC-ENEL-DIWI-0001,2CDS25200R0104,Multimaterial,1,,,
+5,21,Equipment Class,pcs.,2,"MCB - 6A, 1P, for heater & lighting",SJEC-DGNRDC-ENEL-DIWI-0001,2CDS251001R0064,Multimaterial,1,,,
+6,21,Equipment Class,pcs.,12,"Thyristor (SCR), SKKT 106",SJEC-DGNRDC-ENEL-DIWI-0001,SKKT 106,Multimaterial,4,,,
+7,21,Equipment Class,pcs.,2,"Block Diode Module, 120A",SJEC-DGNRDC-ENEL-DIWI-0001,BDM120,Multimaterial,1,,,
+8,21,Equipment Class,pcs.,1,"Signal lamp, 110V",SJEC-DGNRDC-ENEL-DIWI-0001,607103005,Multimaterial,1,,,
+9,21,Equipment Class,pcs.,4,Thyristor Driver PCB (control cards),SJEC-DGNRDC-ENEL-DIWI-0001,DTD-PK-02,Multimaterial,1,,,
+10,21,Equipment Class,pcs.,3,Voltage Supervisor PCB (control cards),SJEC-DGNRDC-ENEL-DIWI-0001,CVS-PK-01,Multimaterial,1,,,
+11,21,Equipment Class,cell,176,"Batteries (SBM112, 88 Cells)(2 Banks)",SJEC-DGNRDC-ENEL-DIWI-0001,SBM112,Multimaterial,9,,,

@@ -1,0 +1,267 @@
+HTML_Diabetes_Distribution = 
+VAR NormalFBS = [Normal_FBS_Count]
+VAR PreDiabetes = [Prediabetes_Count]
+VAR Diabetic = [Diabetes_Count]
+VAR TotalDiabetes = NormalFBS + PreDiabetes + Diabetic
+VAR NormalPercent = IF(TotalDiabetes > 0, DIVIDE(NormalFBS, TotalDiabetes) * 100, 0)
+VAR PreDiabetesPercent = IF(TotalDiabetes > 0, DIVIDE(PreDiabetes, TotalDiabetes) * 100, 0)
+VAR DiabeticPercent = IF(TotalDiabetes > 0, DIVIDE(Diabetic, TotalDiabetes) * 100, 0)
+VAR AvgFBS = [Avg_FBS]
+VAR AvgHbA1C = [HbA1C_Average]
+
+RETURN
+"<style>
+@import url('https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/font-face.css');
+* { font-family: 'Vazir', Tahoma, sans-serif !important; }
+
+@keyframes wave { 
+  0% { transform: translateX(0) translateZ(0) scaleY(1); }
+  50% { transform: translateX(-25%) translateZ(0) scaleY(0.8); }
+  100% { transform: translateX(-50%) translateZ(0) scaleY(1); }
+}
+
+@keyframes glow {
+  0%, 100% { box-shadow: 0 0 15px currentColor; }
+  50% { box-shadow: 0 0 25px currentColor; }
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.diabetes-card {
+  width: 280px;
+  height: 155px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 8px;
+  padding: 8px 10px 12px 10px;
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+}
+
+.diabetes-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.diabetes-title {
+  color: rgba(255,255,255,0.95);
+  font-size: 11px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.header-stats {
+  display: flex;
+  gap: 4px;
+}
+
+.stat-mini {
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  border-radius: 3px;
+  padding: 2px 5px;
+  color: #10b981;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.wave-container {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.wave-circle {
+  flex: 1;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  animation: slideIn 0.5s ease-out backwards;
+}
+
+.wave-circle:nth-child(1) { animation-delay: 0.1s; }
+.wave-circle:nth-child(2) { animation-delay: 0.2s; }
+.wave-circle:nth-child(3) { animation-delay: 0.3s; }
+
+.wave-bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 100%);
+}
+
+.wave-fill {
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  bottom: 0;
+  left: -50%;
+  border-radius: 40%;
+  animation: wave 3s ease-in-out infinite;
+}
+
+.wave-green {
+  background: linear-gradient(180deg, rgba(16, 185, 129, 0.9) 0%, rgba(5, 150, 105, 0.95) 100%);
+}
+
+.wave-orange {
+  background: linear-gradient(180deg, rgba(245, 158, 11, 0.9) 0%, rgba(217, 119, 6, 0.95) 100%);
+  animation-delay: -1s;
+}
+
+.wave-red {
+  background: linear-gradient(180deg, rgba(239, 68, 68, 0.9) 0%, rgba(220, 38, 38, 0.95) 100%);
+  animation-delay: -2s;
+}
+
+.wave-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 10;
+}
+
+.wave-percent {
+  color: #fff;
+  font-size: 14px;
+  font-weight: 800;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+  line-height: 1;
+}
+
+.wave-count {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 10px;
+  font-weight: 600;
+  margin-top: 2px;
+}
+
+.legend-compact {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+}
+
+.legend-mini {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  padding: 4px 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  transition: all 0.2s ease;
+}
+
+.legend-mini:hover {
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateY(-1px);
+}
+
+.legend-row {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.legend-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.legend-name {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 9px;
+  font-weight: 600;
+}
+
+.legend-range {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 8px;
+  font-weight: 500;
+  text-align: right;
+  direction: ltr;
+}
+</style>
+
+<div class='diabetes-card'>
+  <div class='diabetes-header'>
+    <div class='diabetes-title'>
+      🩸 غربالگری دیابت
+    </div>
+    <div class='header-stats'>
+      <div class='stat-mini'>FBS: " & FORMAT(AvgFBS, "0") & "</div>
+      <div class='stat-mini'>A1C: " & FORMAT(AvgHbA1C, "0.0") & "%</div>
+    </div>
+  </div>
+  
+  <div class='wave-container'>
+    <div class='wave-circle'>
+      <div class='wave-bg'></div>
+      <div class='wave-fill wave-green' style='bottom: " & FORMAT(100 - NormalPercent, "0") & "%;'></div>
+      <div class='wave-text'>
+        <div class='wave-percent'>" & FORMAT(NormalPercent, "0") & "%</div>
+        <div class='wave-count'>" & FORMAT(NormalFBS, "0") & "</div>
+      </div>
+    </div>
+    
+    <div class='wave-circle'>
+      <div class='wave-bg'></div>
+      <div class='wave-fill wave-orange' style='bottom: " & FORMAT(100 - PreDiabetesPercent, "0") & "%;'></div>
+      <div class='wave-text'>
+        <div class='wave-percent'>" & FORMAT(PreDiabetesPercent, "0") & "%</div>
+        <div class='wave-count'>" & FORMAT(PreDiabetes, "0") & "</div>
+      </div>
+    </div>
+    
+    <div class='wave-circle'>
+      <div class='wave-bg'></div>
+      <div class='wave-fill wave-red' style='bottom: " & FORMAT(100 - DiabeticPercent, "0") & "%;'></div>
+      <div class='wave-text'>
+        <div class='wave-percent'>" & FORMAT(DiabeticPercent, "0") & "%</div>
+        <div class='wave-count'>" & FORMAT(Diabetic, "0") & "</div>
+      </div>
+    </div>
+  </div>
+  
+  <div class='legend-compact'>
+    <div class='legend-mini'>
+      <div class='legend-row'>
+        <div class='legend-dot' style='background: #10b981;'></div>
+        <div class='legend-name'>طبیعی</div>
+      </div>
+      <div class='legend-range'><100 mg/dL</div>
+    </div>
+    
+    <div class='legend-mini'>
+      <div class='legend-row'>
+        <div class='legend-dot' style='background: #f59e0b;'></div>
+        <div class='legend-name'>پیش‌دیابت</div>
+      </div>
+      <div class='legend-range'>100-125</div>
+    </div>
+    
+    <div class='legend-mini'>
+      <div class='legend-row'>
+        <div class='legend-dot' style='background: #ef4444;'></div>
+        <div class='legend-name'>دیابتی</div>
+      </div>
+      <div class='legend-range'>≥126</div>
+    </div>
+  </div>
+</div>"

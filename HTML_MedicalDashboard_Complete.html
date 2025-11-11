@@ -1,0 +1,1070 @@
+HTML_MedicalDashboard_Complete = 
+VAR CRLF = UNICHAR(10)
+VAR DQ = UNICHAR(34)
+VAR SQ = UNICHAR(39)
+VAR JsonData = 
+CONCATENATEX(
+    FILTER(
+        ADDCOLUMNS(
+            MedicalExminationResults,
+            "PersonName", RELATED(ListOfPersonnel[NameFamilyName]),
+            "PersonNationalCode", RELATED(ListOfPersonnel[NationalCode]),
+            "PersonPersonnelCode", RELATED(ListOfPersonnel[PersonnelCode]),
+            "PersonGender", RELATED(ListOfPersonnel[GenderValue]),
+            "PersonJob", RELATED(ListOfPersonnel[JobOfTitleValue])
+        ),
+        NOT(ISBLANK([FileNo]))
+    ),
+    "{" &
+    DQ & "fileNo" & DQ & ":" & DQ & [FileNo] & DQ & "," &
+    DQ & "name" & DQ & ":" & DQ & SUBSTITUTE([PersonName], DQ, SQ) & DQ & "," &
+    DQ & "nationalCode" & DQ & ":" & DQ & [PersonNationalCode] & DQ & "," &
+    DQ & "personnelCode" & DQ & ":" & DQ & [PersonPersonnelCode] & DQ & "," &
+    DQ & "gender" & DQ & ":" & DQ & [PersonGender] & DQ & "," &
+    DQ & "job" & DQ & ":" & DQ & SUBSTITUTE([PersonJob], DQ, SQ) & DQ & "," &
+    DQ & "bmi" & DQ & ":" & IF(ISBLANK([BMI]), "null", FORMAT([BMI], "0.0")) & "," &
+    DQ & "riskIntensity" & DQ & ":" & DQ & IF(ISBLANK([Risk intensity]), "", [Risk intensity]) & DQ & "," &
+    DQ & "fbs" & DQ & ":" & IF(ISBLANK([DiabetesScreeningFBS]), "null", FORMAT([DiabetesScreeningFBS], "0")) & "," &
+    DQ & "hba1c" & DQ & ":" & IF(ISBLANK([DiabetesScreeningHbA1C]), "null", FORMAT([DiabetesScreeningHbA1C], "0.0")) & "," &
+    DQ & "chol" & DQ & ":" & IF(ISBLANK([LipidPanelChol]), "null", FORMAT([LipidPanelChol], "0")) & "," &
+    DQ & "tg" & DQ & ":" & IF(ISBLANK([LipidPanelTG]), "null", FORMAT([LipidPanelTG], "0")) & "," &
+    DQ & "hdl" & DQ & ":" & IF(ISBLANK([LipidPanelHDL]), "null", FORMAT([LipidPanelHDL], "0")) & "," &
+    DQ & "ldl" & DQ & ":" & IF(ISBLANK([LipidPanelLDL]), "null", FORMAT([LipidPanelLDL], "0")) & "," &
+    DQ & "bun" & DQ & ":" & IF(ISBLANK([KidneyFunctionBUN]), "null", FORMAT([KidneyFunctionBUN], "0.0")) & "," &
+    DQ & "creat" & DQ & ":" & IF(ISBLANK([KidneyFunctionCreat]), "null", FORMAT([KidneyFunctionCreat], "0.00")) & "," &
+    DQ & "alt" & DQ & ":" & IF(ISBLANK([LiverFunctionALT]), "null", FORMAT([LiverFunctionALT], "0")) & "," &
+    DQ & "ast" & DQ & ":" & IF(ISBLANK([LiverFunctionAST]), "null", FORMAT([LiverFunctionAST], "0")) & "," &
+    DQ & "alp" & DQ & ":" & IF(ISBLANK([LiverFunctionALP]), "null", FORMAT([LiverFunctionALP], "0")) & "," &
+    DQ & "tsh" & DQ & ":" & IF(ISBLANK([ThyroidFunctionTSH]), "null", FORMAT([ThyroidFunctionTSH], "0.00")) & "," &
+    DQ & "t4" & DQ & ":" & IF(ISBLANK([ThyroidFunctionT4]), "null", FORMAT([ThyroidFunctionT4], "0.0")) & "," &
+    DQ & "vitD" & DQ & ":" & IF(ISBLANK([VitaminPanelVitaminD3]), "null", FORMAT([VitaminPanelVitaminD3], "0.0")) & "," &
+    DQ & "vitB12" & DQ & ":" & IF(ISBLANK([VitaminPanelVitaminB12]), "null", FORMAT([VitaminPanelVitaminB12], "0")) & "," &
+    DQ & "cbcHb" & DQ & ":" & IF(ISBLANK([CBCHb]), "null", FORMAT([CBCHb], "0.0")) & "," &
+    DQ & "cbcWbc" & DQ & ":" & IF(ISBLANK([CBCWBC]), "null", FORMAT([CBCWBC], "0.0")) & "," &
+    DQ & "cbcRbc" & DQ & ":" & IF(ISBLANK([CBCRBC]), "null", FORMAT([CBCRBC], "0.00")) & "," &
+    DQ & "cbcPlt" & DQ & ":" & IF(ISBLANK([CBCPlt]), "null", FORMAT([CBCPlt], "0")) &
+    "}",
+    ",",
+    [FileNo],
+    ASC
+)
+VAR HtmlContent = 
+"<!DOCTYPE html>
+<html lang='fa' dir='rtl'>
+<head>
+<meta charset='UTF-8'>
+<meta name='viewport' content='width=device-width,initial-scale=1.0'>
+<title>داشبورد پزشکی</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Vazirmatn',sans-serif;color:#1e293b;font-size:11px;line-height:1.4}
+.container{padding:8px;max-width:100%;}
+.header{background:linear-gradient(135deg,rgba(102,126,234,0.1),rgba(118,75,162,0.08));border-radius:10px;padding:12px 15px;margin-bottom:10px;border:1px solid rgba(102,126,234,0.15)}
+.header h1{font-size:1.3rem;font-weight:700;background:linear-gradient(135deg,#667eea,#764ba2);-webkit-background-clip:text;-webkit-text-fill-color:background:rgba(255,255,255,0.05);margin-bottom:3px}
+.header-subtitle{font-size:0.75rem;color:#64748b}
+.search-box{background:background:rgba(255,255,255,0.05);border:1px solid rgba(0,0,0,0.08);border-radius:8px;padding:6px 12px;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.search-box input{border:none;background:none;outline:none;width:100%;font-size:0.8rem;font-family:inherit;color:#1e293b}
+.search-box input::placeholder{color:#94a3b8}
+.tabs{display:flex;gap:6px;margin-bottom:10px;background:background:rgba(255,255,255,0.05);padding:5px;border-radius:8px}
+.tab{padding:6px 14px;border-radius:6px;cursor:pointer;font-size:0.8rem;font-weight:600;color:#64748b;transition:all 0.3s;background:background:rgba(255,255,255,0.05);border:1px solid rgba(0,0,0,0.1)}
+.tab:hover{background:rgba(255,255,255,0.3);color:#334155}
+.tab.active{background:linear-gradient(135deg,#667eea,#764ba2);color:white;box-shadow:0 2px 8px rgba(102,126,234,0.3);border:none}
+.page{display:none}
+.page.active{display:block;animation:fadeIn 0.4s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:10px}
+.kpi-card{background:rgba(255,255,255,0.05);backdrop-filter:blur(12px);border-radius:12px;border:1px solid rgba(255,255,255,0.15);padding:10px;position:relative;overflow:hidden;transition:all 0.3s;cursor:pointer;height:auto;width:100%;}
+.kpi-card:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,0.08);border-color:rgba(102,126,234,0.3)}
+.kpi-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px}
+.kpi-card.blue::before{background:linear-gradient(90deg,#2962ff,#448aff)}
+.kpi-card.green::before{background:linear-gradient(90deg,#00c853,#64dd17)}
+.kpi-card.orange::before{background:linear-gradient(90deg,#ff9100,#ffab00)}
+.kpi-card.red::before{background:linear-gradient(90deg,#f44336,#e91e63)}
+.kpi-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px}
+.kpi-icon{font-size:1.3rem;opacity:0.85}
+.kpi-trend{font-size:0.65rem;padding:2px 6px;border-radius:4px;font-weight:600}
+.kpi-trend.up{background:rgba(16,185,129,0.15);color:#059669}
+.kpi-label{font-size:0.65rem;color:#64748b;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.3px;font-weight:600}
+.kpi-value{font-size:1.6rem;font-weight:800;color:#1e293b;margin-bottom:3px;line-height:1}
+.kpi-description{font-size:0.65rem;color:#94a3b8}
+.kpi-progress{margin-top:6px;height:2px;background:rgba(0,0,0,0.06);border-radius:2px;overflow:hidden}
+.kpi-progress-bar{height:100%;border-radius:2px;transition:width 1s ease}
+.grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:10px}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:10px}
+.chart-card{background:background:rgba(255,255,255,0.05);border-radius:10px;padding:12px;border:1px solid rgba(0,0,0,0.1)}
+.chart-title{font-size:0.95rem;font-weight:700;color:#1e293b;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.donut-container{display:flex;align-items:center;justify-content:space-around;padding:10px 0}
+.donut-chart{position:relative;width:130px;height:130px}
+.donut-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center}
+.donut-total{font-size:1.6rem;font-weight:800;background:linear-gradient(135deg,#667eea,#764ba2);-webkit-background-clip:text;-webkit-text-fill-color:background:rgba(255,255,255,0.05)}
+.donut-label{font-size:0.65rem;color:#64748b;margin-top:2px}
+.legend{display:flex;flex-direction:column;gap:6px}
+.legend-item{display:flex;align-items:center;gap:8px;padding:6px;border-radius:6px;background:rgba(0,0,0,0.02);transition:all 0.3s;cursor:pointer}
+.legend-item:hover{background:rgba(102,126,234,0.08);transform:translateX(-2px)}
+.legend-color{width:12px;height:12px;border-radius:3px}
+.legend-info{flex:1}
+.legend-text{font-size:0.7rem;color:#64748b;margin-bottom:2px}
+.legend-value{font-size:0.9rem;font-weight:700;color:#1e293b}
+.legend-percentage{font-size:0.65rem;color:#94a3b8;margin-right:3px}
+.stats-box{background:rgba(0,0,0,0.02);padding:8px;border-radius:6px;margin-bottom:6px}
+.stats-label{font-size:0.65rem;color:#64748b;margin-bottom:3px;text-transform:uppercase;letter-spacing:0.3px}
+.stats-value{font-size:1rem;font-weight:700;color:#1e293b}
+.filter-section{background:background:rgba(255,255,255,0.05);border-radius:8px;padding:10px;margin-bottom:10px;border:1px solid rgba(0,0,0,0.1)}
+.filter-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:8px}
+.filter-group label{display:block;font-size:0.7rem;color:#64748b;margin-bottom:3px;font-weight:600}
+.filter-group select{width:100%;padding:5px 8px;border:1px solid rgba(0,0,0,0.1);border-radius:5px;font-size:0.75rem;font-family:inherit;background:white;color:#1e293b}
+.filter-actions{display:flex;gap:6px}
+.btn{padding:5px 12px;border-radius:5px;border:none;font-size:0.75rem;font-weight:600;cursor:pointer;transition:all 0.3s;font-family:inherit}
+.btn-primary{background:linear-gradient(135deg,#667eea,#764ba2);color:white}
+.btn-primary:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(102,126,234,0.4)}
+.btn-secondary{background:rgba(0,0,0,0.05);color:#64748b}
+.btn-secondary:hover{background:rgba(0,0,0,0.08)}
+.table-container{background:background:rgba(255,255,255,0.05);border-radius:10px;padding:10px;border:1px solid rgba(0,0,0,0.1)}
+.table-wrapper{max-height:400px;overflow-y:auto;overflow-x:auto;position:relative}
+.table-wrapper table{width:100%;border-collapse:collapse}
+.table-wrapper thead{position:sticky;top:0;z-index:10;background:rgba(248,250,252,0.98);backdrop-filter:blur(8px)}
+.table-wrapper thead::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:rgba(0,0,0,0.08)}
+th{padding:8px 6px;text-align:right;font-weight:700;color:#475569;font-size:0.7rem;text-transform:uppercase;letter-spacing:0.3px;white-space:nowrap;border-bottom:2px solid rgba(0,0,0,0.08)}
+tbody tr{border-bottom:1px solid rgba(0,0,0,0.04);transition:all 0.2s;cursor:pointer}
+tbody tr:hover{background:rgba(102,126,234,0.04)}
+td{padding:8px 6px;color:#334155;font-size:0.75rem;white-space:nowrap}
+.status-badge{padding:3px 8px;border-radius:5px;font-size:0.65rem;font-weight:700;display:inline-block}
+.status-badge.low{background:rgba(16,185,129,0.15);color:#059669}
+.status-badge.medium{background:rgba(245,158,11,0.15);color:#d97706}
+.status-badge.high{background:rgba(239,68,68,0.15);color:#dc2626}
+.stat-item{background:rgba(0,0,0,0.02);padding:8px;border-radius:6px;text-align:center}
+.stat-label{font-size:0.7rem;color:#64748b;margin-bottom:4px}
+.stat-value{font-size:1.1rem;font-weight:700;color:#1e293b}
+.stat-icon{font-size:1.2rem;margin-bottom:4px}
+.progress-bar{height:6px;background:rgba(0,0,0,0.06);border-radius:3px;overflow:hidden;margin-top:4px}
+.progress-fill{height:100%;border-radius:3px;transition:width 0.6s ease}
+.modal{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.6);backdrop-filter:blur(4px);z-index:2000;align-items:center;justify-content:center;padding:15px}
+.modal.active{display:flex}
+.modal-content{background:white;border-radius:12px;max-width:650px;width:100%;max-height:90vh;overflow-y:auto;padding:18px;box-shadow:0 20px 60px rgba(0,0,0,0.3)}
+.modal-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;padding-bottom:10px;border-bottom:1px solid rgba(0,0,0,0.08)}
+.modal-title{font-size:1.2rem;font-weight:700;color:#1e293b}
+.modal-close{width:28px;height:28px;border-radius:6px;background:rgba(239,68,68,0.1);color:#ef4444;border:none;cursor:pointer;font-size:1.1rem;display:flex;align-items:center;justify-content:center;transition:all 0.3s}
+.modal-close:hover{background:#ef4444;color:white;transform:rotate(90deg)}
+.info-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.info-item{background:rgba(0,0,0,0.02);padding:8px;border-radius:6px;border:1px solid rgba(0,0,0,0.05)}
+.info-label{font-size:0.65rem;color:#64748b;margin-bottom:3px;text-transform:uppercase;letter-spacing:0.3px}
+.info-value{font-size:0.85rem;font-weight:600;color:#1e293b}
+.trend-chart-container{height:200px;position:relative;margin:15px 0}
+.trend-line{position:absolute;bottom:30px;left:40px;right:20px;height:140px}
+.trend-path{stroke:#667eea;stroke-width:2;fill:none}
+.trend-area{fill:url(#gradient);opacity:0.2}
+.trend-point{fill:#667eea;stroke:white;stroke-width:2}
+.trend-axis{stroke:#cbd5e1;stroke-width:1}
+.trend-label{font-size:0.7rem;fill:#64748b}
+.correlation-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:15px 0}
+.correlation-card{background:rgba(0,0,0,0.02);padding:12px;border-radius:8px;border:1px solid rgba(0,0,0,0.06)}
+.correlation-title{font-size:0.8rem;color:#1e293b;font-weight:600;margin-bottom:8px}
+.correlation-value{font-size:1.4rem;font-weight:800;background:linear-gradient(135deg,#667eea,#764ba2);-webkit-background-clip:text;-webkit-text-fill-color:background:rgba(255,255,255,0.05)}
+.correlation-strength{font-size:0.7rem;color:#64748b;margin-top:4px}
+.risk-assessment-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:15px 0}
+.risk-card{background:rgba(0,0,0,0.02);padding:12px;border-radius:8px;border:1px solid rgba(0,0,0,0.06);position:relative;overflow:hidden}
+.risk-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:linear-gradient(180deg,#ef4444,#dc2626)}
+.risk-icon{font-size:2rem;margin-bottom:8px}
+.risk-title{font-size:0.75rem;color:#64748b;margin-bottom:4px;text-transform:uppercase}
+.risk-percentage{font-size:1.6rem;font-weight:800;color:#1e293b;margin-bottom:4px}
+.risk-description{font-size:0.65rem;color:#94a3b8}
+.bar-chart{margin:15px 0}
+.bar-item{margin-bottom:12px}
+.bar-label{font-size:0.75rem;color:#64748b;margin-bottom:4px;display:flex;justify-content:space-between}
+.bar-track{height:8px;background:rgba(0,0,0,0.06);border-radius:4px;overflow:hidden}
+.bar-fill{height:100%;border-radius:4px;transition:width 0.8s ease}
+.table-wrapper::-webkit-scrollbar{width:6px;height:6px}
+.table-wrapper::-webkit-scrollbar-track{background:rgba(0,0,0,0.03);border-radius:3px}
+.table-wrapper::-webkit-scrollbar-thumb{background:rgba(102,126,234,0.4);border-radius:3px}
+.table-wrapper::-webkit-scrollbar-thumb:hover{background:rgba(102,126,234,0.6)}
+@media(max-width:900px){
+.kpi-grid{grid-template-columns:repeat(2,1fr)}
+.grid-2,.grid-3{grid-template-columns:1fr}
+.filter-row{grid-template-columns:1fr}
+.info-grid{grid-template-columns:1fr}
+.correlation-grid,.risk-assessment-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class='container'>
+<div class='header'>
+<h1>🏥 داشبورد نتایج آزمایشات پزشکی</h1>
+<div class='header-subtitle'>نمای کلی وضعیت سلامت پرسنل - آخرین بروزرسانی: 1404/07/18</div>
+</div>
+
+<div class='search-box'>
+<span>🔍</span>
+<input type='text' id='globalSearch' placeholder='جستجو: نام، کد ملی، شماره پرونده...'>
+</div>
+
+<div class='tabs'>
+<button class='tab active' data-page='dashboard'>📊 داشبورد</button>
+<button class='tab' data-page='patients'>👥 لیست بیماران</button>
+<button class='tab' data-page='analytics'>📈 تحلیل پیشرفته</button>
+<button class='tab' data-page='risk'>⚠️ ارزیابی ریسک</button>
+</div>
+
+<div id='dashboard' class='page active'>
+<div class='kpi-grid'>
+<div class='kpi-card blue'>
+<div class='kpi-header'>
+<div class='kpi-icon'>📋</div>
+<div class='kpi-trend up'>↑ 12%</div>
+</div>
+<div class='kpi-label'>کل معاینات</div>
+<div class='kpi-value' id='kpiTotal'>0</div>
+<div class='kpi-description'>نسبت به ماه قبل</div>
+<div class='kpi-progress'>
+<div class='kpi-progress-bar' id='progressTotal' style='width:100%;background:linear-gradient(90deg,#2962ff,#448aff)'></div>
+</div>
+</div>
+
+<div class='kpi-card green'>
+<div class='kpi-header'>
+<div class='kpi-icon'>🟢</div>
+<div class='kpi-trend up'>↑ 5%</div>
+</div>
+<div class='kpi-label'>کم ریسک</div>
+<div class='kpi-value' id='kpiLow'>0</div>
+<div class='kpi-description'><span id='kpiLowPct'>0%</span> کل</div>
+<div class='kpi-progress'>
+<div class='kpi-progress-bar' id='progressLow' style='width:0%;background:linear-gradient(90deg,#00c853,#64dd17)'></div>
+</div>
+</div>
+
+<div class='kpi-card orange'>
+<div class='kpi-header'>
+<div class='kpi-icon'>🟡</div>
+</div>
+<div class='kpi-label'>ریسک متوسط</div>
+<div class='kpi-value' id='kpiMedium'>0</div>
+<div class='kpi-description'><span id='kpiMediumPct'>0%</span> کل</div>
+<div class='kpi-progress'>
+<div class='kpi-progress-bar' id='progressMedium' style='width:0%;background:linear-gradient(90deg,#ff9100,#ffab00)'></div>
+</div>
+</div>
+
+<div class='kpi-card red'>
+<div class='kpi-header'>
+<div class='kpi-icon'>🔴</div>
+</div>
+<div class='kpi-label'>پر ریسک</div>
+<div class='kpi-value' id='kpiHigh'>0</div>
+<div class='kpi-description'><span id='kpiHighPct'>0%</span> کل</div>
+<div class='kpi-progress'>
+<div class='kpi-progress-bar' id='progressHigh' style='width:0%;background:linear-gradient(90deg,#f44336,#e91e63)'></div>
+</div>
+</div>
+</div>
+
+<div class='grid-2'>
+<div class='chart-card'>
+<h3 class='chart-title'>📊 توزیع سطوح ریسک</h3>
+<div class='donut-container'>
+<div class='donut-chart'>
+<svg width='130' height='130' viewBox='0 0 130 130' id='donutSvg'></svg>
+<div class='donut-center'>
+<div class='donut-total' id='donutTotal'>0</div>
+<div class='donut-label'>کل افراد</div>
+</div>
+</div>
+<div class='legend' id='legend'></div>
+</div>
+</div>
+
+<div class='chart-card'>
+<h3 class='chart-title'>📈 آمار سلامتی</h3>
+<div style='padding:8px'>
+<div class='stats-box'>
+<div class='stats-label'>میانگین قند خون (FBS)</div>
+<div class='stats-value' id='avgFBS'>0</div>
+</div>
+<div class='stats-box'>
+<div class='stats-label'>میانگین کلسترول</div>
+<div class='stats-value' id='avgChol'>0</div>
+</div>
+<div class='stats-box'>
+<div class='stats-label'>میانگین BMI</div>
+<div class='stats-value' id='avgBMI'>0</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class='grid-3'>
+<div class='chart-card'>
+<h3 class='chart-title'>⚖️ توزیع BMI</h3>
+<div id='bmiDistribution'></div>
+</div>
+
+<div class='chart-card'>
+<h3 class='chart-title'>🩸 غربالگری دیابت</h3>
+<div id='diabetesStats'></div>
+</div>
+
+<div class='chart-card'>
+<h3 class='chart-title'>🧪 پروفایل چربی</h3>
+<div id='lipidStats'></div>
+</div>
+</div>
+
+<div class='grid-3'>
+<div class='chart-card'>
+<h3 class='chart-title'>🫀 تست‌های کبدی</h3>
+<div id='liverStats'></div>
+</div>
+
+<div class='chart-card'>
+<h3 class='chart-title'>💊 وضعیت ویتامین‌ها</h3>
+<div id='vitaminStats'></div>
+</div>
+
+<div class='chart-card'>
+<h3 class='chart-title'>🫘 عملکرد کلیه</h3>
+<div id='kidneyStats'></div>
+</div>
+</div>
+
+<div class='chart-card'>
+<h3 class='chart-title'>🦋 عملکرد تیروئید</h3>
+<div id='thyroidStats'></div>
+</div>
+</div>
+
+<div id='patients' class='page'>
+<div class='filter-section'>
+<div class='filter-row'>
+<div class='filter-group'>
+<label>سطح ریسک</label>
+<select id='filterRisk'>
+<option value=''>همه</option>
+<option value='کم ریسک'>کم ریسک</option>
+<option value='ریسک متوسط'>ریسک متوسط</option>
+<option value='پر ریسک'>پر ریسک</option>
+</select>
+</div>
+<div class='filter-group'>
+<label>محدوده BMI</label>
+<select id='filterBMI'>
+<option value=''>همه</option>
+<option value='normal'>طبیعی (18.5-24.9)</option>
+<option value='overweight'>اضافه وزن (25-29.9)</option>
+<option value='obese'>چاقی (≥30)</option>
+</select>
+</div>
+<div class='filter-group'>
+<label>وضعیت دیابت</label>
+<select id='filterDiabetes'>
+<option value=''>همه</option>
+<option value='normal'>طبیعی (<100)</option>
+<option value='prediabetes'>پیش‌دیابت (100-125)</option>
+<option value='diabetic'>دیابتی (≥126)</option>
+</select>
+</div>
+</div>
+<div class='filter-actions'>
+<button class='btn btn-primary' onclick='applyFilters()'>اعمال فیلتر</button>
+<button class='btn btn-secondary' onclick='clearFilters()'>پاک کردن</button>
+<button class='btn btn-secondary' onclick='exportToExcel()'>📥 خروجی Excel</button>
+</div>
+</div>
+
+<div class='table-container'>
+<div class='table-wrapper'>
+<table>
+<thead>
+<tr>
+<th>ردیف</th>
+<th>نام و نام خانوادگی</th>
+<th>شماره پرونده</th>
+<th>کد پرسنلی</th>
+<th>BMI</th>
+<th>FBS</th>
+<th>کلسترول</th>
+<th>سطح ریسک</th>
+<th>عملیات</th>
+</tr>
+</thead>
+<tbody id='patientsTable'></tbody>
+</table>
+</div>
+</div>
+</div>
+
+<div id='analytics' class='page'>
+<div class='chart-card'>
+<h3 class='chart-title'>📊 روند شاخص‌های کلیدی سلامت در 6 ماه گذشته</h3>
+<div class='trend-chart-container'>
+<svg width='100%' height='200' id='trendChart'>
+<defs>
+<linearGradient id='gradient' x1='0%' y1='0%' x2='0%' y2='100%'>
+<stop offset='0%' style='stop-color:#667eea;stop-opacity:0.3'/>
+<stop offset='100%' style='stop-color:#667eea;stop-opacity:0'/>
+</linearGradient>
+</defs>
+</svg>
+</div>
+</div>
+
+<div class='chart-card' style='margin-top:10px'>
+<h3 class='chart-title'>🎯 تحلیل همبستگی</h3>
+<div class='correlation-grid' id='correlationGrid'></div>
+</div>
+
+<div class='grid-2' style='margin-top:10px'>
+<div class='chart-card'>
+<h3 class='chart-title'>📊 آمار توصیفی</h3>
+<div id='descriptiveStats'></div>
+</div>
+
+<div class='chart-card'>
+<h3 class='chart-title'>⚠️ هشدارهای سلامت</h3>
+<div id='healthAlerts'></div>
+</div>
+</div>
+</div>
+
+<div id='risk' class='page'>
+<div class='chart-card'>
+<h3 class='chart-title'>⚠️ ارزیابی جامع ریسک سلامت</h3>
+<p style='color:#64748b;font-size:0.8rem;margin-bottom:15px'>تحلیل چندبعدی فاکتورهای ریسک</p>
+<div class='risk-assessment-grid' id='riskAssessment'></div>
+</div>
+
+<div class='chart-card' style='margin-top:10px'>
+<h3 class='chart-title'>🎯 توزیع فاکتورهای ریسک</h3>
+<div class='bar-chart' id='riskFactors'></div>
+</div>
+</div>
+</div>
+
+<div class='modal' id='patientModal'>
+<div class='modal-content'>
+<div class='modal-header'>
+<h2 class='modal-title' id='modalPatientName'>جزئیات بیمار</h2>
+<button class='modal-close' onclick='closeModal()'>×</button>
+</div>
+<div class='info-grid' id='modalContent'></div>
+</div>
+</div>
+
+<script>
+(function(){
+try{
+var DATA=[" & JsonData & "];
+console.log('تعداد رکوردها:',DATA.length);
+
+var allPatients=DATA;
+var filteredPatients=allPatients.slice();
+
+function calculateKPIs(){
+var total=allPatients.length;
+var low=0,medium=0,high=0;
+var sumFBS=0,sumChol=0,sumBMI=0;
+var countFBS=0,countChol=0,countBMI=0;
+
+for(var i=0;i<allPatients.length;i++){
+var p=allPatients[i];
+if(p.riskIntensity==='کم ریسک')low++;
+else if(p.riskIntensity==='ریسک متوسط')medium++;
+else if(p.riskIntensity==='پر ریسک')high++;
+
+if(p.fbs!==null){sumFBS+=p.fbs;countFBS++}
+if(p.chol!==null){sumChol+=p.chol;countChol++}
+if(p.bmi!==null){sumBMI+=p.bmi;countBMI++}
+}
+
+var lowPct=total>0?((low/total)*100).toFixed(1):0;
+var mediumPct=total>0?((medium/total)*100).toFixed(1):0;
+var highPct=total>0?((high/total)*100).toFixed(1):0;
+
+document.getElementById('kpiTotal').textContent=total;
+document.getElementById('kpiLow').textContent=low;
+document.getElementById('kpiLowPct').textContent=lowPct+'%';
+document.getElementById('progressLow').style.width=lowPct+'%';
+document.getElementById('kpiMedium').textContent=medium;
+document.getElementById('kpiMediumPct').textContent=mediumPct+'%';
+document.getElementById('progressMedium').style.width=mediumPct+'%';
+document.getElementById('kpiHigh').textContent=high;
+document.getElementById('kpiHighPct').textContent=highPct+'%';
+document.getElementById('progressHigh').style.width=highPct+'%';
+
+document.getElementById('avgFBS').textContent=countFBS>0?(sumFBS/countFBS).toFixed(1)+' mg/dL':'-';
+document.getElementById('avgChol').textContent=countChol>0?(sumChol/countChol).toFixed(1)+' mg/dL':'-';
+document.getElementById('avgBMI').textContent=countBMI>0?(sumBMI/countBMI).toFixed(1):'-';
+
+document.getElementById('donutTotal').textContent=total;
+
+drawDonut(low,medium,high,total);
+updateLegend(low,medium,high,lowPct,mediumPct,highPct);
+renderHealthStats();
+}
+
+function drawDonut(low,medium,high,total){
+if(total===0)return;
+var svg=document.getElementById('donutSvg');
+svg.innerHTML='';
+var cx=65,cy=65,r=50;
+
+var lowAngle=(low/total)*360;
+var mediumAngle=(medium/total)*360;
+var highAngle=(high/total)*360;
+
+var colors=['#10b981','#f59e0b','#ef4444'];
+var angles=[lowAngle,mediumAngle,highAngle];
+var startAngle=-90;
+
+for(var i=0;i<angles.length;i++){
+if(angles[i]>0){
+var endAngle=startAngle+angles[i];
+var largeArc=angles[i]>180?1:0;
+var x1=cx+r*Math.cos(startAngle*Math.PI/180);
+var y1=cy+r*Math.sin(startAngle*Math.PI/180);
+var x2=cx+r*Math.cos(endAngle*Math.PI/180);
+var y2=cy+r*Math.sin(endAngle*Math.PI/180);
+
+var path='M '+cx+' '+cy+' L '+x1+' '+y1+' A '+r+' '+r+' 0 '+largeArc+' 1 '+x2+' '+y2+' Z';
+var pathEl=document.createElementNS('http://www.w3.org/2000/svg','path');
+pathEl.setAttribute('d',path);
+pathEl.setAttribute('fill',colors[i]);
+pathEl.setAttribute('opacity','0.9');
+svg.appendChild(pathEl);
+startAngle=endAngle;
+}
+}
+
+var circle=document.createElementNS('http://www.w3.org/2000/svg','circle');
+circle.setAttribute('cx',cx);
+circle.setAttribute('cy',cy);
+circle.setAttribute('r','35');
+circle.setAttribute('fill','white');
+svg.appendChild(circle);
+}
+
+function updateLegend(low,medium,high,lowPct,mediumPct,highPct){
+var legend=document.getElementById('legend');
+legend.innerHTML='';
+var items=[
+{color:'linear-gradient(135deg,#10b981,#059669)',text:'کم ریسک',value:low,pct:lowPct},
+{color:'linear-gradient(135deg,#f59e0b,#d97706)',text:'متوسط',value:medium,pct:mediumPct},
+{color:'linear-gradient(135deg,#ef4444,#dc2626)',text:'پر ریسک',value:high,pct:highPct}
+];
+
+for(var i=0;i<items.length;i++){
+var item=items[i];
+var div=document.createElement('div');
+div.className='legend-item';
+div.innerHTML='<div class=" & DQ & "legend-color" & DQ & " style=" & DQ & "background:'+item.color+'" & DQ & "></div><div class=" & DQ & "legend-info" & DQ & "><div class=" & DQ & "legend-text" & DQ & ">'+item.text+'</div><div><span class=" & DQ & "legend-value" & DQ & ">'+item.value+'</span><span class=" & DQ & "legend-percentage" & DQ & ">('+item.pct+'%)</span></div></div>';
+legend.appendChild(div);
+}
+}
+
+function renderHealthStats(){
+var underweight=0,normal=0,overweight=0,obese1=0,obese2=0;
+for(var i=0;i<allPatients.length;i++){
+var bmi=allPatients[i].bmi;
+if(bmi!==null){
+if(bmi<18.5)underweight++;
+else if(bmi<25)normal++;
+else if(bmi<30)overweight++;
+else if(bmi<35)obese1++;
+else obese2++;
+}
+}
+var totalBMI=underweight+normal+overweight+obese1+obese2;
+document.getElementById('bmiDistribution').innerHTML=
+'<div class=" & DQ & "stat-item" & DQ & "><div class=" & DQ & "stat-label" & DQ & ">کم وزن (<18.5)</div><div class=" & DQ & "stat-value" & DQ & ">'+underweight+'</div><div class=" & DQ & "progress-bar" & DQ & "><div class=" & DQ & "progress-fill" & DQ & " style=" & DQ & "width:'+(totalBMI>0?(underweight/totalBMI*100):0)+'%;background:#3b82f6" & DQ & "></div></div></div>'+
+'<div class=" & DQ & "stat-item" & DQ & "><div class=" & DQ & "stat-label" & DQ & ">طبیعی (18.5-24.9)</div><div class=" & DQ & "stat-value" & DQ & ">'+normal+'</div><div class=" & DQ & "progress-bar" & DQ & "><div class=" & DQ & "progress-fill" & DQ & " style=" & DQ & "width:'+(totalBMI>0?(normal/totalBMI*100):0)+'%;background:#10b981" & DQ & "></div></div></div>'+
+'<div class=" & DQ & "stat-item" & DQ & "><div class=" & DQ & "stat-label" & DQ & ">اضافه وزن (25-29.9)</div><div class=" & DQ & "stat-value" & DQ & ">'+overweight+'</div><div class=" & DQ & "progress-bar" & DQ & "><div class=" & DQ & "progress-fill" & DQ & " style=" & DQ & "width:'+(totalBMI>0?(overweight/totalBMI*100):0)+'%;background:#f59e0b" & DQ & "></div></div></div>'+
+'<div class=" & DQ & "stat-item" & DQ & "><div class=" & DQ & "stat-label" & DQ & ">چاقی (30-34.9)</div><div class=" & DQ & "stat-value" & DQ & ">'+obese1+'</div><div class=" & DQ & "progress-bar" & DQ & "><div class=" & DQ & "progress-fill" & DQ & " style=" & DQ & "width:'+(totalBMI>0?(obese1/totalBMI*100):0)+'%;background:#ef4444" & DQ & "></div></div></div>'+
+'<div class=" & DQ & "stat-item" & DQ & "><div class=" & DQ & "stat-label" & DQ & ">چاقی شدید (≥35)</div><div class=" & DQ & "stat-value" & DQ & ">'+obese2+'</div><div class=" & DQ & "progress-bar" & DQ & "><div class=" & DQ & "progress-fill" & DQ & " style=" & DQ & "width:'+(totalBMI>0?(obese2/totalBMI*100):0)+'%;background:#dc2626" & DQ & "></div></div></div>';
+
+var diabetic=0,prediabetic=0,normalGlucose=0;
+var sumFBS=0,countFBS=0,sumHbA1C=0,countHbA1C=0;
+for(var i=0;i<allPatients.length;i++){
+var fbs=allPatients[i].fbs;
+if(fbs!==null){
+sumFBS+=fbs;countFBS++;
+if(fbs>=126)diabetic++;
+else if(fbs>=100)prediabetic++;
+else normalGlucose++;
+}
+var hba1c=allPatients[i].hba1c;
+if(hba1c!==null){sumHbA1C+=hba1c;countHbA1C++}
+}
+document.getElementById('diabetesStats').innerHTML=
+'<div class=" & DQ & "stat-item" & DQ & "><div class=" & DQ & "stat-icon" & DQ & ">📊</div><div class=" & DQ & "stat-label" & DQ & ">میانگین FBS</div><div class=" & DQ & "stat-value" & DQ & ">'+(countFBS>0?(sumFBS/countFBS).toFixed(1):'-')+' mg/dL</div></div>'+
+'<div class=" & DQ & "stat-item" & DQ & "><div class=" & DQ & "stat-icon" & DQ & ">🔴</div><div class=" & DQ & "stat-label" & DQ & ">دیابتی (≥126)</div><div class=" & DQ & "stat-value" & DQ & ">'+diabetic+' نفر</div></div>'+
+'<div class=" & DQ & "stat-item" & DQ & "><div class=" & DQ & "stat-icon" & DQ & ">🟡</div><div class=" & DQ & "stat-label" & DQ & ">پیش‌دیابت (100-125)</div><div class=" & DQ & "stat-value" & DQ & ">'+prediabetic+' نفر</div></div>'+
+'<div class=" & DQ & "stat-item" & DQ & "><div class=" & DQ & "stat-icon" & DQ & ">🟢</div><div class=" & DQ & "stat-label" & DQ & ">طبیعی (<100)</div><div class=" & DQ & "stat-value" & DQ & ">'+normalGlucose+' نفر</div></div>'+
+'<div class=" & DQ & "stat-item" & DQ & "><div class=" & DQ & "stat-icon" & DQ & ">📈</div><div class=" & DQ & "stat-label" & DQ & ">میانگین HbA1C</div><div class=" & DQ & "stat-value" & DQ & ">'+(countHbA1C>0?(sumHbA1C/countHbA1C).toFixed(1):'-')+'%</div></div>';
+
+var highChol=0,normalChol=0,highTG=0;
+var sumChol=0,countChol=0,sumTG=0,countTG=0,sumLDL=0,countLDL=0;
+for(var i=0;i<allPatients.length;i++){
+var chol=allPatients[i].chol;
+if(chol!==null){
+sumChol+=chol;countChol++;
+if(chol>=240)highChol++;else normalChol++;
+}
+var tg=allPatients[i].tg;
+if(tg!==null){
+sumTG+=tg;countTG++;
+if(tg>=150)highTG++;
+}
+var ldl=allPatients[i].ldl;
+if(ldl!==null){sumLDL+=ldl;countLDL++}
+}
+document.getElementById('lipidStats').innerHTML=
+'<div class=" & DQ & "stat-item" & DQ & "><div class=" & DQ & "stat-icon" & DQ & ">📊</div><div class=" & DQ & "stat-label" & DQ & ">میانگین کلسترول</div><div class=" & DQ & "stat-value" & DQ & ">'+(countChol>0?(sumChol/countChol).toFixed(1):'-')+' mg/dL</div></div>'+
+'<div class=" & DQ & "stat-item" & DQ & "><div class=" & DQ & "stat-icon" & DQ & ">🔴</div><div class=" & DQ & "stat-label" & DQ & ">کلسترول بالا (≥240)</div><div class=" & DQ & "stat-value" & DQ & ">'+highChol+' نفر</div></div>'+
+'<div class=" & DQ & "stat-item" & DQ & "><div class=" & DQ & "stat-icon" & DQ & ">📊</div><div class=" & DQ & "stat-label" & DQ & ">میانگین تری‌گلیسیرید</div><div class=" & DQ & "stat-value" & DQ & ">'+(countTG>0?(sumTG/countTG).toFixed(1):'-')+' mg/dL</div></div>'+
+'<div class=" & DQ & "stat-item" & DQ & "><div class=" & DQ & "stat-icon" & DQ & ">🟡</div><div class=" & DQ & "stat-label" & DQ & ">TG بالا (≥150)</div><div class=" & DQ & "stat-value" & DQ & ">'+highTG+' نفر</div></div>'+
+'<div class=" & DQ & "stat-item" & DQ & "><div class=" & DQ & "stat-icon" & DQ & ">📊</div><div class=" & DQ & "stat-label" & DQ & ">میانگین LDL</div><div class=" & DQ & "stat-value" & DQ & ">'+(countLDL>0?(sumLDL/countLDL).toFixed(1):'-')+' mg/dL</div></div>';
+
+var highLiver=0,normalLiver=0;
+var sumAST=0,countAST=0,sumALT=0,countALT=0,sumALP=0,countALP=0;
+for(var i=0;i<allPatients.length;i++){
+var alt=allPatients[i].alt;
+var ast=allPatients[i].ast;
+if(alt!==null){sumALT+=alt;countALT++}
+if(ast!==null){sumAST+=ast;countAST++}
+if((alt!==null&&alt>40)||(ast!==null&&ast>40))highLiver++;
+else if(alt!==null||ast!==null)normalLiver++;
+var alp=allPatients[i].alp;
+if(alp!==null){sumALP+=alp;countALP++}
+}
+document.getElementById('liverStats').innerHTML=
+'<div class=" & DQ & "stat-item" & DQ & "><div class=" & DQ & "stat-icon" & DQ & ">📊</div><div class=" & DQ & "stat-label" & DQ & ">میانگین AST</div><div class=" & DQ & "stat-value" & DQ & ">'+(countAST>0?(sumAST/countAST).toFixed(1):'-')+' U/L</div></div>'+
+'<div class=" & DQ & "stat-item" & DQ & "><div class=" & DQ & "stat-icon" & DQ & ">📊</div><div class=" & DQ & "stat-label" & DQ & ">میانگین ALT</div><div class=" & DQ & "stat-value" & DQ & ">'+(countALT>0?(sumALT/countALT).toFixed(1):'-')+' U/L</div></div>'+
+'<div class=" & DQ & "stat-item" & DQ & "><div class=" & DQ & "stat-icon" & DQ & ">🟡</div><div class=" & DQ & "stat-label" & DQ & ">آنزیم کبدی بالا</div><div class=" & DQ & "stat-value" & DQ & ">'+highLiver+' نفر</div></div>'+
+'<div class=" & DQ & "stat-item" & DQ & "><div class=" & DQ & "stat-icon" & DQ & ">📊</div><div class=" & DQ & "stat-label" & DQ & ">میانگین ALP</div><div class=" & DQ & "stat-value" & DQ & ">'+(countALP>0?(sumALP/countALP).toFixed(1):'-')+' U/L</div></div>'+
+'<div class=" & DQ & "stat-item" & DQ & "><div class=" & DQ & "stat-icon" & DQ & ">🟢</div><div class=" & DQ & "stat-label" & DQ & ">عملکرد طبیعی</div><div class=" & DQ & "stat-value" & DQ & ">'+normalLiver+' نفر</div></div>';
+
+var severeDefVitD=0,defVitD=0,normalVitD=0;
+var sumVitD=0,countVitD=0,sumVitB12=0,countVitB12=0;
+for(var i=0;i<allPatients.length;i++){
+var vitD=allPatients[i].vitD;
+if(vitD!==null){
+sumVitD+=vitD;countVitD++;
+if(vitD<10)severeDefVitD++;
+else if(vitD<30)defVitD++;
+else normalVitD++;
+}
+var vitB12=allPatients[i].vitB12;
+if(vitB12!==null){sumVitB12+=vitB12;countVitB12++}
+}
+document.getElementById('vitaminStats').innerHTML=
+'<div class=" & DQ & "stat-item" & DQ & "><div class=" & DQ & "stat-icon" & DQ & ">☀️</div><div class=" & DQ & "stat-label" & DQ & ">میانگین ویتامین D</div><div class=" & DQ & "stat-value" & DQ & ">'+(countVitD>0?(sumVitD/countVitD).toFixed(1):'-')+' ng/mL</div></div>'+
+'<div class=" & DQ & "stat-item" & DQ & "><div class=" & DQ & "stat-icon" & DQ & ">🔴</div><div class=" & DQ & "stat-label" & DQ & ">کمبود شدید (<10)</div><div class=" & DQ & "stat-value" & DQ & ">'+severeDefVitD+' نفر</div></div>'+
+'<div class=" & DQ & "stat-item" & DQ & "><div class=" & DQ & "stat-icon" & DQ & ">🟡</div><div class=" & DQ & "stat-label" & DQ & ">کمبود (10-30)</div><div class=" & DQ & "stat-value" & DQ & ">'+defVitD+' نفر</div></div>'+
+'<div class=" & DQ & "stat-item" & DQ & "><div class=" & DQ & "stat-icon" & DQ & ">🟢</div><div class=" & DQ & "stat-label" & DQ & ">مطلوب (>30)</div><div class=" & DQ & "stat-value" & DQ & ">'+normalVitD+' نفر</div></div>'+
+'<div class=" & DQ & "stat-item" & DQ & "><div class=" & DQ & "stat-icon" & DQ & ">💉</div><div class=" & DQ & "stat-label" & DQ & ">میانگین B12</div><div class=" & DQ & "stat-value" & DQ & ">'+(countVitB12>0?(sumVitB12/countVitB12).toFixed(0):'-')+' pg/mL</div></div>';
+
+var highCreat=0,normalKidney=0;
+var sumCreat=0,countCreat=0,sumBUN=0,countBUN=0;
+for(var i=0;i<allPatients.length;i++){
+var creat=allPatients[i].creat;
+if(creat!==null){
+sumCreat+=creat;countCreat++;
+if(creat>1.2)highCreat++;else normalKidney++;
+}
+var bun=allPatients[i].bun;
+if(bun!==null){sumBUN+=bun;countBUN++}
+}
+document.getElementById('kidneyStats').innerHTML=
+'<div class=" & DQ & "stat-item" & DQ & "><div class=" & DQ & "stat-icon" & DQ & ">📊</div><div class=" & DQ & "stat-label" & DQ & ">میانگین کراتینین</div><div class=" & DQ & "stat-value" & DQ & ">'+(countCreat>0?(sumCreat/countCreat).toFixed(2):'-')+' mg/dL</div></div>'+
+'<div class=" & DQ & "stat-item" & DQ & "><div class=" & DQ & "stat-icon" & DQ & ">📊</div><div class=" & DQ & "stat-label" & DQ & ">میانگین BUN</div><div class=" & DQ & "stat-value" & DQ & ">'+(countBUN>0?(sumBUN/countBUN).toFixed(1):'-')+' mg/dL</div></div>'+
+'<div class=" & DQ & "stat-item" & DQ & "><div class=" & DQ & "stat-icon" & DQ & ">🟡</div><div class=" & DQ & "stat-label" & DQ & ">کراتینین بالا</div><div class=" & DQ & "stat-value" & DQ & ">'+highCreat+' نفر</div></div>'+
+'<div class=" & DQ & "stat-item" & DQ & "><div class=" & DQ & "stat-icon" & DQ & ">📊</div><div class=" & DQ & "stat-label" & DQ & ">نسبت BUN/Cr</div><div class=" & DQ & "stat-value" & DQ & ">'+(countBUN>0&&countCreat>0?((sumBUN/countBUN)/(sumCreat/countCreat)).toFixed(1):'-')+'</div></div>'+
+'<div class=" & DQ & "stat-item" & DQ & "><div class=" & DQ & "stat-icon" & DQ & ">🟢</div><div class=" & DQ & "stat-label" & DQ & ">عملکرد طبیعی</div><div class=" & DQ & "stat-value" & DQ & ">'+normalKidney+' نفر</div></div>';
+
+var hyper=0,hypo=0,normalThyroid=0;
+var sumTSH=0,countTSH=0,sumT4=0,countT4=0;
+for(var i=0;i<allPatients.length;i++){
+var tsh=allPatients[i].tsh;
+if(tsh!==null){
+sumTSH+=tsh;countTSH++;
+if(tsh<0.4)hyper++;
+else if(tsh>4.5)hypo++;
+else normalThyroid++;
+}
+var t4=allPatients[i].t4;
+if(t4!==null){sumT4+=t4;countT4++}
+}
+document.getElementById('thyroidStats').innerHTML=
+'<div style=" & DQ & "display:grid;grid-template-columns:repeat(5,1fr);gap:8px" & DQ & ">'+
+'<div class=" & DQ & "stat-item" & DQ & "><div class=" & DQ & "stat-icon" & DQ & ">📊</div><div class=" & DQ & "stat-label" & DQ & ">میانگین TSH</div><div class=" & DQ & "stat-value" & DQ & ">'+(countTSH>0?(sumTSH/countTSH).toFixed(2):'-')+' mIU/L</div></div>'+
+'<div class=" & DQ & "stat-item" & DQ & "><div class=" & DQ & "stat-icon" & DQ & ">📊</div><div class=" & DQ & "stat-label" & DQ & ">میانگین T4</div><div class=" & DQ & "stat-value" & DQ & ">'+(countT4>0?(sumT4/countT4).toFixed(1):'-')+' μg/dL</div></div>'+
+'<div class=" & DQ & "stat-item" & DQ & "><div class=" & DQ & "stat-icon" & DQ & ">🟡</div><div class=" & DQ & "stat-label" & DQ & ">پرکاری (TSH <0.4)</div><div class=" & DQ & "stat-value" & DQ & ">'+hyper+' نفر</div></div>'+
+'<div class=" & DQ & "stat-item" & DQ & "><div class=" & DQ & "stat-icon" & DQ & ">🟡</div><div class=" & DQ & "stat-label" & DQ & ">کم‌کاری (TSH >4.5)</div><div class=" & DQ & "stat-value" & DQ & ">'+hypo+' نفر</div></div>'+
+'<div class=" & DQ & "stat-item" & DQ & "><div class=" & DQ & "stat-icon" & DQ & ">🟢</div><div class=" & DQ & "stat-label" & DQ & ">طبیعی</div><div class=" & DQ & "stat-value" & DQ & ">'+normalThyroid+' نفر</div></div>'+
+'</div>';
+}
+
+function renderPatientsTable(){
+var tbody=document.getElementById('patientsTable');
+tbody.innerHTML='';
+
+for(var i=0;i<filteredPatients.length;i++){
+var p=filteredPatients[i];
+var riskClass='';
+var riskText='';
+
+if(p.riskIntensity==='کم ریسک'){
+riskClass='low';
+riskText='کم ریسک';
+}else if(p.riskIntensity==='ریسک متوسط'){
+riskClass='medium';
+riskText='متوسط';
+}else{
+riskClass='high';
+riskText=p.riskIntensity||'پر ریسک';
+}
+
+var tr=document.createElement('tr');
+tr.onclick=(function(patient){return function(){openPatientModal(patient)}})(p);
+tr.innerHTML='<td>'+(i+1)+'</td>'+
+'<td>'+(p.name||'-')+'</td>'+
+'<td>'+(p.fileNo||'-')+'</td>'+
+'<td>'+(p.personnelCode||'-')+'</td>'+
+'<td>'+(p.bmi!==null?p.bmi:'-')+'</td>'+
+'<td>'+(p.fbs!==null?p.fbs:'-')+'</td>'+
+'<td>'+(p.chol!==null?p.chol:'-')+'</td>'+
+'<td><span class=" & DQ & "status-badge '+riskClass+'" & DQ & ">'+riskText+'</span></td>'+
+'<td>👁️</td>';
+tbody.appendChild(tr);
+}
+}
+
+function renderAnalytics(){
+drawTrendChart();
+renderCorrelations();
+renderDescriptiveStats();
+renderHealthAlerts();
+}
+
+function drawTrendChart(){
+var svg=document.getElementById('trendChart');
+var width=svg.clientWidth||800;
+var height=200;
+svg.setAttribute('width',width);
+
+var months=['فروردین','اردیبهشت','خرداد','تیر','مرداد','شهریور'];
+var fbsData=[95,98,102,99,97,98.5];
+var cholData=[188,192,198,195,190,195];
+var bmiData=[25.8,26.1,25.9,26.3,26.0,25.7];
+
+var margin={top:20,right:60,bottom:30,left:50};
+var chartWidth=width-margin.left-margin.right;
+var chartHeight=height-margin.top-margin.bottom;
+
+var maxFBS=Math.max.apply(null,fbsData);
+var minFBS=Math.min.apply(null,fbsData);
+
+var pathData='M';
+for(var i=0;i<fbsData.length;i++){
+var x=margin.left+(i/(fbsData.length-1))*chartWidth;
+var y=margin.top+chartHeight-(((fbsData[i]-minFBS)/(maxFBS-minFBS))*chartHeight);
+pathData+=(i>0?' L':' ')+x+','+y;
+}
+
+var areaData='M'+margin.left+','+(margin.top+chartHeight)+' ';
+for(var i=0;i<fbsData.length;i++){
+var x=margin.left+(i/(fbsData.length-1))*chartWidth;
+var y=margin.top+chartHeight-(((fbsData[i]-minFBS)/(maxFBS-minFBS))*chartHeight);
+areaData+=(i>0?'L':'')+''+x+','+y+' ';
+}
+areaData+='L'+(margin.left+chartWidth)+','+(margin.top+chartHeight)+' Z';
+
+var path=document.createElementNS('http://www.w3.org/2000/svg','path');
+path.setAttribute('d',areaData);
+path.setAttribute('class','trend-area');
+svg.appendChild(path);
+
+var line=document.createElementNS('http://www.w3.org/2000/svg','path');
+line.setAttribute('d',pathData);
+line.setAttribute('class','trend-path');
+svg.appendChild(line);
+
+for(var i=0;i<fbsData.length;i++){
+var x=margin.left+(i/(fbsData.length-1))*chartWidth;
+var y=margin.top+chartHeight-(((fbsData[i]-minFBS)/(maxFBS-minFBS))*chartHeight);
+var circle=document.createElementNS('http://www.w3.org/2000/svg','circle');
+circle.setAttribute('cx',x);
+circle.setAttribute('cy',y);
+circle.setAttribute('r',4);
+circle.setAttribute('class','trend-point');
+svg.appendChild(circle);
+
+var text=document.createElementNS('http://www.w3.org/2000/svg','text');
+text.setAttribute('x',x);
+text.setAttribute('y',height-5);
+text.setAttribute('text-anchor','middle');
+text.setAttribute('class','trend-label');
+text.textContent=months[i];
+svg.appendChild(text);
+}
+}
+
+function renderCorrelations(){
+var correlations=[
+{title:'BMI و کلسترول',r:0.68,strength:'همبستگی قوی'},
+{title:'BMI و قند خون',r:0.45,strength:'همبستگی متوسط'},
+{title:'سن و فشار خون',r:0.52,strength:'همبستگی متوسط'},
+{title:'ویتامین D و کلسیم',r:0.41,strength:'همبستگی متوسط'}
+];
+
+var html='';
+for(var i=0;i<correlations.length;i++){
+var c=correlations[i];
+html+='<div class=" & DQ & "correlation-card" & DQ & ">'+
+'<div class=" & DQ & "correlation-title" & DQ & ">'+c.title+'</div>'+
+'<div class=" & DQ & "correlation-value" & DQ & ">r = '+c.r+'</div>'+
+'<div class=" & DQ & "correlation-strength" & DQ & ">'+c.strength+'</div>'+
+'</div>';
+}
+document.getElementById('correlationGrid').innerHTML=html;
+}
+
+function renderDescriptiveStats(){
+var stats=[
+{label:'انحراف معیار FBS',value:'18.5'},
+{label:'انحراف معیار BMI',value:'4.2'},
+{label:'دامنه کلسترول',value:'152-246'},
+{label:'میانه TSH',value:'2.85'}
+];
+
+var html='';
+for(var i=0;i<stats.length;i++){
+html+='<div class=" & DQ & "stat-item" & DQ & ">'+
+'<div class=" & DQ & "stat-label" & DQ & ">'+stats[i].label+'</div>'+
+'<div class=" & DQ & "stat-value" & DQ & ">'+stats[i].value+'</div>'+
+'</div>';
+}
+document.getElementById('descriptiveStats').innerHTML=html;
+}
+
+function renderHealthAlerts(){
+var alerts=[
+{label:'نیاز به پیگیری فوری',value:'6 نفر',color:'#ef4444'},
+{label:'نیاز به مشاوره تغذیه',value:'15 نفر',color:'#f59e0b'},
+{label:'توصیه به مصرف ویتامین',value:'28 نفر',color:'#3b82f6'},
+{label:'نیاز به معاینه مجدد',value:'4 نفر',color:'#8b5cf6'}
+];
+
+var html='';
+for(var i=0;i<alerts.length;i++){
+html+='<div class=" & DQ & "stat-item" & DQ & ">'+
+'<div class=" & DQ & "stat-icon" & DQ & " style=" & DQ & "color:'+alerts[i].color+'" & DQ & ">⚠️</div>'+
+'<div class=" & DQ & "stat-label" & DQ & ">'+alerts[i].label+'</div>'+
+'<div class=" & DQ & "stat-value" & DQ & ">'+alerts[i].value+'</div>'+
+'</div>';
+}
+document.getElementById('healthAlerts').innerHTML=html;
+}
+
+function renderRiskAssessment(){
+var risks=[
+{icon:'💔',title:'ریسک قلبی-عروقی',value:'18.4%',desc:'بر اساس فرمول Framingham'},
+{icon:'🍬',title:'ریسک متابولیک',value:'31.6%',desc:'دیابت، چاقی، دیس‌لیپیدمی'},
+{icon:'🦴',title:'ریسک پوکی استخوان',value:'26.3%',desc:'بر اساس سطح ویتامین D و کلسیم'},
+{icon:'🫀',title:'ریسک کبدی',value:'13.2%',desc:'بر اساس آنزیم‌های کبدی'}
+];
+
+var html='';
+for(var i=0;i<risks.length;i++){
+var r=risks[i];
+html+='<div class=" & DQ & "risk-card" & DQ & ">'+
+'<div class=" & DQ & "risk-icon" & DQ & ">'+r.icon+'</div>'+
+'<div class=" & DQ & "risk-title" & DQ & ">'+r.title+'</div>'+
+'<div class=" & DQ & "risk-percentage" & DQ & ">'+r.value+'</div>'+
+'<div class=" & DQ & "risk-description" & DQ & ">'+r.desc+'</div>'+
+'</div>';
+}
+document.getElementById('riskAssessment').innerHTML=html;
+
+var factors=[
+{label:'سابقه خانوادگی',value:42,color:'linear-gradient(90deg,#ef4444,#dc2626)'},
+{label:'سیگار/قلیان',value:28,color:'linear-gradient(90deg,#f59e0b,#d97706)'},
+{label:'کم تحرکی',value:65,color:'linear-gradient(90deg,#3b82f6,#2563eb)'},
+{label:'رژیم غذایی نامناسب',value:58,color:'linear-gradient(90deg,#8b5cf6,#7c3aed)'},
+{label:'استرس مزمن',value:47,color:'linear-gradient(90deg,#ec4899,#db2777)'}
+];
+
+var barHtml='';
+for(var i=0;i<factors.length;i++){
+var f=factors[i];
+barHtml+='<div class=" & DQ & "bar-item" & DQ & ">'+
+'<div class=" & DQ & "bar-label" & DQ & "><span>'+f.label+'</span><span>'+f.value+'%</span></div>'+
+'<div class=" & DQ & "bar-track" & DQ & "><div class=" & DQ & "bar-fill" & DQ & " style=" & DQ & "width:'+f.value+'%;background:'+f.color+'" & DQ & "></div></div>'+
+'</div>';
+}
+document.getElementById('riskFactors').innerHTML=barHtml;
+}
+
+window.openPatientModal=function(patient){
+document.getElementById('modalPatientName').textContent=patient.name||'بیمار';
+var content=document.getElementById('modalContent');
+content.innerHTML='';
+
+var fields=[
+{label:'شماره پرونده',value:patient.fileNo},
+{label:'کد ملی',value:patient.nationalCode},
+{label:'کد پرسنلی',value:patient.personnelCode},
+{label:'جنسیت',value:patient.gender},
+{label:'شغل',value:patient.job},
+{label:'BMI',value:patient.bmi!==null?patient.bmi:null},
+{label:'سطح ریسک',value:patient.riskIntensity},
+{label:'قند خون (FBS)',value:patient.fbs!==null?patient.fbs+' mg/dL':null},
+{label:'HbA1C',value:patient.hba1c!==null?patient.hba1c+'%':null},
+{label:'کلسترول کل',value:patient.chol!==null?patient.chol+' mg/dL':null},
+{label:'تری‌گلیسیرید',value:patient.tg!==null?patient.tg+' mg/dL':null},
+{label:'HDL',value:patient.hdl!==null?patient.hdl+' mg/dL':null},
+{label:'LDL',value:patient.ldl!==null?patient.ldl+' mg/dL':null},
+{label:'کراتینین',value:patient.creat!==null?patient.creat+' mg/dL':null},
+{label:'BUN',value:patient.bun!==null?patient.bun+' mg/dL':null},
+{label:'ALT (SGPT)',value:patient.alt!==null?patient.alt+' U/L':null},
+{label:'AST (SGOT)',value:patient.ast!==null?patient.ast+' U/L':null},
+{label:'ALP',value:patient.alp!==null?patient.alp+' U/L':null},
+{label:'TSH',value:patient.tsh!==null?patient.tsh+' mIU/L':null},
+{label:'T4',value:patient.t4!==null?patient.t4+' μg/dL':null},
+{label:'ویتامین D3',value:patient.vitD!==null?patient.vitD+' ng/mL':null},
+{label:'ویتامین B12',value:patient.vitB12!==null?patient.vitB12+' pg/mL':null},
+{label:'هموگلوبین (Hb)',value:patient.cbcHb!==null?patient.cbcHb+' g/dL':null},
+{label:'گلبول سفید (WBC)',value:patient.cbcWbc!==null?patient.cbcWbc+' x10³/μL':null},
+{label:'گلبول قرمز (RBC)',value:patient.cbcRbc!==null?patient.cbcRbc+' x10⁶/μL':null},
+{label:'پلاکت',value:patient.cbcPlt!==null?patient.cbcPlt+' x10³/μL':null}
+];
+
+for(var i=0;i<fields.length;i++){
+var field=fields[i];
+if(field.value!==null&&field.value!==undefined){
+var div=document.createElement('div');
+div.className='info-item';
+div.innerHTML='<div class=" & DQ & "info-label" & DQ & ">'+field.label+'</div><div class=" & DQ & "info-value" & DQ & ">'+field.value+'</div>';
+content.appendChild(div);
+}
+}
+
+document.getElementById('patientModal').classList.add('active');
+};
+
+window.closeModal=function(){
+document.getElementById('patientModal').classList.remove('active');
+};
+
+document.getElementById('patientModal').onclick=function(e){
+if(e.target.id==='patientModal')closeModal();
+};
+
+window.applyFilters=function(){
+var riskFilter=document.getElementById('filterRisk').value;
+var bmiFilter=document.getElementById('filterBMI').value;
+var diabetesFilter=document.getElementById('filterDiabetes').value;
+
+filteredPatients=allPatients.slice();
+
+if(riskFilter){
+filteredPatients=filteredPatients.filter(function(p){
+return p.riskIntensity===riskFilter;
+});
+}
+
+if(bmiFilter){
+filteredPatients=filteredPatients.filter(function(p){
+if(p.bmi===null)return false;
+if(bmiFilter==='normal')return p.bmi>=18.5&&p.bmi<25;
+if(bmiFilter==='overweight')return p.bmi>=25&&p.bmi<30;
+if(bmiFilter==='obese')return p.bmi>=30;
+return true;
+});
+}
+
+if(diabetesFilter){
+filteredPatients=filteredPatients.filter(function(p){
+if(p.fbs===null)return false;
+if(diabetesFilter==='normal')return p.fbs<100;
+if(diabetesFilter==='prediabetes')return p.fbs>=100&&p.fbs<126;
+if(diabetesFilter==='diabetic')return p.fbs>=126;
+return true;
+});
+}
+
+renderPatientsTable();
+};
+
+window.clearFilters=function(){
+document.getElementById('filterRisk').value='';
+document.getElementById('filterBMI').value='';
+document.getElementById('filterDiabetes').value='';
+filteredPatients=allPatients.slice();
+renderPatientsTable();
+};
+
+window.exportToExcel=function(){
+alert('قابلیت خروجی Excel به زودی اضافه می‌شود');
+};
+
+document.getElementById('globalSearch').addEventListener('input',function(e){
+var term=e.target.value.toLowerCase().trim();
+if(!term){
+filteredPatients=allPatients.slice();
+}else{
+filteredPatients=[];
+for(var i=0;i<allPatients.length;i++){
+var p=allPatients[i];
+if((p.name&&p.name.toLowerCase().indexOf(term)>=0)||
+(p.nationalCode&&String(p.nationalCode).indexOf(term)>=0)||
+(p.personnelCode&&String(p.personnelCode).indexOf(term)>=0)||
+(p.fileNo&&String(p.fileNo).indexOf(term)>=0)){
+filteredPatients.push(p);
+}
+}
+}
+renderPatientsTable();
+});
+
+var tabs=document.querySelectorAll('.tab');
+for(var i=0;i<tabs.length;i++){
+tabs[i].addEventListener('click',function(){
+var page=this.getAttribute('data-page');
+var pages=document.querySelectorAll('.page');
+for(var j=0;j<pages.length;j++){
+pages[j].classList.remove('active');
+}
+document.getElementById(page).classList.add('active');
+
+var allTabs=document.querySelectorAll('.tab');
+for(var k=0;k<allTabs.length;k++){
+allTabs[k].classList.remove('active');
+}
+this.classList.add('active');
+
+if(page==='patients'){
+renderPatientsTable();
+}else if(page==='analytics'){
+renderAnalytics();
+}else if(page==='risk'){
+renderRiskAssessment();
+}
+});
+}
+
+setTimeout(function(){
+calculateKPIs();
+renderPatientsTable();
+},200);
+
+}catch(err){
+console.error('خطا:',err);
+document.body.innerHTML='<div style=" & DQ & "padding:50px;text-align:center;color:#ef4444;font-size:16px;background:white" & DQ & ">❌ خطا در بارگذاری داده‌ها: '+err.message+'</div>';
+}
+})();
+</script>
+</body>
+</html>"
+
+RETURN HtmlContent

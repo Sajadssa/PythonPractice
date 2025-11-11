@@ -1,0 +1,599 @@
+<style>
+/* ========================================
+   🎨 MODERN SHAREPOINT STYLING - LEFT SIDEBAR
+   ======================================== */
+
+/* 1️⃣ مخفی کردن المان‌های غیرضروری */
+#suiteLinksBox,
+a[title="Edit Links"],
+.ms-promotedActionButton-button[title="Edit Links"],
+.ms-breadcrumb-anchor {
+    display: none !important;
+}
+
+/* 2️⃣ تنظیمات کلی صفحه */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f5f7fa;
+    margin: 0;
+    padding: 0;
+}
+
+#s4-workspace {
+    margin-top: 0 !important;
+    padding-top: 50px !important;
+}
+
+/* 3️⃣ هدر مدرن سفارشی - باریک‌تر */
+.customModernHeader {
+    position: fixed;
+    top: 0;
+    left: 260px;
+    right: 0;
+    height: 50px;
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 25px;
+}
+
+.customModernHeader .logo-section {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.customModernHeader .logo-section img {
+    height: 35px;
+    width: auto;
+}
+
+.customModernHeader .logo-section h1 {
+    color: #fff;
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0;
+    letter-spacing: 0.5px;
+}
+
+.customModernHeader .nav-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.customModernHeader .nav-btn {
+    padding: 6px 16px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.customModernHeader .nav-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.customModernHeader .nav-btn.active {
+    background: rgba(255, 255, 255, 0.25);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+/* 4️⃣ بهبود نوار Suite Bar */
+#suiteBar {
+    background: #ffca28 !important;
+    min-height: 40px !important;
+    padding: 0 20px !important;
+    margin-left: 260px !important;
+}
+
+#suiteBarLeft {
+    display: flex !important;
+    align-items: center !important;
+    gap: 0 !important;
+}
+
+#suiteBar .ms-core-suiteLink-a,
+#suiteBar a {
+    padding: 8px 16px !important;
+    margin: 0 4px !important;
+    min-width: auto !important;
+    display: inline-block !important;
+    color: #000 !important;
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    border-radius: 4px !important;
+    transition: all 0.2s ease !important;
+}
+
+#suiteBar .ms-core-suiteLink-a:hover,
+#suiteBar a:hover {
+    background: rgba(0,0,0,0.08) !important;
+    transform: scale(1.05) !important;
+}
+
+/* 5️⃣ بهبود Ribbon */
+#s4-ribbonrow {
+    background: #fff !important;
+    border-bottom: 1px solid #e0e0e0 !important;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08) !important;
+    margin-left: 260px !important;
+}
+
+.ms-cui-tabBody {
+    background: #fafbfc !important;
+}
+
+/* 6️⃣ سایدبار چپ - طراحی داشبورد مانند */
+.modernSidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 260px;
+    height: 100vh;
+    background: linear-gradient(180deg, #1a1f36 0%, #0f1419 100%);
+    box-shadow: 2px 0 15px rgba(0,0,0,0.3);
+    overflow-y: auto;
+    z-index: 1000;
+    padding: 20px 0;
+}
+
+.modernSidebar::-webkit-scrollbar {
+    width: 5px;
+}
+
+.modernSidebar::-webkit-scrollbar-track {
+    background: #0f1419;
+}
+
+.modernSidebar::-webkit-scrollbar-thumb {
+    background: #2d3748;
+    border-radius: 3px;
+}
+
+/* 🎨 آیتم‌های آکاردئون تک سطحی */
+.accordion-item {
+    margin: 0 12px 8px;
+    border-radius: 8px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.05);
+    transition: all 0.3s ease;
+}
+
+.accordion-item:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.accordion-header {
+    padding: 12px 16px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+    font-size: 13px;
+    user-select: none;
+    transition: all 0.3s ease;
+}
+
+.accordion-header:hover {
+    background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+}
+
+.accordion-header .icon {
+    font-size: 16px;
+}
+
+.accordion-header .arrow {
+    margin-left: auto;
+    transition: transform 0.3s ease;
+    font-size: 12px;
+}
+
+.accordion-item.active .accordion-header .arrow {
+    transform: rotate(180deg);
+}
+
+/* محتوای آکاردئون تک سطحی */
+.accordion-content {
+    display: none;
+    padding: 10px 16px;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.accordion-item.active .accordion-content {
+    display: block;
+    animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        max-height: 0;
+    }
+    to {
+        opacity: 1;
+        max-height: 800px;
+    }
+}
+
+.accordion-content a {
+    display: block;
+    padding: 8px 12px;
+    margin: 4px 0;
+    color: #cbd5e0;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    font-size: 12px;
+}
+
+.accordion-content a:hover {
+    background: rgba(102, 126, 234, 0.2);
+    padding-left: 16px;
+    color: #fff;
+}
+
+/* 🔵 آکاردئون دو سطحی - فقط برای Production */
+.production-section .accordion-header {
+    background: linear-gradient(135deg, #7489e4 0%, #764ba2 100%);
+}
+
+.production-section .accordion-header:hover {
+    background: linear-gradient(135deg, #764ba2 0%, #7489e4 100%);
+}
+
+.sub-accordion-item {
+    margin: 6px 0;
+    border-radius: 6px;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.sub-accordion-header {
+    padding: 10px 12px;
+    background: rgba(102, 126, 234, 0.15);
+    color: #e2e8f0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 500;
+    font-size: 12px;
+    user-select: none;
+    transition: all 0.2s ease;
+    border-left: 3px solid transparent;
+}
+
+.sub-accordion-header:hover {
+    background: rgba(102, 126, 234, 0.25);
+    border-left-color: #667eea;
+}
+
+.sub-accordion-header .sub-icon {
+    font-size: 14px;
+}
+
+.sub-accordion-header .sub-arrow {
+    margin-left: auto;
+    transition: transform 0.3s ease;
+    font-size: 10px;
+}
+
+.sub-accordion-item.active .sub-accordion-header {
+    background: rgba(102, 126, 234, 0.3);
+    border-left-color: #667eea;
+}
+
+.sub-accordion-item.active .sub-accordion-header .sub-arrow {
+    transform: rotate(180deg);
+}
+
+.sub-accordion-content {
+    display: none;
+    padding: 8px 12px 8px 28px;
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.sub-accordion-item.active .sub-accordion-content {
+    display: block;
+    animation: slideDown 0.3s ease;
+}
+
+.sub-accordion-content a {
+    display: block;
+    padding: 6px 10px;
+    margin: 3px 0;
+    color: #a0aec0;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    font-size: 11px;
+    border-left: 2px solid transparent;
+}
+
+.sub-accordion-content a:hover {
+    background: rgba(102, 126, 234, 0.15);
+    padding-left: 14px;
+    color: #cbd5e0;
+    border-left-color: #667eea;
+}
+
+/* لینک‌های مستقیم در سطح اول Production */
+.sub-item-link {
+    display: block;
+    padding: 10px 12px;
+    margin: 6px 0;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    font-size: 12px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.sub-item-link:hover {
+    background: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+}
+
+.sub-item-link .sub-icon {
+    font-size: 14px;
+    opacity: 0.75;
+}
+
+/* 7️⃣ تنظیم فاصله محتوای اصلی */
+#contentBox {
+    margin-left: 280px !important;
+    padding: 20px !important;
+}
+
+/* 8️⃣ بهبود ظاهر کلی صفحه */
+.ms-webpart-chrome-title {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #fff !important;
+    border-radius: 6px 6px 0 0;
+}
+
+.ms-webpartzone-cell {
+    margin: 10px 0;
+}
+</style>
+
+<!-- ========== هدر مدرن ========== -->
+<div class="customModernHeader">
+    <div class="logo-section">
+      
+        <h1>Production Dashboard</h1>
+    </div>
+    <div class="nav-buttons">
+        <a href="https://extranet.pedc.ir/pogp/portal" class="nav-btn">🏠 پورتال</a>
+        <a href="https://extranet.pedc.ir/pogp/PRD/SitePages/خانه.aspx" class="nav-btn active">📊 Production</a>
+        <a href="https://extranet.pedc.ir/pogp/PRD/Lists/Maintenances/AllItems.aspx" class="nav-btn">🔧 Maintenance</a>
+    </div>
+</div>
+
+<!-- ========== سایدبار چپ با آکاردئون دو سطحی ========== -->
+<div class="modernSidebar">
+    <!-- 📊 Dashboard - تک سطحی -->
+    <div class="accordion-item">
+        <div class="accordion-header">
+            <span class="icon">📊</span>
+            <span>Dashboard</span>
+            <span class="arrow">▼</span>
+        </div>
+        <div class="accordion-content">
+            <a href="https://extranet.pedc.ir/pogp/PRD/SitePages/خانه.aspx">🏠 Home</a>
+            <a href="https://extranet.pedc.ir/pogp/PRD/SitePages/Reports.aspx">📈 Reports</a>
+            <a href="https://extranet.pedc.ir/pogp/PRD/SitePages/Analytics.aspx">📉 Analytics</a>
+        </div>
+    </div>
+
+    <!-- 🔧 Maintenance - تک سطحی -->
+    <div class="accordion-item">
+        <div class="accordion-header">
+            <span class="icon">🔧</span>
+            <span>Maintenance</span>
+            <span class="arrow">▼</span>
+        </div>
+        <div class="accordion-content">
+            <a href="https://extranet.pedc.ir/pogp/PRD/Maintenances/Forms/AllItems.aspx">📋 Maintenance Report</a>
+            <a href="https://extranet.pedc.ir/pogp/PRD/Lists/WorkOrders/AllItems.aspx">📝 Work Orders</a>
+            <a href="https://extranet.pedc.ir/pogp/PRD/Lists/EquipmentStatus/AllItems.aspx">⚙️ Equipment Status</a>
+        </div>
+    </div>
+
+    <!-- ⚙️ Production - دو سطحی -->
+    <div class="accordion-item production-section">
+        <div class="accordion-header">
+            <span class="icon">⚙️</span>
+            <span>Production</span>
+            <span class="arrow">▼</span>
+        </div>
+        <div class="accordion-content">
+            
+            <!-- سطح دوم: Production Engineering - آکاردئون -->
+            <div class="sub-accordion-item">
+                <div class="sub-accordion-header">
+                    <span class="sub-icon">🏗️</span>
+                    <span>Production Engineering</span>
+                    <span class="sub-arrow">▼</span>
+                </div>
+                <div class="sub-accordion-content">
+                    <a href="https://extranet.pedc.ir/pogp/PRD/Action%20Plan%20Well%20Production%20Enhancement/Forms/AllItems.aspx">🎯 Action Plan Well Production Enhancement</a>
+                    <a href="https://extranet.pedc.ir/pogp/PRD/Call%20off%20Order/Forms/AllItems.aspx">📞 Call off Order</a>
+                    <a href="https://extranet.pedc.ir/pogp/PRD/CTEPWPD/Forms/AllItems.aspx">📈 CTEP And Wells Performance Data</a>
+                    <a href="https://extranet.pedc.ir/pogp/PRD/LightCrudeReport/Forms/AllItems.aspx">📋 Delivery And Acceptance Light Crude Report</a>
+                    <a href="https://extranet.pedc.ir/pogp/PRD/HeavyCrudeReport/Forms/AllItems.aspx">📊 Delivery And Acceptance Heavy Crude Report</a>
+                    <a href="https://extranet.pedc.ir/pogp/PRD/Production%20Engineering%20Report/Forms/AllItems.aspx">📄 Production Engineering Report</a>
+                    <a href="https://extranet.pedc.ir/pogp/PRD/Well%20Intervention%20Analysis%20Report/Forms/AllItems.aspx">🔬 Well Intervention Analysis Report</a>
+                </div>
+            </div>
+
+            <!-- لینک مستقیم: Production Operation -->
+            <a href="https://extranet.pedc.ir/pogp/PRD/Production%20Operations/Forms/AllItems.aspx" class="sub-item-link">
+                <span class="sub-icon">⚡</span>
+                <span>Production Operation</span>
+            </a>
+
+            <!-- لینک مستقیم: Corrosion Report -->
+            <a href="https://extranet.pedc.ir/pogp/PRD/Corrosion%20Report/Forms/AllItems.aspx" class="sub-item-link">
+                <span class="sub-icon">🛡️</span>
+                <span>Corrosion Report</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- ✅ Quality Control - تک سطحی -->
+    <div class="accordion-item">
+        <div class="accordion-header">
+            <span class="icon">✅</span>
+            <span>Quality Control</span>
+            <span class="arrow">▼</span>
+        </div>
+        <div class="accordion-content">
+            <a href="https://extranet.pedc.ir/pogp/PRD/Quality%20Control/Forms/AllItems.aspx">🔍 QC Records</a>
+            <a href="https://extranet.pedc.ir/pogp/PRD/Lists/Inspections/AllItems.aspx">📋 Inspections</a>
+            <a href="https://extranet.pedc.ir/pogp/PRD/Lists/TestResults/AllItems.aspx">🧪 Test Results</a>
+        </div>
+    </div>
+
+    <!-- 📋 Reports - تک سطحی -->
+    <div class="accordion-item">
+        <div class="accordion-header">
+            <span class="icon">📋</span>
+            <span>Reports</span>
+            <span class="arrow">▼</span>
+        </div>
+        <div class="accordion-content">
+            <a href="https://extranet.pedc.ir/pogp/PRD/Lists/DailyReports/AllItems.aspx">📅 Daily Reports</a>
+            <a href="https://extranet.pedc.ir/pogp/PRD/Lists/MonthlyReports/AllItems.aspx">📆 Monthly Reports</a>
+            <a href="https://extranet.pedc.ir/pogp/PRD/Lists/AnnualReports/AllItems.aspx">📊 Annual Reports</a>
+        </div>
+    </div>
+
+    <!-- ⚙️ SharePoint Settings - تک سطحی -->
+    <div class="accordion-item">
+        <div class="accordion-header">
+            <span class="icon">⚙️</span>
+            <span>SharePoint Settings</span>
+            <span class="arrow">▼</span>
+        </div>
+        <div class="accordion-content">
+            <a href="https://extranet.pedc.ir/pogp/PRD/_layouts/15/settings.aspx">🔧 SharePoint settings</a>
+            <a href="https://extranet.pedc.ir/pogp/PRD/_layouts/15/shareddocuments.aspx">👥 Shared with...</a>
+            <a href="#" id="editPageBtn">✏️ Edit page</a>
+            <a href="https://extranet.pedc.ir/pogp/PRD/_layouts/15/createpage.aspx">➕ Add a page</a>
+            <a href="https://extranet.pedc.ir/pogp/PRD/_layouts/15/addanapp.aspx">📦 Add an app</a>
+            <a href="https://extranet.pedc.ir/pogp/PRD/_layouts/15/viewlsts.aspx">📚 Site contents</a>
+            <a href="https://extranet.pedc.ir/pogp/PRD/_layouts/15/DesignGallery.aspx">🎨 Design Manager</a>
+            <a href="https://extranet.pedc.ir/pogp/PRD/_layouts/15/settings.aspx">⚙️ Site settings</a>
+            <a href="https://extranet.pedc.ir/pogp/PRD/_layouts/15/help.aspx">❓ Getting started</a>
+            <a href="https://extranet.pedc.ir/pogp/PRD/Lists/Alerts/AllItems.aspx">🔔 Infowise Smart Alert Pro</a>
+        </div>
+    </div>
+</div>
+
+<script>
+// ========== عملکرد آکاردئون سطح اول ==========
+document.querySelectorAll('.accordion-header').forEach(function(header) {
+    header.addEventListener('click', function() {
+        const item = this.parentElement;
+        const isActive = item.classList.contains('active');
+        
+        // بستن همه آیتم‌های سطح اول
+        document.querySelectorAll('.accordion-item').forEach(function(i) {
+            i.classList.remove('active');
+        });
+        
+        // باز کردن آیتم کلیک شده (اگر قبلاً بسته بود)
+        if (!isActive) {
+            item.classList.add('active');
+        }
+    });
+});
+
+// ========== عملکرد آکاردئون سطح دوم (فقط Production Engineering) ==========
+document.querySelectorAll('.sub-accordion-header').forEach(function(subHeader) {
+    subHeader.addEventListener('click', function(e) {
+        e.stopPropagation(); // جلوگیری از بسته شدن آیتم والد
+        
+        const subItem = this.parentElement;
+        const isActive = subItem.classList.contains('active');
+        
+        // بستن همه آیتم‌های سطح دوم در همان بخش Production
+        const parentContent = subItem.closest('.accordion-content');
+        parentContent.querySelectorAll('.sub-accordion-item').forEach(function(i) {
+            i.classList.remove('active');
+        });
+        
+        // باز کردن آیتم کلیک شده (اگر قبلاً بسته بود)
+        if (!isActive) {
+            subItem.classList.add('active');
+        }
+    });
+});
+
+// ========== فعال‌سازی دکمه Edit Page ==========
+document.getElementById('editPageBtn').addEventListener('click', function(e) {
+    e.preventDefault();
+    
+    // روش 1: استفاده از Ribbon API
+    try {
+        if (typeof SP !== 'undefined' && SP.Ribbon) {
+            SP.Ribbon.PageManager.get_instance().get_ribbon().selectTabById('Ribbon.WikiPageTab');
+        }
+    } catch(err) {
+        console.log('Ribbon method failed, trying alternative...');
+    }
+    
+    // روش 2: کلیک مستقیم روی دکمه Edit اصلی SharePoint
+    try {
+        var editButton = document.querySelector('#Ribbon\\.WikiPageTab\\.EditAndCheckout\\.EditPage-Medium, .ms-cui-ctl[id*="EditPage"], a[id*="editpagebtn"]');
+        if (editButton) {
+            editButton.click();
+            return;
+        }
+    } catch(err) {
+        console.log('Direct click failed, trying URL method...');
+    }
+    
+    // روش 3: هدایت به URL ویرایش
+    try {
+        var currentUrl = window.location.href;
+        var baseUrl = currentUrl.split('?')[0];
+        
+        // برای صفحات wiki
+        if (baseUrl.indexOf('.aspx') > -1) {
+            window.location.href = baseUrl + '?ControlMode=Edit&DisplayMode=Design';
+        } else {
+            // برای صفحات مدرن
+            window.location.href = baseUrl + '/_layouts/15/EditForm.aspx?ID=1';
+        }
+    } catch(err) {
+        alert('Unable to edit page. Please use the standard SharePoint edit button.');
+    }
+});
+
+// ========== حذف اتوماتیک Edit Links ==========
+window.addEventListener('load', function() {
+    const editLinks = document.querySelectorAll('a[title="Edit Links"]');
+    editLinks.forEach(function(link) {
+        if (link) link.style.display = 'none';
+    });
+});
+</script>

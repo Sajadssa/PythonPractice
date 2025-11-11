@@ -1,0 +1,421 @@
+
+<style>
+    /* حذف کامل اسکرول لایه بیرونی Workspace */
+#s4-workspace.ms-core-overlay {
+    overflow: hidden !important;
+    height: auto !important;
+}
+
+.pf-main-form {
+    /* وسط‌چین کردن فرم */
+    margin: 20px auto !important;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* استایل اصلی برای Kendo TabStrip Container - فشرده و وسط‌چین */
+.k-widget.k-header.k-tabstrip {
+    background: #ffffff;
+    border: 1px solid #e0e0e0 !important;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    padding: 0;
+    overflow: hidden !important; /* 🎯 حتماً hidden */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    max-width: 800px;
+    width: 100%;
+    height: auto;
+    direction: ltr;
+    position: relative !important;
+}
+
+/* استایل تب‌های بالای فرم - فشرده */
+.k-widget.k-header.k-tabstrip .k-tabstrip-items {
+    background: linear-gradient(135deg, #13a538 0%, #7ebe7d 100%);
+    border: none;
+    padding: 5px 12px 0;
+    margin: 0;
+    display: flex;
+    min-height: 35px;
+}
+
+.k-widget.k-header.k-tabstrip .k-item {
+    background: rgba(255, 255, 255, 0.15);
+    border: none;
+    border-radius: 5px 5px 0 0;
+    margin: 0 2px;
+    transition: all 0.3s ease;
+    color: rgba(255, 255, 255, 0.85);
+    padding: 6px 15px;
+    font-size: 12px;
+    line-height: 1.2;
+}
+
+.k-widget.k-header.k-tabstrip .k-item:hover {
+    background: rgba(255, 255, 255, 0.25);
+    color: white;
+}
+
+.k-widget.k-header.k-tabstrip .k-item.k-state-active {
+    background: white;
+    color: #2c3e50;
+    font-weight: 600;
+    box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.08);
+}
+
+/* محتوای داخل تب - فشرده */
+.k-widget.k-header.k-tabstrip .k-content {
+    background: #fafbfc;
+    border: none;
+    padding: 12px 18px !important;
+    min-height: 500px !important; /* 🎯 فضای کافی برای calendar */
+    height: auto !important;
+    overflow: hidden !important; /* 🎯 حتماً hidden */
+    position: relative !important;
+}
+
+/* 🎯 جدول اصلی - اجازه visible */
+.k-widget.k-header.k-tabstrip .k-content table {
+    position: relative !important;
+    overflow: visible !important;
+}
+
+/* 🎯 TR ها */
+.k-widget.k-header.k-tabstrip .k-content table tbody tr {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 200px;
+    align-items: start; /* 🎯 مهم: start نه center */
+    margin-bottom: 25px;
+    width: 100%;
+    position: relative !important;
+}
+
+/* 🎯 TD سمت راست (label) */
+.k-widget.k-header.k-tabstrip .k-content table tbody td:first-child {
+    text-align: right;
+    font-weight: 500;
+    color: #2c3e50;
+    padding: 0;
+    overflow: visible !important;
+}
+
+/* 🎯 TD سمت چپ (input و calendar) */
+.k-widget.k-header.k-tabstrip .k-content table tbody td:last-child {
+    text-align: left;
+    padding: 0;
+    position: relative !important; /* 🎯 کلیدی */
+    overflow: visible !important; /* 🎯 کلیدی */
+    z-index: 100;
+}
+
+/* ستون اینپوت‌ها - چپ‌چین */
+.k-widget.k-header.k-tabstrip input[type="text"],
+.k-widget.k-header.k-tabstrip input[type="number"],
+.k-widget.k-header.k-tabstrip input[type="date"],
+.k-widget.k-header.k-tabstrip select,
+.k-widget.k-header.k-tabstrip textarea,
+.k-widget.k-header.k-tabstrip .k-textbox,
+.k-widget.k-header.k-tabstrip .k-dropdown,
+.k-widget.k-header.k-tabstrip .k-combobox {
+    text-align: left !important;
+}
+
+/* === 🎯 CALENDAR POSITIONING - کلیدی‌ترین بخش === */
+
+/* Calendar wrapper */
+.k-widget.k-header.k-tabstrip .calendar {
+    position: relative !important;
+    display: block;
+    width: 100%;
+    z-index: 1;
+}
+
+/* Input خود reportDate */
+.k-widget.k-header.k-tabstrip input[name="ReportDate"],
+.k-widget.k-header.k-tabstrip input[id*="reportdate"],
+.k-widget.k-header.k-tabstrip input[id*="ReportDate"],
+.k-widget.k-header.k-tabstrip .calendar input {
+    position: relative !important;
+    z-index: 1;
+    width: 100%;
+}
+
+/* 🎯 Calendar Table - باز شدن دقیقاً زیر input */
+.k-widget.k-header.k-tabstrip .calendar table {
+    position: absolute !important;
+    top: calc(100% + 4px) !important; /* 🎯 دقیقاً زیر input */
+    left: 0 !important;
+    right: auto !important;
+    margin: 0 !important;
+    z-index: 9999 !important;
+    background: white;
+    border: none !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15) !important;
+    border-radius: 8px;
+    width: 320px !important;
+    max-width: 320px !important;
+    display: none;
+}
+
+/* وقتی calendar باز میشه */
+.k-widget.k-header.k-tabstrip .calendar table.k-state-active,
+.k-widget.k-header.k-tabstrip .calendar table[style*="display: block"],
+.k-widget.k-header.k-tabstrip .calendar table[style*="display: table"],
+.k-widget.k-header.k-tabstrip .calendar table.active {
+    display: table !important;
+}
+
+/* 🎯 اگر از Kendo DatePicker استفاده می‌کنی */
+.k-widget.k-header.k-tabstrip .k-datepicker-wrap,
+.k-widget.k-header.k-tabstrip .k-picker-wrap {
+    position: relative !important;
+}
+
+.k-widget.k-header.k-tabstrip .k-animation-container {
+    position: absolute !important;
+    top: calc(100% + 4px) !important;
+    left: 0 !important;
+    right: auto !important;
+    z-index: 9999 !important;
+    max-width: 320px !important;
+}
+
+.k-widget.k-header.k-tabstrip .k-popup {
+    left: 0 !important;
+    right: auto !important;
+}
+
+/* === استایل‌های Calendar === */
+
+/* هدر Calendar */
+.k-widget.k-header.k-tabstrip .calendar table thead {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    color: white !important;
+    border-radius: 8px 8px 0 0;
+}
+
+.k-widget.k-header.k-tabstrip .calendar table thead th {
+    padding: 12px 8px;
+    color: white !important;
+    font-weight: 600;
+    border: none !important;
+    background: transparent !important;
+    text-align: center;
+}
+
+/* بدنه Calendar */
+.k-widget.k-header.k-tabstrip .calendar table tbody {
+    padding: 10px;
+    background: white;
+}
+
+.k-widget.k-header.k-tabstrip .calendar table tbody td {
+    padding: 8px;
+    text-align: center;
+    border: none !important;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    min-width: 36px;
+    height: 36px;
+}
+
+/* Hover روی روزها */
+.k-widget.k-header.k-tabstrip .calendar table tbody td:hover {
+    background: rgba(102, 126, 234, 0.15) !important;
+    color: #667eea !important;
+}
+
+/* روز انتخاب شده */
+.k-widget.k-header.k-tabstrip .calendar table tbody td.selected,
+.k-widget.k-header.k-tabstrip .calendar table tbody td.k-state-selected,
+.k-widget.k-header.k-tabstrip .calendar table tbody td[aria-selected="true"] {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    color: white !important;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.4);
+}
+
+/* روز امروز */
+.k-widget.k-header.k-tabstrip .calendar table tbody td.today,
+.k-widget.k-header.k-tabstrip .calendar table tbody td.k-today {
+    background: rgba(102, 126, 234, 0.1) !important;
+    color: #667eea !important;
+    font-weight: 600;
+    border: 2px solid #667eea;
+}
+
+/* روزهای ماه قبل/بعد */
+.k-widget.k-header.k-tabstrip .calendar table tbody td.other-month,
+.k-widget.k-header.k-tabstrip .calendar table tbody td.k-other-month {
+    opacity: 0.3;
+    color: #999 !important;
+}
+
+/* دکمه‌های ناوبری (ماه قبل/بعد) */
+.k-widget.k-header.k-tabstrip .calendar table thead .k-nav-prev,
+.k-widget.k-header.k-tabstrip .calendar table thead .k-nav-next {
+    background: rgba(255, 255, 255, 0.2) !important;
+    border: none !important;
+    border-radius: 4px;
+    color: white !important;
+    padding: 6px 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    width: 32px;
+    height: 32px;
+}
+
+.k-widget.k-header.k-tabstrip .calendar table thead .k-nav-prev:hover,
+.k-widget.k-header.k-tabstrip .calendar table thead .k-nav-next:hover {
+    background: rgba(255, 255, 255, 0.3) !important;
+}
+
+/* عنوان ماه/سال */
+.k-widget.k-header.k-tabstrip .calendar table thead .k-nav-fast {
+    background: transparent !important;
+    border: none !important;
+    color: white !important;
+    font-weight: 600;
+    font-size: 14px;
+    padding: 6px 12px;
+    cursor: pointer;
+}
+
+.k-widget.k-header.k-tabstrip .calendar table thead .k-nav-fast:hover {
+    background: rgba(255, 255, 255, 0.15) !important;
+    border-radius: 4px;
+}
+
+/* Animation برای باز/بسته شدن */
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.k-widget.k-header.k-tabstrip .calendar table {
+    animation: slideDown 0.2s ease;
+}
+
+/* فوتر Calendar (اگه دکمه امروز داره) */
+.k-widget.k-header.k-tabstrip .calendar table tfoot {
+    background: #f8f9fa;
+    border-top: 1px solid #e9ecef;
+    border-radius: 0 0 8px 8px;
+}
+
+.k-widget.k-header.k-tabstrip .calendar table tfoot td {
+    padding: 10px;
+    text-align: center;
+}
+
+.k-widget.k-header.k-tabstrip .calendar table .k-today-button,
+.k-widget.k-header.k-tabstrip .calendar table .k-nav-today,
+.k-widget.k-header.k-tabstrip .calendar table tfoot button {
+    background: transparent !important;
+    border: 2px solid #667eea !important;
+    color: #667eea !important;
+    padding: 6px 16px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.k-widget.k-header.k-tabstrip .calendar table .k-today-button:hover,
+.k-widget.k-header.k-tabstrip .calendar table .k-nav-today:hover,
+.k-widget.k-header.k-tabstrip .calendar table tfoot button:hover {
+    background: #667eea !important;
+    color: white !important;
+}
+
+/* استایل دکمه‌ها با گرادیانت زیبا */
+.k-widget.k-header.k-tabstrip button,
+.k-widget.k-header.k-tabstrip .k-button,
+.k-widget.k-header.k-tabstrip input[type="submit"],
+.k-widget.k-header.k-tabstrip input[type="button"] {
+    background: linear-gradient(135deg, #13a538 0%, #7ebe7d 100%);
+    border: none;
+    color: white;
+    padding: 8px 20px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(19, 165, 56, 0.3);
+}
+
+.k-widget.k-header.k-tabstrip button:hover,
+.k-widget.k-header.k-tabstrip .k-button:hover,
+.k-widget.k-header.k-tabstrip input[type="submit"]:hover,
+.k-widget.k-header.k-tabstrip input[type="button"]:hover {
+    background: linear-gradient(135deg, #f7a600 0%, #d0bf72 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(247, 166, 0, 0.4);
+}
+
+.k-widget.k-header.k-tabstrip button:active,
+.k-widget.k-header.k-tabstrip .k-button:active,
+.k-widget.k-header.k-tabstrip input[type="submit"]:active,
+.k-widget.k-header.k-tabstrip input[type="button"]:active {
+    transform: translateY(0);
+    box-shadow: 0 1px 4px rgba(19, 165, 56, 0.3);
+}
+
+/* دکمه ثانویه (اختیاری) */
+.k-widget.k-header.k-tabstrip button.secondary,
+.k-widget.k-header.k-tabstrip .k-button.secondary {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    box-shadow: 0 2px 8px rgba(240, 147, 251, 0.3);
+}
+
+.k-widget.k-header.k-tabstrip button.secondary:hover,
+.k-widget.k-header.k-tabstrip .k-button.secondary:hover {
+    background: linear-gradient(135deg, #e082ea 0%, #e4465b 100%);
+    box-shadow: 0 4px 12px rgba(240, 147, 251, 0.4);
+}
+
+/* دکمه موفقیت (Success) */
+.k-widget.k-header.k-tabstrip button.success,
+.k-widget.k-header.k-tabstrip .k-button.success {
+    background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+    box-shadow: 0 2px 8px rgba(17, 153, 142, 0.3);
+}
+
+.k-widget.k-header.k-tabstrip button.success:hover,
+.k-widget.k-header.k-tabstrip .k-button.success:hover {
+    background: linear-gradient(135deg, #0f887d 0%, #2fde6c 100%);
+    box-shadow: 0 4px 12px rgba(17, 153, 142, 0.4);
+}
+
+/* دکمه خطر (Danger) */
+.k-widget.k-header.k-tabstrip button.danger,
+.k-widget.k-header.k-tabstrip .k-button.danger {
+    background: linear-gradient(135deg, #ee0979 0%, #ff6a00 100%);
+    box-shadow: 0 2px 8px rgba(238, 9, 121, 0.3);
+}
+
+.k-widget.k-header.k-tabstrip button.danger:hover,
+.k-widget.k-header.k-tabstrip .k-button.danger:hover {
+    background: linear-gradient(135deg, #dd0868 0%, #ee5900 100%);
+    box-shadow: 0 4px 12px rgba(238, 9, 121, 0.4);
+}
+
+/* Responsive - برای موبایل */
+@media (max-width: 768px) {
+    .k-widget.k-header.k-tabstrip {
+        max-width: 95%;
+        margin: 10px auto !important;
+    }
+}
+
+</style>

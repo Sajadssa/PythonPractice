@@ -1,0 +1,61 @@
+{
+  "name": "Vazir Persian Theme",
+  "dataColors": [
+    "#22c55e",
+    "#3b82f6",
+    "#eab308",
+    "#ef4444",
+    "#8b5cf6",
+    "#ec4899"
+  ],
+  "background": "#ffffff",
+  "foreground": "#1e293b",
+  "tableAccent": "#3b82f6",
+  "visualStyles": {
+    "*": {
+      "*": {
+        "title": [
+          {
+            "fontFamily": "Vazir",
+            "fontSize": 14,
+            "color": { "solid": { "color": "#1e293b" } }
+          }
+        ],
+        "categoryLabels": [
+          {
+            "fontFamily": "Vazir",
+            "fontSize": 12
+          }
+        ],
+        "labels": [
+          {
+            "fontFamily": "Vazir",
+            "fontSize": 11
+          }
+        ],
+        "values": [
+          {
+            "fontFamily": "Vazir",
+            "fontSize": 11
+          }
+        ]
+      }
+    },
+    "card": {
+      "*": {
+        "categoryLabels": [
+          {
+            "fontFamily": "Vazir",
+            "fontSize": 32
+          }
+        ],
+        "labels": [
+          {
+            "fontFamily": "Vazir",
+            "fontSize": 14
+          }
+        ]
+      }
+    }
+  }
+}

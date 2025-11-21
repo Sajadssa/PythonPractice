@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سجاد سعیدی آزاد - رزومه</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Vazirmatn', 'Tahoma', sans-serif;
+            line-height: 1.4;
+            color: #000;
+            font-size: 10pt;
+            background: #f5f5f5;
+            padding: 15px;
+            direction: rtl;
+        }
+        
+        .print-banner {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            background: linear-gradient(135deg, #1e3d6b 0%, #2c5aa0 100%);
+            color: white;
+            padding: 12px 20px;
+            text-align: center;
+            font-size: 12pt;
+            font-weight: 600;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            z-index: 1000;
+        }
+        
+        .print-banner .keys {
+            background: rgba(255,255,255,0.2);
+            padding: 4px 12px;
+            border-radius: 4px;
+            display: inline-block;
+            margin: 0 5px;
+            font-family: monospace;
+        }
+        
+        .container {
+            max-width: 8.5in;
+            margin: 60px auto 20px;
+            background: white;
+            padding: 0.45in;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            margin-top:-5px;
+        }
+        
+        .header {
+            text-align: center;
+            border-bottom: 2px solid #1e3d6b;
+            padding-bottom: 8px;
+            margin-bottom: 12px;
+        }
+        
+        h1 {
+            font-size: 20pt;
+            font-weight: 700;
+            color: #1e3d6b;
+            margin-bottom: 2px;
+        }
+        
+        .title {
+            font-size: 11pt;
+            color: #555;
+            font-weight: 500;
+            margin-bottom: 6px;
+        }
+        
+        .contact-info {
+            font-size: 8.5pt;
+            color: #333;
+            line-height: 1.5;
+        }
+        
+        .contact-info a {
+            color: #1e3d6b;
+            text-decoration: none;
+        }
+        
+        h2 {
+            font-size: 11pt;
+            font-weight: 700;
+            color: #1e3d6b;
+            border-bottom: 1.5px solid #1e3d6b;
+            padding-bottom: 2px;
+            margin-top: 10px;
+            margin-bottom: 5px;
+        }
+        
+        h3 {
+            font-size: 10pt;
+            font-weight: 600;
+            color: #000;
+            margin-top: 4px;
+            margin-bottom: 1px;
+        }
+        
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 1px;
+        }
+        
+        .job-date {
+            font-size: 8.5pt;
+            color: #555;
+            font-style: italic;
+        }
+        
+        .company {
+            font-size: 9pt;
+            color: #555;
+            font-style: italic;
+            margin-bottom: 2px;
+        }
+        
+        ul {
+            margin: 2px 15px 5px 0;
+            padding: 0;
+        }
+        
+        li {
+            margin: 1px 0;
+            line-height: 1.3;
+            font-size: 9pt;
+        }
+        
+        p {
+            margin: 2px 0;
+            line-height: 1.3;
+            font-size: 9pt;
+        }
+        
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3px 8px;
+            margin: 4px 0;
+            font-size: 8.5pt;
+        }
+        
+        .skills-grid div { line-height: 1.25; }
+        
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin: 4px 0;
+        }
+        
+        .project-item { margin-bottom: 6px; }
+        
+        .project-title {
+            font-weight: 600;
+            font-size: 9pt;
+            color: #1e3d6b;
+        }
+        
+        .project-desc {
+            font-size: 8.5pt;
+            margin: 1px 0;
+        }
+        
+        .project-link {
+            font-size: 8pt;
+            color: #1e3d6b;
+            text-decoration: none;
+            direction: ltr;
+            display: inline-block;
+        }
+        
+        strong { font-weight: 600; }
+        .ltr { direction: ltr; display: inline-block; }
+        
+        @media print {
+            body { padding: 0; background: white; }
+            .container {
+                margin: 0;
+                padding: 0.4in;
+                box-shadow: none;
+                max-width: 100%;
+            }
+            .print-banner { display: none !important; }
+        }
+    </style>
+</head>
+<body>
+    <div class="print-banner">
+        📄 برای ذخیره PDF: <span class="keys">Ctrl + P</span> یا <span class="keys">⌘ + P</span> سپس "Save as PDF" را انتخاب کنید
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <h1>سجاد سعیدی آزاد</h1>
+            <div class="title">کارشناس ارشد پایگاه داده | تحلیلگر داده | توسعه‌دهنده فول‌استک</div>
+            <div class="contact-info">
+                📧 <a href="mailto:sajadsaeediazad0007@gmail.com">sajadsaeediazad0007@gmail.com</a> | 
+                📱 <span class="ltr">+98-991-754-0483</span> | 
+                🌐 <a href="https://sajadssa.vercel.app">sajadssa.vercel.app</a> |
+                💼 <a href="https://linkedin.com/in/sajad-saeedi-azad-2085b9102">LinkedIn</a> | 
+                🔗 <a href="https://github.com/Sajadssa">GitHub</a><br>
+                📍 ایذه، خوزستان، ایران | تاریخ تولد: ۱۳۶۷/۰۶/۲۰ | متأهل | پایان خدمت
+            </div>
+        </div>
+
+        <h2>خلاصه پروفایل</h2>
+        <p>کارشناس ارشد پایگاه داده و برنامه‌نویسی با <strong>۱۱+ سال تجربه</strong> در پروژه‌های EPC نفت و گاز (ساخت، نصب، راه‌اندازی و بهره‌برداری). تخصص در طراحی سیستم‌های WJCS/QBASE، پایگاه داده‌های کنترل کیفیت چند رشته‌ای (Piping، Mechanical، Structural، E&I، Painting) با Access/SQL Server. مسلط به استانداردهای ASME، IPS و مستندات ITP. توانمندی در توسعه فول‌استک (C#، Node.js، React، Next.js)، تحلیل داده با Power BI/Python، توسعه SharePoint و اتوماسیون با n8n/Docker.</p>
+
+        <h2>مهارت‌های فنی</h2>
+        <div class="skills-grid">
+            <div>• SQL Server، MySQL، MongoDB</div>
+            <div>• Microsoft Access، Oracle</div>
+            <div>• C#، .NET، PHP، Node.js</div>
+            <div>• React.js، Next.js، TypeScript</div>
+            <div>• HTML، CSS، JavaScript</div>
+            <div>• TailwindCSS، Bootstrap</div>
+            <div>• Python (NumPy، Pandas، Matplotlib)</div>
+            <div>• Power BI، DAX، Power Query</div>
+            <div>• Figma، Photoshop، Canva</div>
+            <div>• WordPress، SharePoint، Power Apps</div>
+            <div>• Docker، n8n، Git/GitHub</div>
+            <div>• Primavera P6، MS Project</div>
+            <div>• WJCS، NDT، PWHT، ITP، ICAPS</div>
+            <div>• ASME B31.3، IPS، API</div>
+            <div>• AI Prompt Engineering</div>
+        </div>
+
+        <h2>سوابق شغلی</h2>
+
+        <div class="job-header">
+            <h3>کارشناس کنترل اسناد و تحلیل داده</h3>
+            <span class="job-date">مرداد ۱۴۰۳ - اکنون</span>
+        </div>
+        <p class="company">شرکت بهره‌برداری نفت و گاز سپهر پاسارگاد، اهواز</p>
+        <ul>
+            <li>طراحی و پیاده‌سازی <strong>سیستم مدیریت اسناد سازمانی (EDMS)</strong> در بستر SharePoint با یکپارچه‌سازی Power Automate برای گردش کار مستندات</li>
+            <li>توسعه <strong>۵+ داشبورد تحلیلی Power BI</strong> در حوزه‌های تولید، تعمیرات و نگهداری، بازرسی‌ها و HSE با اتصال به SQL Server</li>
+            <li>طراحی نرم‌افزار <strong>IDMS (Inspection Data Management System)</strong> برای مانیتورینگ خوردگی، برنامه‌ریزی بازرسی‌ها و Predictive Maintenance</li>
+            <li>پیاده‌سازی اتوماسیون فرآیندها با <strong>n8n</strong> و کاهش ۶۰٪ ورود دستی اطلاعات</li>
+        </ul>
+
+        <div class="job-header">
+            <h3>کارشناس برنامه‌ریزی تعمیرات</h3>
+            <span class="job-date">فروردین ۱۴۰۳ - مرداد ۱۴۰۳</span>
+        </div>
+        <p class="company">شرکت مخازن سبز عسلویه (APGT)، عسلویه</p>
+        <ul>
+            <li>کار با سیستم <strong>CMMS پارسه</strong> برای مدیریت تعمیرات و نگهداری تجهیزات صنعتی</li>
+            <li>تعریف <strong>ساختار شکست تجهیزات (Equipment Breakdown Structure)</strong> و ثبت Asset Hierarchy در سیستم</li>
+            <li>برنامه‌ریزی <strong>PM (Preventive Maintenance)</strong> و <strong>CM (Corrective Maintenance)</strong>، صدور و پیگیری Work Orders</li>
+        </ul>
+
+        <div class="job-header">
+            <h3>کارشناس ارشد پایگاه داده</h3>
+            <span class="job-date">خرداد ۱۴۰۲ - اسفند ۱۴۰۲</span>
+        </div>
+        <p class="company">شرکت نارگان - پروژه پتروشیمی دهلران، ایلام</p>
+        <ul>
+            <li>طراحی و توسعه <strong>پایگاه داده جامع QC</strong> بر پلتفرم Access/SQL Server برای ۷ رشته (Piping، Structure، Mechanical، Civil، E&I، Painting، Insulation)</li>
+            <li>مدیریت کامل <strong>WJCS</strong>: ثبت Weld Map، کنترل WPS/PQR، ردیابی Welder Qualification، محاسبه Repair Rate و تهیه Joint History</li>
+            <li>پیاده‌سازی سیستم <strong>Material Traceability</strong> و کنترل Heat Number برای مواد P1 تا P11</li>
+            <li>طراحی گزارشات <strong>ITP-Based</strong> برای تمامی Hold Points و Witness Points با قابلیت خروجی PDF</li>
+            <li>ارائه <strong>Daily/Weekly Progress Reports</strong> و تحلیل Performance Metrics برای مدیریت پروژه</li>
+        </ul>
+
+        <div class="job-header">
+            <h3>کارشناس ارشد پایگاه داده</h3>
+            <span class="job-date">آبان ۱۳۹۸ - خرداد ۱۴۰۲</span>
+        </div>
+        <p class="company">شرکت توسعه صنایع نفت و انرژی (OEID) - پروژه توسعه میدان نفتی منصوری، اهواز</p>
+        <ul>
+            <li>طراحی <strong>سیستم یکپارچه QC/Technical Office</strong> با پشتیبانی از Multi-Discipline Operations و ۵۰+ کاربر همزمان</li>
+            <li>مدیریت <strong>Test Package Documentation</strong>: ایجاد Package، Punch List Management، Turnover Documentation</li>
+            <li>کنترل <strong>NDT Operations</strong>: برنامه‌ریزی RT/UT/PT/MT، ردیابی Film Interpretation، مدیریت Repair و Re-examination</li>
+            <li>توسعه <strong>داشبوردهای Power BI</strong> با KPIs شامل: Welding Progress، NDT Acceptance Rate، Punch Closure Trend</li>
+            <li>کنترل مالی پیمانکاران: تهیه <strong>IPC (Interim Payment Certificate)</strong> برای Piping و NDT  </li>
+        </ul>
+
+        <div class="job-header">
+            <h3>کارشناس پایگاه داده</h3>
+            <span class="job-date">اسفند ۱۳۹۶ - آبان ۱۳۹۸</span>
+        </div>
+        <p class="company">شرکت مهندسی جهان‌پارس - پروژه توسعه میدان نفتی آذر، مهران، ایلام</p>
+        <ul>
+            <li>توسعه پایگاه داده <strong>QC/WJCS</strong> با یکپارچه‌سازی نرم‌افزار <strong>DORSA</strong> برای ثبت روزانه Fit-up/Welding</li>
+            <li>مدیریت <strong>ICAPS Compliance</strong>: ثبت ITR، کنترل As-Built، تهیه مستندات Mechanical Completion</li>
+            <li>پیاده‌سازی سیستم <strong>PWHT Tracking</strong>: ثبت Chart، کنترل Heating/Cooling Rate، تأیید Hardness Test Results</li>
+            <li>تهیه <strong>Backlog Reports</strong> و تحلیل Critical Path برای Piping/NDT/PWHT Operations</li>
+        </ul>
+
+        <div class="job-header">
+            <h3>کارشناس پایگاه داده</h3>
+            <span class="job-date">تیر ۱۳۹۵ - آذر ۱۳۹۶</span>
+        </div>
+        <p class="company">شرکت آذران گستر پارس - فازهای ۲۲-۲۴ پارس جنوبی، کنگان</p>
+        <ul>
+            <li>طراحی <strong>Piping QC Database</strong> با قابلیت Welder Performance Tracking و محاسبه اتوماتیک Repair Percentage</li>
+            <li>مدیریت <strong>Isometric Tracking</strong>: کنترل Spool Status، Fit-up/Weld/NDT Progress per Isometric</li>
+            <li>تهیه گزارشات <strong>Welder Qualification Matrix</strong> و کنترل انقضای گواهینامه‌ها طبق ASME Section IX</li>
+        </ul>
+
+        <div class="job-header">
+            <h3>کارشناس WJCS</h3>
+            <span class="job-date">مهر ۱۳۹۶ - اسفند ۱۳۹۶</span>
+        </div>
+        <p class="company">شرکت مهندسی احداث - فاز ۱۴ پارس جنوبی، کنگان</p>
+        <ul>
+            <li>طراحی سیستم <strong>Weld Joint Control</strong> و ثبت Daily Welding Reports در نرم‌افزار DORSA</li>
+        </ul>
+
+        <div class="job-header">
+            <h3>کارشناس پایگاه داده</h3>
+            <span class="job-date">اردیبهشت ۱۳۹۵ - مهر ۱۳۹۵</span>
+        </div>
+        <p class="company">شرکت مهندسی احداث - فازهای ۲۰-۲۱ پارس جنوبی، عسلویه</p>
+        <ul>
+            <li>یکپارچه‌سازی پایگاه داده با <strong>سیستم Oracle شرکت OIEC</strong> برای Data Exchange و Reporting</li>
+            <li>کنترل <strong>Contractor Progress Measurement</strong> در بخش‌های Piping، NDT و PWHT</li>
+        </ul>
+
+        <div class="job-header">
+            <h3>کارشناس دفتر فنی Piping</h3>
+            <span class="job-date">مهر ۱۳۹۴ - بهمن ۱۳۹۴</span>
+        </div>
+        <p class="company">شرکت لیدوما - فازهای ۲۰-۲۱ پارس جنوبی، عسلویه</p>
+        <ul>
+            <li>طراحی پایگاه داده برای <strong>Pre-Commissioning/Commissioning Phase</strong> شامل Loop Check و Function Test Tracking</li>
+        </ul>
+
+        <div class="job-header">
+            <h3>کارشناس WJCS</h3>
+            <span class="job-date">اردیبهشت ۱۳۹۴ - مهر ۱۳۹۴</span>
+        </div>
+        <p class="company">شرکت جهان‌پارس - میدان نفتی آزادگان، شادگان</p>
+
+        <div class="job-header">
+            <h3>کارشناس دفتر فنی Piping</h3>
+            <span class="job-date">بهمن ۱۳۹۳ - اردیبهشت ۱۳۹۴</span>
+        </div>
+        <p class="company">شرکت مپنا بلوئر - فاز ۱۴ پارس جنوبی، کنگان</p>
+        <ul>
+            <li>تهیه <strong>MTO (Material Take-Off)</strong> و صدور <strong>MIV/MRV</strong> برای کنترل مواد</li>
+            <li>ارائه گزارشات <strong>Project Control</strong> شامل S-Curve و Progress Measurement</li>
+        </ul>
+
+        <div class="job-header">
+            <h3>کارشناس دفتر فنی و QC</h3>
+            <span class="job-date">شهریور ۱۳۹۳ - بهمن ۱۳۹۳</span>
+        </div>
+        <p class="company">شرکت IGC - فازهای ۱۷-۱۸ پارس جنوبی، عسلویه</p>
+
+        <div class="job-header">
+            <h3>کارشناس PLC (کارآموزی)</h3>
+            <span class="job-date">خرداد ۱۳۸۹ - شهریور ۱۳۸۹</span>
+        </div>
+        <p class="company">شرکت صنایع ابزار دقیق اصفهان</p>
+        <ul>
+            <li>برنامه‌نویسی PLC با <strong>Siemens S7</strong> و نرم‌افزار Simatic Manager</li>
+        </ul>
+
+        <h2>تحصیلات</h2>
+        <div class="job-header">
+            <h3>کارشناسی مهندسی برق - الکترونیک</h3>
+            <span class="job-date">۱۳۸۷ - ۱۳۹۲</span>
+        </div>
+        <p class="company">دانشگاه صنعتی اصفهان ،شعبه جهاد دانشگاهی اصفهان</p>
+
+        <h2>گواهینامه‌ها</h2>
+        <ul>
+            <li><strong>UI/UX Design</strong> - آژانس ملینا (۱۴۰۳)</li>
+            <li><strong>Back-End Development</strong> - آکادمی بوتواستارت (۱۴۰۲) - Node.js، TypeScript، Next.js | <a href="https://botostart.ir" target="_blank" class="ltr">botostart.ir</a></li>
+            <li><strong>Front-End Development</strong> - آکادمی فرانت‌هوکس (۱۴۰۱) - React.js، Git | <a href="https://fronthooks.ir" target="_blank" class="ltr">fronthooks.ir</a></li>
+            <li><strong>Full-Stack Developer</strong> - آکادمی مدحج (۱۳۹۹)</li>
+            <li><strong>PLC Programming</strong> - دانشگاه مهاجر اصفهان (۱۳۸۹)</li>
+        </ul>
+
+        <h2>پروژه‌های کلیدی</h2>
+        <div class="two-column">
+            <div class="project-item">
+                <div class="project-title">سیستم خرید بلیط قطار (Full-Stack)</div>
+                <p class="project-desc">پلتفرم E-Ticketing با کیف پول دیجیتال، PDF Generation. PHP، MySQL، JS.</p>
+                <a href="https://github.com/Sajadssa/online_ticket_purchase" target="_blank" class="project-link">github.com/Sajadssa/online_ticket_purchase</a>
+            </div>
+            <div class="project-item">
+                <div class="project-title">نرم‌افزار کلینیک پزشکی (MCIS)</div>
+                <p class="project-desc">سیستم نوبت‌دهی با Dashboard و گزارشات آماری. C#، SQL Server.</p>
+                <a href="https://github.com/Sajadssa/Intelligent-Patient-Admission-Management-System" target="_blank" class="project-link">github.com/Sajadssa/Intelligent-Patient-Admission</a>
+            </div>
+        </div>
+        <div class="two-column">
+            <div class="project-item">
+                <div class="project-title">پورتفولیو شخصی</div>
+                <p class="project-desc">React.js، TailwindCSS، Vite، Vercel.</p>
+                <a href="https://sajadssa.vercel.app" target="_blank" class="project-link">sajadssa.vercel.app</a>
+            </div>
+            <div class="project-item">
+                <div class="project-title">داشبورد HSE و تعمیرات</div>
+                <p class="project-desc">Power BI Dashboards برای شرکت سپهر پاسارگاد.</p>
+            </div>
+        </div>
+
+        <h2>افتخارات</h2>
+        <p>🥇 <strong>رتبه اول</strong> المپیاد کامپیوتر شهرستان ایذه (۱۳۸۴) | 🏅 <strong>رتبه چهارم</strong> المپیاد کامپیوتر استان خوزستان (۱۳۸۴)</p>
+
+        <h2>زبان‌ها</h2>
+        <p><strong>انگلیسی:</strong> تسلط حرفه‌ای (خواندن، نوشتن، مکالمه) | <strong>فارسی:</strong> زبان مادری</p>
+    </div>
+</body>
+</html>

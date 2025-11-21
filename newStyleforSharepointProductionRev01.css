@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+/* ========================================
+   MODERN SHAREPOINT STYLING - LEFT SIDEBAR (LIGHT MODE + GLASSY & MINIMAL)
+   ======================================== */
+/* 1. مخفی کردن المان‌های غیرضروری */
+#suiteLinksBox,
+a[title="Edit Links"],
+.ms-promotedActionButton-button[title="Edit Links"],
+.ms-breadcrumb-anchor,
+#DeltaPlaceHolderSearchArea,
+.ms-mpSearchBox,
+.ms-breadcrumb-top {
+    display: none !important;
+}
+/* نوار Suite Bar (نوار سیاه) را نگه می‌داریم اما در اسکریپت مدیریت می‌کنیم */
+#suiteBar {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    height: 35px !important;
+    background: #000 !important;
+    z-index: 1001 !important;
+    padding: 0 20px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+}
+#suiteBarRight {
+    display: flex !important;
+    align-items: center !important;
+    gap: 15px !important;
+}
+/* استایل متن نام کاربر */
+#suiteBar .ms-core-suiteLink-a,
+#suiteBar a {
+    color: #fff !important;
+    font-size: 13px !important;
+    padding: 5px 10px !important;
+    text-decoration: none !important;
+}
+#suiteBar .ms-core-suiteLink-a:hover,
+#suiteBar a:hover {
+    background: rgba(255,255,255,0.1) !important;
+    border-radius: 4px !important;
+}
+/* 2. تنظیمات کلی صفحه - حالت روشن با بک‌گراند شیشه‌ای کامل */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #F9F9F4;
+    color: #2d3748;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+}
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background:#F9F9F4 ;
+    backdrop-filter: blur(12px);
+    z-index: -1;
+    opacity: 0.9;
+}
+#s4-workspace {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+    background: transparent !important;
+}
+/* 3. هدر مدرن سفارشی - حالت روشن شیشه‌ای مینیمال با بک‌گراند متمایز (گرادیان آبی) */
+.customModernHeader {
+    position: fixed;
+    top: 0;
+    left: 260px;
+    right: 0;
+    height: 50px;
+    backdrop-filter: blur(15px);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 25px;
+    transition: box-shadow 0.3s ease;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    background: rgba(240,248,255,0.8);
+    border: 1px solid rgba(59,130,246,0.3);
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(59,130,246,0.1);
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+}
+.customModernHeader:hover {
+    box-shadow: 0 4px 15px rgba(0,0,0,0.12);
+}
+.customModernHeader .logo-section {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+.customModernHeader .logo-section h1 {
+    color: #1E3C72;
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0;
+}
+/* Search Box در هدر - مینیمال */
+.header-search {
+    flex: 1;
+    max-width: 400px;
+    margin: 0 20px;
+}
+.header-search input {
+    width: 100%;
+    padding: 8px 15px;
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.2);
+    color: #1E3C72;
+    font-size: 13px;
+    outline: none;
+    transition: all 0.3s ease;  
+     border: 1px solid rgba(85, 65, 65, 0.3);
+}
+.header-search input::placeholder {
+    color: rgba(66, 58, 58, 0.7);
+}
+.header-search input:focus {
+    background: rgba(255, 255, 255, 0.3);
+    border-color: rgba(48, 45, 45, 0.5);
+    box-shadow: 0 0 0 2px rgba(255,255,255,0.1);
+}
+.customModernHeader .nav-buttons {
+    display: flex;
+    gap: 8px;
+}
+.customModernHeader .nav-btn {
+    padding: 6px 16px;
+    background: rgba(255,255,255,0.2);
+    color: #1E3C72;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(85, 65, 65, 0.3);
+}
+.customModernHeader .nav-btn:hover {
+    background: hsla(238, 49%, 72%, 0.3);
+    color: #1E3C72;
+}
+/* بخش جدید برای اطلاعات کاربر از suiteBar - مینیمال */
+.customModernHeader .user-section {
+    display: flex !important;
+    align-items: center !important;
+    gap: 15px !important;
+}
+.customModernHeader .user-section .ms-core-suiteLink-a,
+.customModernHeader .user-section a {
+    color: #1E3C72 !important;
+    font-size: 13px !important;
+    padding: 5px 10px !important;
+    text-decoration: none !important;
+    transition: all 0.3s ease;
+}
+.customModernHeader .user-section .ms-core-suiteLink-a:hover,
+.customModernHeader .user-section a:hover {
+    background: rgba(255,255,255,0.3) !important;
+    border-radius: 4px !important;
+}
+/* 4. بهبود Ribbon - حالت روشن مینیمال */
+#s4-ribbonrow {
+    background: rgba(255,255,255,0.9) !important;
+    border-bottom: 1px solid rgba(0,0,0,0.1) !important;
+    margin-left: 0 !important;
+    color: #1E3C72 !important;
+    backdrop-filter: blur(10px);
+}
+/* 5. سایدبار چپ - حالت روشن شیشه‌ای مینیمال */
+.modernSidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 260px;
+    height: 100vh;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(15px);
+    box-shadow: 2px 0 10px rgba(0,0,0,0.08);
+    overflow-y: auto;
+    z-index: 1000;
+    padding: 20px 0;
+    transition: box-shadow 0.3s ease;
+    border-right: 1px solid rgba(0,0,0,0.05);
+}
+.modernSidebar:hover {
+    box-shadow: 2px 0 15px rgba(0,0,0,0.12);
+}
+.modernSidebar::-webkit-scrollbar {
+    width: 5px;
+}
+.modernSidebar::-webkit-scrollbar-track {
+    background: rgba(240,248,255,0.8);
+}
+.modernSidebar::-webkit-scrollbar-thumb {
+    background: #a0aec0;
+    border-radius: 3px;
+}
+/* آیتم‌های آکاردئون - مینیمال */
+.accordion-item {
+    margin: 0 12px 8px;
+    border-radius: 8px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.5);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0,0,0,0.05);
+}
+.accordion-item:hover {
+    background: rgba(255, 255, 255, 0.7);
+}
+.accordion-header {
+    padding: 12px 16px;
+    background: rgba(30,60,114,0.1);
+    color: #1e3c72;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+    font-size: 13px;
+    user-select: none;
+    transition: background 0.3s ease;
+}
+.accordion-header:hover {
+    background: rgba(30,60,114,0.2);
+}
+.accordion-header .arrow {
+    margin-left: auto;
+    transition: transform 0.3s ease;
+}
+.accordion-item.active .accordion-header .arrow {
+    transform: rotate(180deg);
+}
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    padding: 0 16px;
+    background: rgba(255, 255, 255, 0.6);
+    transition: max-height 0.5s ease, padding 0.5s ease;
+}
+.accordion-item.active .accordion-content {
+    max-height: 1000px;
+    padding: 10px 16px;
+}
+.accordion-content a {
+    display: block;
+    padding: 8px 12px;
+    margin: 4px 0;
+    color: #2d3748;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    font-size: 12px;
+}
+.accordion-content a:hover {
+    background: rgba(30,60,114,0.1);
+    padding-left: 16px;
+    color: #1e3c72;
+}
+/* آکاردئون سطح دوم - مینیمال */
+.sub-accordion-item {
+    margin: 6px 0;
+    border-radius: 6px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.4);
+    transition: all 0.3s ease;
+}
+.sub-accordion-item:hover {
+    background: rgba(255, 255, 255, 0.6);
+}
+.sub-accordion-header {
+    padding: 10px 12px;
+    background: rgba(30,60,114,0.08);
+    color: #2d3748;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 500;
+    font-size: 12px;
+    border-left: 3px solid transparent;
+    transition: all 0.3s ease;
+}
+.sub-accordion-header:hover {
+    background: rgba(30,60,114,0.15);
+    border-left-color: #1e3c72;
+}
+.sub-accordion-header .sub-arrow {
+    margin-left: auto;
+    transition: transform 0.3s ease;
+}
+.sub-accordion-item.active .sub-accordion-header {
+    background: rgba(30,60,114,0.2);
+    border-left-color: #1e3c72;
+}
+.sub-accordion-item.active .sub-accordion-header .sub-arrow {
+    transform: rotate(180deg);
+}
+.sub-accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    padding: 0 12px 0 28px;
+    background: rgba(255, 255, 255, 0.5);
+    transition: max-height 0.5s ease, padding 0.5s ease;
+}
+.sub-accordion-item.active .sub-accordion-content {
+    max-height: 800px;
+    padding: 8px 12px 8px 28px;
+}
+.sub-accordion-content a {
+    display: block;
+    padding: 6px 10px;
+    margin: 3px 0;
+    color: #4a5568;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 12px;
+    border-left: 2px solid transparent;
+    transition: all 0.3s ease;
+    font-weight: bold;
+    text-align: left;
+}
+.sub-accordion-content a:hover {
+    background: rgba(30,60,114,0.08);
+    padding-left: 14px;
+    color: #1e3c72;
+    border-left-color: #1e3c72;
+}
+.sub-item-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 12px;
+    margin: 6px 0;
+    color: #1e3c72;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 500;
+    border-top: 1px solid rgba(30,60,114,0.1);
+    transition: all 0.3s ease;
+}
+.sub-item-link:hover {
+    background: rgba(30,60,114,0.1);
+}
+#contentBox {
+    margin-left: 280px !important;
+    padding: 20px !important;
+    background: transparent !important;
+    color: #2d3748;
+}
+/* استایل ویژه برای گزینه New - بدون آکاردئون، بالاترین آیتم */
+.new-direct-link {
+    display: flex !important;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 16px;
+    margin: 0 12px 16px;
+    color: #1e40af !important;
+    text-decoration: none;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 700;
+    background: rgba(59,130,246,0.15);
+    border: 1px solid rgba(59,130,246,0.3);
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(59,130,246,0.1);
+}
+.new-direct-link:hover {
+    background: rgba(59,130,246,0.25);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(59,130,246,0.2);
+    color: #1e3a8a !important;
+}
+.new-direct-link .new-badge {
+    background: #3b82f6;
+    color: white;
+    font-size: 10px;
+    padding: 2px 6px;
+    border-radius: 12px;
+    font-weight: 600;
+}
+
+/* مخفی کردن لینک/صفحه Recent در SharePoint Navigation */
+#DeltaTopNavigation a[href*="/Recent.aspx"],
+.ms-core-listMenu-item a[href*="Recent"],
+.ms-breadcrumb-box a[href*="Recent"],
+.ms-GlobalNav a[href*="Recent"],
+li[id*="Recent"],
+a[title*="Recent"] {
+    display: none !important;
+}
+
+/* اگر در Quick Launch هست */
+.ms-core-sideNavBox-removeLeftMargin a[href*="Recent"] {
+    display: none !important;
+}
+
+/* اگر در Top Navigation هست */
+.ms-core-listMenu-horizontalBox a[href*="Recent"] {
+    display: none !important;
+}
+
+#sideNavBox{
+    display:none;
+}
+
+</style>
+</head>
+<body>
+<!-- هدر -->
+<div class="customModernHeader">
+    <div class="logo-section">
+        <h1>Production Dashboard</h1>
+    </div>
+   
+    <!-- Search Box -->
+    <div class="header-search">
+        <input type="text" placeholder="Search this site..." id="headerSearchInput">
+    </div>
+   
+    <div class="nav-buttons">
+        <a href="https://extranet.pedc.ir/pogp/PRD/SitePages/خانه.aspx" class="nav-btn">Production</a>
+        <a href="https://extranet.pedc.ir/pogp/PRD/Lists/Maintenances/AllItems.aspx" class="nav-btn">Maintenance</a>
+    </div>
+</div>
+
+<!-- سایدبار -->
+<div class="modernSidebar">
+   
+    <!-- گزینه New - مستقیم و بدون آکاردئون، بالاترین آیتم -->
+    <a href="https://extranet.pedc.ir/pogp/Portal/Lists/DocumentEnteryList/NewForm.aspx" class="new-direct-link" target="_blank">
+        <span>New Document</span>
+        <span class="new-badge">NEW</span>
+    </a>
+
+    <!-- Dashboard -->
+    <div class="accordion-item">
+        <div class="accordion-header">
+            <span>Dashboard</span>
+            <span class="arrow">▼</span>
+        </div>
+        <div class="accordion-content">
+            <a href="https://extranet.pedc.ir/pogp/PRD/SitePages/خانه.aspx">Home</a>
+            <a href="https://extranet.pedc.ir/pogp/PRD/SitePages/Reports.aspx">Reports</a>
+        </div>
+    </div>
+    
+    <!-- Maintenance -->
+    <div class="accordion-item">
+        <div class="accordion-header">
+            <span>Maintenance</span>
+            <span class="arrow">▼</span>
+        </div>
+        <div class="accordion-content">
+            <a href="https://extranet.pedc.ir/pogp/PRD/Maintenances/Forms/AllItems.aspx">Maintenance Report</a>
+            <a href="https://extranet.pedc.ir/pogp/PRD/Lists/WorkOrders/AllItems.aspx">Work Orders</a>
+        </div>
+    </div>
+    
+    <!-- Production -->
+    <div class="accordion-item">
+        <div class="accordion-header">
+            <span>Production</span>
+            <span class="arrow">▼</span>
+        </div>
+        <div class="accordion-content">
+            <div class="sub-accordion-item">
+                <div class="sub-accordion-header">
+                    <span>Production Engineering</span>
+                    <span class="sub-arrow">▼</span>
+                </div>
+                <div class="sub-accordion-content">
+                    <a href="https://extranet.pedc.ir/pogp/PRD/Action%20Plan%20Well%20Production%20Enhancement/Forms/AllItems.aspx">Action Plan</a>
+                    <a href="https://extranet.pedc.ir/pogp/PRD/Call%20off%20Order/Forms/AllItems.aspx">Call off Order</a>
+                    <a href="https://extranet.pedc.ir/pogp/PRD/CTEPWPD/Forms/AllItems.aspx">CTEP Data</a>
+                    <a href="https://extranet.pedc.ir/pogp/PRD/LightCrudeReport/Forms/AllItems.aspx">Light Crude Report</a>
+                    <a href="https://extranet.pedc.ir/pogp/PRD/HeavyCrudeReport/Forms/AllItems.aspx">Heavy Crude Report</a>
+                    <a href="https://extranet.pedc.ir/pogp/PRD/Production%20Engineering%20Report/Forms/AllItems.aspx">Engineering Report</a>
+                    <a href="https://extranet.pedc.ir/pogp/PRD/Well%20Intervention%20Analysis%20Report/Forms/AllItems.aspx">Well Intervention</a>
+                </div>
+            </div>
+            <a href="https://extranet.pedc.ir/pogp/PRD/Production%20Operations/Forms/AllItems.aspx" class="sub-item-link">
+                <span>Production Operation</span>
+            </a>
+            <a href="https://extranet.pedc.ir/pogp/PRD/Corrosion%20Report/Forms/AllItems.aspx" class="sub-item-link">
+                <span>Corrosion Report</span>
+            </a>
+        </div>
+    </div>
+    
+    <!-- Quality Control -->
+    <div class="accordion-item">
+        <div class="accordion-header">
+            <span>Quality Control</span>
+            <span class="arrow">▼</span>
+        </div>
+        <div class="accordion-content">
+            <a href="https://extranet.pedc.ir/pogp/PRD/Quality%20Control/Forms/AllItems.aspx">QC Records</a>
+        </div>
+    </div>
+    
+    <!-- Reports -->
+    <div class="accordion-item">
+        <div class="accordion-header">
+            <span>Reports</span>
+            <span class="arrow">▼</span>
+        </div>
+        <div class="accordion-content">
+            <a href="https://extranet.pedc.ir/pogp/PRD/Lists/DailyReports/AllItems.aspx">Daily</a>
+            <a href="https://extranet.pedc.ir/pogp/PRD/Lists/MonthlyReports/AllItems.aspx">Monthly</a>
+        </div>
+    </div>
+    
+    <!-- Settings -->
+    <div class="accordion-item">
+        <div class="accordion-header">
+            <span>Settings & Tools</span>
+            <span class="arrow">▼</span>
+        </div>
+        <div class="accordion-content">
+           
+            <div class="sub-accordion-item">
+                <div class="sub-accordion-header">
+                    <span>Browse</span>
+                    <span class="sub-arrow">▼</span>
+                </div>
+                <div class="sub-accordion-content">
+                    <a href="#" class="ribbon-action" data-action="tags">Tags & Notes</a>
+                    <a href="https://extranet.pedc.ir/pogp/PRD/_layouts/15/listedit.aspx">Library Settings</a>
+                    <a href="https://extranet.pedc.ir/pogp/PRD/_layouts/15/viewlsts.aspx">View All Pages</a>
+                </div>
+            </div>
+            <div class="sub-accordion-item">
+                <div class="sub-accordion-header">
+                    <span>Page</span>
+                    <span class="sub-arrow">▼</span>
+                </div>
+                <div class="sub-accordion-content">
+                    <a href="#" id="editPageBtn">Edit</a>
+                    <a href="#" id="savePageBtn">Save</a>
+                    <a href="#" id="checkInBtn">Check In</a>
+                    <a href="https://extranet.pedc.ir/pogp/PRD/_layouts/15/versions.aspx">History</a>
+                </div>
+            </div>
+            <div class="sub-accordion-item">
+                <div class="sub-accordion-header">
+                    <span>Publish</span>
+                    <span class="sub-arrow">▼</span>
+                </div>
+                <div class="sub-accordion-content">
+                    <a href="#" id="publishBtn">Publish</a>
+                    <a href="#" id="unpublishBtn">Unpublish</a>
+                    <a href="https://extranet.pedc.ir/pogp/PRD/_layouts/15/draftcheck.aspx">Approve/Reject</a>
+                </div>
+            </div>
+            <div class="sub-accordion-item">
+                <div class="sub-accordion-header">
+                    <span>Insert</span>
+                    <span class="sub-arrow">▼</span>
+                </div>
+                <div class="sub-accordion-content">
+                    <a href="#" class="ribbon-action" data-action="picture">Picture</a>
+                    <a href="#" class="ribbon-action" data-action="video">Video</a>
+                    <a href="#" class="ribbon-action" data-action="link">Link</a>
+                    <a href="#" class="ribbon-action" data-action="webpart">Web Part</a>
+                </div>
+            </div>
+            <div class="sub-accordion-item">
+                <div class="sub-accordion-header">
+                    <span>Design</span>
+                    <span class="sub-arrow">▼</span>
+                </div>
+                <div class="sub-accordion-content">
+                    <a href="https://extranet.pedc.ir/pogp/PRD/_layouts/15/ChangeSiteMasterPage.aspx">Page Layout</a>
+                    <a href="https://extranet.pedc.ir/pogp/PRD/_layouts/15/DesignGallery.aspx">Design Manager</a>
+                </div>
+            </div>
+            <div class="sub-accordion-item">
+                <div class="sub-accordion-header">
+                    <span>Share & Track</span>
+                    <span class="sub-arrow">▼</span>
+                </div>
+                <div class="sub-accordion-content">
+                    <a href="https://extranet.pedc.ir/pogp/PRD/_layouts/15/shareddocuments.aspx">Shared With</a>
+                    <a href="#" class="ribbon-action" data-action="email">E-mail Link</a>
+                    <a href="#" class="ribbon-action" data-action="alert">Alert Me</a>
+                </div>
+            </div>
+            <div class="sub-accordion-item">
+                <div class="sub-accordion-header">
+                    <span>Page Actions</span>
+                    <span class="sub-arrow">▼</span>
+                </div>
+                <div class="sub-accordion-content">
+                    <a href="#" id="editPropertiesBtn">Edit Properties</a>
+                    <a href="https://extranet.pedc.ir/pogp/PRD/_layouts/15/rename.aspx">Rename</a>
+                    <a href="#" class="ribbon-action" data-action="delete">Delete</a>
+                    <a href="https://extranet.pedc.ir/pogp/PRD/_layouts/15/user.aspx">Permissions</a>
+                </div>
+            </div>
+            <div class="sub-accordion-item">
+                <div class="sub-accordion-header">
+                    <span>Site Settings</span>
+                    <span class="sub-arrow">▼</span>
+                </div>
+                <div class="sub-accordion-content">
+                    <a href="https://extranet.pedc.ir/pogp/PRD/_layouts/15/settings.aspx">Settings</a>
+                    <a href="https://extranet.pedc.ir/pogp/PRD/_layouts/15/createpage.aspx">Add Page</a>
+                    <a href="https://extranet.pedc.ir/pogp/PRD/_layouts/15/viewlsts.aspx">Site Contents</a>
+                    <a href="https://extranet.pedc.ir/pogp/PRD/_layouts/15/help.aspx">Help</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// آکاردئون سطح اول
+document.querySelectorAll('.accordion-header').forEach(h => {
+    h.addEventListener('click', function() {
+        const item = this.parentElement;
+        const active = item.classList.contains('active');
+        document.querySelectorAll('.accordion-item').forEach(i => i.classList.remove('active'));
+        if (!active) item.classList.add('active');
+    });
+});
+// آکاردئون سطح دوم
+document.querySelectorAll('.sub-accordion-header').forEach(h => {
+    h.addEventListener('click', function(e) {
+        e.stopPropagation();
+        const item = this.parentElement;
+        const active = item.classList.contains('active');
+        const parent = item.closest('.accordion-content');
+        parent.querySelectorAll('.sub-accordion-item').forEach(i => i.classList.remove('active'));
+        if (!active) item.classList.add('active');
+    });
+});
+// Edit Page
+document.getElementById('editPageBtn')?.addEventListener('click', function(e) {
+    e.preventDefault();
+    var url = window.location.href.split('?')[0];
+    window.location.href = url + '?ControlMode=Edit&DisplayMode=Design';
+});
+// Save Page
+document.getElementById('savePageBtn')?.addEventListener('click', function(e) {
+    e.preventDefault();
+    try {
+        if (typeof SP !== 'undefined' && SP.Ribbon) {
+            var ribbon = SP.Ribbon.PageManager.get_instance().get_ribbon();
+            ribbon.selectTabById('Ribbon.WikiPageTab');
+            var saveBtn = document.querySelector('[id*="SaveEdit"]');
+            if (saveBtn) saveBtn.click();
+        }
+    } catch(err) {
+        window.location.href = window.location.href.split('?')[0] + '?ControlMode=Display';
+    }
+});
+// Edit Properties
+document.getElementById('editPropertiesBtn')?.addEventListener('click', function(e) {
+    e.preventDefault();
+    var url = window.location.href.split('?')[0];
+    window.location.href = url.replace('.aspx', '') + '/_layouts/15/EditForm.aspx?ID=1';
+});
+// Header Search
+document.getElementById('headerSearchInput')?.addEventListener('keypress', function(e) {
+    if (e.key === 'Enter' && this.value.trim()) {
+        window.location.href = 'https://extranet.pedc.ir/pogp/PRD/_layouts/15/osssearchresults.aspx?k=' + encodeURIComponent(this.value);
+    }
+});
+// Ribbon Actions
+document.querySelectorAll('.ribbon-action[data-action]').forEach(a => {
+    a.addEventListener('click', function(e) {
+        e.preventDefault();
+        var action = this.getAttribute('data-action');
+        if (action === 'email') {
+            window.location.href = 'mailto:?subject=' + encodeURIComponent(document.title) + '&body=' + encodeURIComponent(window.location.href);
+        } else if (action === 'delete') {
+            if (confirm('Delete this page?')) {
+                window.location.href = '/_layouts/15/deletefile.aspx';
+            }
+        }
+    });
+});
+// حذف Edit Links و تغییرات اصلی
+window.addEventListener('load', function() {
+    document.querySelectorAll('a[title="Edit Links"]').forEach(l => l.style.display = 'none');
+
+    // مخفی کردن suiteBar و منتقل کردن محتوای #suiteBarRight به هدر
+    var suiteBar = document.getElementById('suiteBar');
+    var suiteBarRight = document.getElementById('suiteBarRight');
+    var header = document.querySelector('.customModernHeader');
+    if (suiteBarRight && header) {
+        header.appendChild(suiteBarRight);
+    }
+    if (suiteBar) {
+        suiteBar.style.display = 'none !important';
+    }
+
+    // مدیریت نوار زرد (ریبون) - فقط در حالت ادیت
+    var ribbon = document.getElementById('s4-ribbonrow');
+    var header = document.querySelector('.customModernHeader');
+    var sidebar = document.querySelector('.modernSidebar');
+    var workspace = document.getElementById('s4-workspace');
+    var ribbonHeight = 0;
+    if (ribbon && ribbon.offsetHeight > 0) {
+        ribbon.style.position = 'fixed !important';
+        ribbon.style.top = '0 !important';
+        ribbon.style.left = '260px !important';
+        ribbon.style.width = 'calc(100% - 260px) !important';
+        ribbon.style.zIndex = '1001 !important';
+        ribbon.style.height = '40px !important';
+        ribbon.style.overflowY = 'auto !important';
+        ribbon.style.background = 'rgba(255,255,255,0.9) !important';
+        ribbon.style.backdropFilter = 'blur(10px)';
+        ribbonHeight = 40;
+    }
+
+    // تنظیم top هدر و سایدبار بر اساس ریبون
+    if (header) {
+        header.style.top = ribbonHeight + 'px';
+    }
+    if (sidebar) {
+        sidebar.style.top = ribbonHeight + 'px';
+        sidebar.style.height = 'calc(100vh - ' + ribbonHeight + 'px)';
+    }
+    if (workspace) {
+        workspace.style.marginTop = ribbonHeight + 50 + 'px';
+        workspace.style.paddingTop = '0';
+    }
+});
+
+
+// حذف تمام لینک‌های Recent
+window.addEventListener('load', function() {
+    // حذف از همه جا
+    document.querySelectorAll('a[href*="Recent.aspx"], a[title*="Recent"]').forEach(link => {
+        let parent = link.closest('li') || link.parentElement;
+        if(parent) parent.remove();
+    });
+});
+
+</script>
+</body>
+</html>

@@ -1,0 +1,418 @@
+import React, { useRef } from 'react';
+import { Download } from 'lucide-react';
+
+export default function ResumeComponent() {
+  const resumeRef = useRef(null);
+
+  const handleDownload = () => {
+    const content = resumeRef.current;
+    const opt = {
+      margin: 0.5,
+      filename: 'Sajad_Saeedi_Azad_Resume.pdf',
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: { scale: 2 },
+      jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+    };
+    
+    // Using html2pdf library
+    if (window.html2pdf) {
+      window.html2pdf().set(opt).from(content).save();
+    } else {
+      alert('Please wait for the page to fully load, then try again.');
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-gray-100 p-4">
+      <div className="max-w-4xl mx-auto mb-4">
+        <button
+          onClick={handleDownload}
+          className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+        >
+          <Download size={20} />
+          Download PDF
+        </button>
+      </div>
+      
+      <div ref={resumeRef} className="max-w-4xl mx-auto bg-white shadow-lg" style={{ padding: '40px' }}>
+        {/* Header */}
+        <div className="border-b-2 border-gray-300 pb-4 mb-4">
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">SAJAD SAEEDI AZAD</h1>
+          <p className="text-lg text-gray-700 mb-2">Senior Database Engineer | Programmer</p>
+          <div className="text-sm text-gray-600 space-y-1">
+            <p>Email: sajadsaeediazad0007@gmail.com</p>
+            <p>Phone: (+98) 9917540483</p>
+            <p>Website: sajadssa.vercel.app</p>
+            <p>Location: Shahid Qoraishi Street, Bahare Marida Alley, Ahvaz, Khuzestan, Iran</p>
+            <p>Date of Birth: September 11, 1988</p>
+            <p>Marital Status: Married | Military Service: Completed</p>
+          </div>
+        </div>
+
+        {/* Professional Summary */}
+        <div className="mb-6">
+          <h2 className="text-xl font-bold text-gray-900 border-b-2 border-gray-300 pb-2 mb-3">PROFESSIONAL SUMMARY</h2>
+          <p className="text-sm text-gray-700 leading-relaxed">
+            Senior Database Engineer and Programmer with approximately 11 years of experience in oil and gas projects. 
+            Expert in database development with Microsoft Access, SQL Server, QBASE, and WJCS. Proficient in complete 
+            quality control documentation for piping, mechanical, electrical, and instrumentation disciplines. Skilled 
+            in creating databases compliant with ASME and IPS standards. Experienced in project control using Primavera 
+            P6 and Microsoft Project. Comprehensive knowledge of engineering documentation including production, 
+            maintenance, and operation software in oil sector. Full-stack developer with expertise in C#, .NET, PHP, 
+            Node.js, React.js, Next.js, and database management systems.
+          </p>
+        </div>
+
+        {/* Technical Skills */}
+        <div className="mb-6">
+          <h2 className="text-xl font-bold text-gray-900 border-b-2 border-gray-300 pb-2 mb-3">TECHNICAL SKILLS</h2>
+          <div className="text-sm text-gray-700 space-y-2">
+            <p><strong>Databases:</strong> Microsoft Access, SQL Server, MySQL, MongoDB, Oracle</p>
+            <p><strong>Programming Languages:</strong> C#, .NET, PHP, JavaScript, TypeScript, Python</p>
+            <p><strong>Frontend:</strong> HTML, CSS, JavaScript, React.js, Next.js, TailwindCSS, Bootstrap, Figma</p>
+            <p><strong>Backend:</strong> Node.js, PHP, .NET Framework</p>
+            <p><strong>Project Management:</strong> Primavera P6, Microsoft Project</p>
+            <p><strong>Business Intelligence:</strong> Power BI, Data Analysis, NumPy, Pandas, Matplotlib</p>
+            <p><strong>Other Tools:</strong> SharePoint, Power Apps, Power Forms, Docker, n8n, Git, GitHub</p>
+            <p><strong>Quality Control:</strong> Complete documentation for piping, mechanical, electrical disciplines</p>
+            <p><strong>Software:</strong> Lab View, PLC Programming, Photoshop, Canva, WordPress</p>
+            <p><strong>Development Tools:</strong> VSCode, PyCharm, Atom, Sublime, CLI, PowerShell, npm, gitbash</p>
+          </div>
+        </div>
+
+        {/* Professional Experience */}
+        <div className="mb-6">
+          <h2 className="text-xl font-bold text-gray-900 border-b-2 border-gray-300 pb-2 mb-3">PROFESSIONAL EXPERIENCE</h2>
+          
+          {/* Job 1 */}
+          <div className="mb-4">
+            <div className="flex justify-between items-start mb-2">
+              <div>
+                <h3 className="text-base font-bold text-gray-900">Database Engineer</h3>
+                <p className="text-sm text-gray-700">Sepehr Pasargad Oil and Gas Exploitation Company</p>
+              </div>
+              <p className="text-sm text-gray-600">July 2024 - Present</p>
+            </div>
+            <p className="text-sm text-gray-600 mb-1">Ahvaz, Khuzestan</p>
+            <ul className="list-disc list-inside text-sm text-gray-700 space-y-1">
+              <li>Designed organization management system in SharePoint</li>
+              <li>Created analytical dashboards in production, maintenance, safety using Power BI</li>
+              <li>Developed IDMS software for self-assessment in quality control</li>
+            </ul>
+          </div>
+
+          {/* Job 2 */}
+          <div className="mb-4">
+            <div className="flex justify-between items-start mb-2">
+              <div>
+                <h3 className="text-base font-bold text-gray-900">Senior Database Engineer</h3>
+                <p className="text-sm text-gray-700">Nargaan Petrochemical Company - Delijan</p>
+              </div>
+              <p className="text-sm text-gray-600">February 2022 - May 2024</p>
+            </div>
+            <p className="text-sm text-gray-600 mb-1">Delijan, Ilam</p>
+            <ul className="list-disc list-inside text-sm text-gray-700 space-y-1">
+              <li>Designed and programmed quality control database on Access and SQL Server platforms</li>
+              <li>Managed all WJCS procedures, NDT packages, and material testing</li>
+              <li>Created various reports based on ITP standards for different disciplines</li>
+              <li>Registered daily activities and prepared joint history reports for piping sections</li>
+              <li>Optimized data management and analysis processes</li>
+              <li>Monitored database user performance and updated database software as needed</li>
+            </ul>
+          </div>
+
+          {/* Job 3 */}
+          <div className="mb-4">
+            <div className="flex justify-between items-start mb-2">
+              <div>
+                <h3 className="text-base font-bold text-gray-900">Senior Database Engineer</h3>
+                <p className="text-sm text-gray-700">OEID - Mansoureh Oil Field Development</p>
+              </div>
+              <p className="text-sm text-gray-600">July 2019 - February 2022</p>
+            </div>
+            <p className="text-sm text-gray-600 mb-1">Ahvaz, Khuzestan</p>
+            <ul className="list-disc list-inside text-sm text-gray-700 space-y-1">
+              <li>Designed quality control database on Access and SQL Server platforms</li>
+              <li>Managed all WJCS procedures and NDT-related packages</li>
+              <li>Created various reports based on ITP standards</li>
+              <li>Provided management reports related to daily site activities using Power BI</li>
+              <li>Controlled contractor status in piping and NDT sections</li>
+            </ul>
+          </div>
+
+          {/* Job 4 */}
+          <div className="mb-4">
+            <div className="flex justify-between items-start mb-2">
+              <div>
+                <h3 className="text-base font-bold text-gray-900">Database Engineer</h3>
+                <p className="text-sm text-gray-700">Jahaan Construction and Engineering Company - Azar Oil Field</p>
+              </div>
+              <p className="text-sm text-gray-600">November 2017 - July 2019</p>
+            </div>
+            <p className="text-sm text-gray-600 mb-1">Mehran, Ilam</p>
+            <ul className="list-disc list-inside text-sm text-gray-700 space-y-1">
+              <li>Designed quality control database on Access and SQL Server</li>
+              <li>Managed WJCS, NDT, and PWHT packages</li>
+              <li>Handled ICAPS-related procedures</li>
+              <li>Registered daily reports and prepared joint history</li>
+              <li>Controlled contractor status in piping, NDT, and PWHT sections</li>
+            </ul>
+          </div>
+
+          {/* Job 5 */}
+          <div className="mb-4">
+            <div className="flex justify-between items-start mb-2">
+              <div>
+                <h3 className="text-base font-bold text-gray-900">Database Engineer</h3>
+                <p className="text-sm text-gray-700">Azaran Parsegastar Company - South Pars Phases 22-24</p>
+              </div>
+              <p className="text-sm text-gray-600">September 2016 - November 2017</p>
+            </div>
+            <p className="text-sm text-gray-600 mb-1">Kangan, Bushehr</p>
+            <ul className="list-disc list-inside text-sm text-gray-700 space-y-1">
+              <li>Designed quality control database in piping area on SQL Server</li>
+              <li>Managed WJCS procedures and NDT packages</li>
+              <li>Prepared backlog reports for piping and NDT</li>
+              <li>Controlled welder information, repair reports, and welder list reports</li>
+            </ul>
+          </div>
+
+          {/* Job 6 */}
+          <div className="mb-4">
+            <div className="flex justify-between items-start mb-2">
+              <div>
+                <h3 className="text-base font-bold text-gray-900">Database Engineer</h3>
+                <p className="text-sm text-gray-700">Ahad Engineering Company - South Pars Phase 14</p>
+              </div>
+              <p className="text-sm text-gray-600">September 2016 - November 2016</p>
+            </div>
+            <p className="text-sm text-gray-600 mb-1">Kangan, Bushehr</p>
+            <ul className="list-disc list-inside text-sm text-gray-700 space-y-1">
+              <li>Designed quality control database in piping area on SQL Server</li>
+              <li>Managed WJCS procedures and NDT packages</li>
+              <li>Controlled contractor status in piping and NDT sections</li>
+            </ul>
+          </div>
+
+          {/* Job 7 */}
+          <div className="mb-4">
+            <div className="flex justify-between items-start mb-2">
+              <div>
+                <h3 className="text-base font-bold text-gray-900">Database Engineer</h3>
+                <p className="text-sm text-gray-700">Ahad Engineering Company - South Pars Phases 20-21</p>
+              </div>
+              <p className="text-sm text-gray-600">April 2016 - September 2016</p>
+            </div>
+            <p className="text-sm text-gray-600 mb-1">Assaluyeh, Bushehr</p>
+            <ul className="list-disc list-inside text-sm text-gray-700 space-y-1">
+              <li>Designed quality control database and welder information control in OIEC company software</li>
+              <li>Prepared backlog reports for piping, NDT, and PWHT</li>
+              <li>Controlled contractor status and prepared management reports</li>
+            </ul>
+          </div>
+
+          {/* Job 8 */}
+          <div className="mb-4">
+            <div className="flex justify-between items-start mb-2">
+              <div>
+                <h3 className="text-base font-bold text-gray-900">Database Engineer</h3>
+                <p className="text-sm text-gray-700">Ledoma Harandi Installation Company - South Pars Phases 20-21</p>
+              </div>
+              <p className="text-sm text-gray-600">October 2015 - April 2016</p>
+            </div>
+            <p className="text-sm text-gray-600 mb-1">Assaluyeh, Bushehr</p>
+            <ul className="list-disc list-inside text-sm text-gray-700 space-y-1">
+              <li>Designed information bank for piping quality control and related office work</li>
+              <li>Managed all daily activities in installation and pre-commissioning at oil and gas refinery</li>
+            </ul>
+          </div>
+
+          {/* Job 9 */}
+          <div className="mb-4">
+            <div className="flex justify-between items-start mb-2">
+              <div>
+                <h3 className="text-base font-bold text-gray-900">Database Engineer</h3>
+                <p className="text-sm text-gray-700">Jahaan Construction Company - North Azadegan Oil Field</p>
+              </div>
+              <p className="text-sm text-gray-600">April 2015 - October 2015</p>
+            </div>
+            <p className="text-sm text-gray-600 mb-1">Shadegan, Khuzestan</p>
+            <ul className="list-disc list-inside text-sm text-gray-700 space-y-1">
+              <li>Registered daily reports in welder control system software</li>
+              <li>Controlled contractor status in piping, NDT, and PWHT sections</li>
+              <li>Provided management reports related to site performance</li>
+            </ul>
+          </div>
+
+          {/* Job 10 */}
+          <div className="mb-4">
+            <div className="flex justify-between items-start mb-2">
+              <div>
+                <h3 className="text-base font-bold text-gray-900">QC Engineer</h3>
+                <p className="text-sm text-gray-7000">Manpana Blouir Company - South Pars Phase 14</p>
+              </div>
+              <p className="text-sm text-gray-600">April 2014 - May 2015</p>
+            </div>
+            <p className="text-sm text-gray-600 mb-1">Kangan, Bushehr</p>
+            <ul className="list-disc list-inside text-sm text-gray-700 space-y-1">
+              <li>Provided project control reports for piping support design, construction, and installation</li>
+              <li>Handled support office-related procedures</li>
+              <li>Created support MTO and issued MIV, MRV for materials</li>
+              <li>Created WPA status and controlled contractor status</li>
+            </ul>
+          </div>
+
+          {/* Job 11 */}
+          <div className="mb-4">
+            <div className="flex justify-between items-start mb-2">
+              <div>
+                <h3 className="text-base font-bold text-gray-900">Database Engineer</h3>
+                <p className="text-sm text-gray-700">IGC - Iran General Contractors - South Pars Phases 17-18</p>
+              </div>
+              <p className="text-sm text-gray-600">September 2014 - April 2014</p>
+            </div>
+            <p className="text-sm text-gray-600 mb-1">Assaluyeh, Bushehr</p>
+            <ul className="list-disc list-inside text-sm text-gray-700 space-y-1">
+              <li>Created information bank for quality control in piping office and discipline</li>
+              <li>Managed all related procedures within defined units</li>
+            </ul>
+          </div>
+
+          {/* Job 12 */}
+          <div className="mb-4">
+            <div className="flex justify-between items-start mb-2">
+              <div>
+                <h3 className="text-base font-bold text-gray-900">Implementation Engineer</h3>
+                <p className="text-sm text-gray-700">Isfahan Refinery Industries Company</p>
+              </div>
+              <p className="text-sm text-gray-600">June 2010 - September 2010</p>
+            </div>
+            <p className="text-sm text-gray-600 mb-1">Isfahan</p>
+            <ul className="list-disc list-inside text-sm text-gray-700 space-y-1">
+              <li>Implemented control mechanisms using Simatic Manager S7 software</li>
+            </ul>
+          </div>
+
+          {/* Job 13 */}
+          <div className="mb-4">
+            <div className="flex justify-between items-start mb-2">
+              <div>
+                <h3 className="text-base font-bold text-gray-900">Technical Instructor</h3>
+                <p className="text-sm text-gray-700">Shahin Shahr Technical and Vocational Organization</p>
+              </div>
+              <p className="text-sm text-gray-600">June 2009 - September 2009</p>
+            </div>
+            <p className="text-sm text-gray-600 mb-1">Shahin Shahr, Meimeh, Isfahan</p>
+            <ul className="list-disc list-inside text-sm text-gray-700 space-y-1">
+              <li>Taught specialized electrical courses to job seekers at vocational center</li>
+            </ul>
+          </div>
+        </div>
+
+        {/* Education */}
+        <div className="mb-6">
+          <h2 className="text-xl font-bold text-gray-900 border-b-2 border-gray-300 pb-2 mb-3">EDUCATION</h2>
+          <div className="mb-3">
+            <div className="flex justify-between items-start">
+              <div>
+                <h3 className="text-base font-bold text-gray-900">Bachelor of Electrical Engineering</h3>
+                <p className="text-sm text-gray-700">Jahad Daneshgahi University of Isfahan</p>
+              </div>
+              <p className="text-sm text-gray-600">2007 - 2012</p>
+            </div>
+            <p className="text-sm text-gray-600">Isfahan, Iran</p>
+          </div>
+        </div>
+
+        {/* Certifications */}
+        <div className="mb-6">
+          <h2 className="text-xl font-bold text-gray-900 border-b-2 border-gray-300 pb-2 mb-3">CERTIFICATIONS & TRAINING</h2>
+          <ul className="list-disc list-inside text-sm text-gray-700 space-y-1">
+            <li>Data Analysis and Control Model Engineering - Milina Academy (April 2024)</li>
+            <li>UI/UX Design Course - Boto Start Academy (May 2023)</li>
+            <li>Comprehensive Web Backend Development (JavaScript, TypeScript, Node.js, Next.js) - Front Hooks Academy (December 2022)</li>
+            <li>Comprehensive Web Frontend Development (HTML, CSS, JS, React.js, Git, GitHub) - Modaj Academy (February 2021)</li>
+            <li>Developer Course: Software Design, Web, Application, and Mobile Development - Mohajer University (September 2010)</li>
+            <li>PLC Programming Course - Mahan Computer Sciences (December 2004)</li>
+            <li>Grade 1 and 2 Work Permit Certificate (June 2005 & May 2005)</li>
+          </ul>
+        </div>
+
+        {/* Projects */}
+        <div className="mb-6">
+          <h2 className="text-xl font-bold text-gray-900 border-b-2 border-gray-300 pb-2 mb-3">NOTABLE PROJECTS</h2>
+          
+          <div className="mb-3">
+            <h3 className="text-sm font-bold text-gray-900">Personal Portfolio Website</h3>
+            <p className="text-sm text-gray-700">Responsive tourist portfolio website with email functionality (December 2024)</p>
+            <p className="text-xs text-gray-600">Technologies: HTML, CSS, JavaScript, Bootstrap</p>
+            <p className="text-xs text-blue-600">Link: sajadssa.vercel.app</p>
+          </div>
+
+          <div className="mb-3">
+            <h3 className="text-sm font-bold text-gray-900">HSE Analysis Dashboard - Oil Production</h3>
+            <p className="text-sm text-gray-700">Sepehr Pasargad Oil and Gas Exploitation Company</p>
+            <p className="text-xs text-gray-600">Analytical dashboard for HSE in oil production sector</p>
+          </div>
+
+          <div className="mb-3">
+            <h3 className="text-sm font-bold text-gray-900">Maintenance and Repair Analysis Dashboard</h3>
+            <p className="text-sm text-gray-700">Sepehr Pasargad Oil and Gas Exploitation Company</p>
+            <p className="text-xs text-gray-600">Analytical dashboard for maintenance and repair in oil and gas sector</p>
+          </div>
+
+          <div className="mb-3">
+            <h3 className="text-sm font-bold text-gray-900">Dynamic Train Ticket Purchase Website</h3>
+            <p className="text-sm text-gray-700">E-ticket purchase with wallet simulation and PDF generation (June 2023)</p>
+            <p className="text-xs text-gray-600">Technologies: PHP, MySQL, JavaScript</p>
+            <p className="text-xs text-blue-600">GitHub: github.com/Sajadssa/online_ticket_purchase</p>
+          </div>
+
+          <div className="mb-3">
+            <h3 className="text-sm font-bold text-gray-900">Pharmacy E-commerce Website</h3>
+            <p className="text-sm text-gray-700">Dynamic perfume shop with shopping cart functionality (February 2023)</p>
+            <p className="text-xs text-gray-600">Technologies: JavaScript, TypeScript</p>
+            <p className="text-xs text-blue-600">GitHub: github.com/Sajadssa/pharmacology</p>
+          </div>
+
+          <div className="mb-3">
+            <h3 className="text-sm font-bold text-gray-900">Language Academy Website</h3>
+            <p className="text-sm text-gray-700">Foreign language academy site with registration, editing, and deletion features (February 2022)</p>
+            <p className="text-xs text-gray-600">Technologies: PHP, MySQL, AJAX</p>
+            <p className="text-xs text-blue-600">GitHub: github.com/Sajadssa/Language_Schools</p>
+          </div>
+
+          <div className="mb-3">
+            <h3 className="text-sm font-bold text-gray-900">Medical Clinic Intelligent Software (MCIS)</h3>
+            <p className="text-sm text-gray-700">Patient management system with appointment scheduling and online reporting (January 2021)</p>
+            <p className="text-xs text-gray-600">Technologies: C#, SQL Server</p>
+            <p className="text-xs text-blue-600">GitHub: github.com/Sajadssa/Intelligent-Patient-Admission-Management-System</p>
+          </div>
+        </div>
+
+        {/* Languages */}
+        <div className="mb-6">
+          <h2 className="text-xl font-bold text-gray-900 border-b-2 border-gray-300 pb-2 mb-3">LANGUAGES</h2>
+          <ul className="list-disc list-inside text-sm text-gray-700">
+            <li>English: Reading, Writing, Speaking, Listening Skills</li>
+            <li>Persian: Native</li>
+          </ul>
+        </div>
+
+        {/* Social Media */}
+        <div>
+          <h2 className="text-xl font-bold text-gray-900 border-b-2 border-gray-300 pb-2 mb-3">SOCIAL MEDIA & LINKS</h2>
+          <ul className="list-disc list-inside text-sm text-gray-700 space-y-1">
+            <li>LinkedIn: linkedin.com/in/sajad-saeedi-azad-2085b9102</li>
+            <li>Telegram: @Sajad_Saeedi_azad</li>
+            <li>Instagram: Sajad saeedi azad</li>
+            <li>Twitter: Sajadsaeediaza7</li>
+          </ul>
+        </div>
+      </div>
+
+      {/* Load html2pdf library */}
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    </div>
+  );
+}

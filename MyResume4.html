@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sajad Saeedi Azad - Senior Database Specialist & Full Stack Developer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+        }
+
+        .container {
+            max-width: 210mm;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .header h2 {
+            font-size: 1.3em;
+            font-weight: 300;
+            margin-bottom: 20px;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .contact-item a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        .contact-item a:hover {
+            opacity: 0.8;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 35px;
+            page-break-inside: avoid;
+        }
+
+        .section-title {
+            font-size: 1.8em;
+            color: #667eea;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .summary {
+            background: #f8f9fa;
+            padding: 20px;
+            border-left: 4px solid #667eea;
+            margin-bottom: 30px;
+        }
+
+        .job, .education, .project {
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .job:last-child, .education:last-child, .project:last-child {
+            border-bottom: none;
+        }
+
+        .job-title {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .company {
+            font-size: 1em;
+            color: #667eea;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .date-location {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .job ul, .project ul {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+
+        .job li, .project li {
+            margin-bottom: 8px;
+            line-height: 1.5;
+        }
+
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .skill-item {
+            background: #f8f9fa;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-size: 0.9em;
+            border-left: 3px solid #667eea;
+        }
+
+        .languages {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .language {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+        }
+
+        .language-name {
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .proficiency {
+            display: flex;
+            gap: 5px;
+            margin-top: 5px;
+        }
+
+        .bar {
+            height: 8px;
+            width: 25%;
+            background: #e0e0e0;
+            border-radius: 3px;
+        }
+
+        .bar.filled {
+            background: #667eea;
+        }
+
+        .social-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .social-link {
+            display: inline-block;
+            padding: 8px 15px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 0.9em;
+            transition: background 0.3s;
+        }
+
+        .social-link:hover {
+            background: #764ba2;
+        }
+
+        .achievements {
+            background: #fff3cd;
+            padding: 20px;
+            border-left: 4px solid #ffc107;
+            border-radius: 5px;
+        }
+
+        .achievements ul {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+
+        .achievements li {
+            margin-bottom: 8px;
+        }
+
+        .print-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 1em;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+
+        .print-button:hover {
+            background: #764ba2;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+            .container {
+                box-shadow: none;
+                max-width: 100%;
+            }
+            .print-button {
+                display: none;
+            }
+            .section {
+                page-break-inside: avoid;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .two-column {
+                grid-template-columns: 1fr;
+            }
+            .content {
+                padding: 20px;
+            }
+            .header {
+                padding: 30px 20px;
+            }
+            .print-button {
+                bottom: 15px;
+                right: 15px;
+                padding: 12px 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>SAJAD SAEEDI AZAD</h1>
+            <h2>Senior Database Specialist | Full Stack Developer | Data Analyst</h2>
+            
+            <div class="contact-info">
+                <div class="contact-item">
+                    📧 <a href="mailto:sajadsaeediazad0007@gmail.com">sajadsaeediazad0007@gmail.com</a>
+                </div>
+                <div class="contact-item">
+                    📱 <a href="tel:+989917540483">(+98) 991-754-0483</a>
+                </div>
+                <div class="contact-item">
+                    🌐 <a href="https://sajadssa.vercel.app" target="_blank">sajadssa.vercel.app</a>
+                </div>
+                <div class="contact-item">
+                    📍 Khuzestan, Izeh, Iran
+                </div>
+            </div>
+
+            <div class="social-links">
+                <a href="https://linkedin.com/in/sajad-saeedi-azad-2085b9102" target="_blank" class="social-link">LinkedIn</a>
+                <a href="https://github.com/Sajadssa" target="_blank" class="social-link">GitHub</a>
+                <a href="https://twitter.com/@Sajad_Saeedi_azad" target="_blank" class="social-link">Twitter</a>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="summary section">
+                <h3 class="section-title">Professional Summary</h3>
+                <p>Highly accomplished Senior Database Specialist and Full Stack Developer with over 11 years of extensive experience in oil and gas projects. Expert in database design, development, and management using SQL Server and Microsoft Access. Proficient in quality control documentation across multiple disciplines including piping, painting, insulation, mechanical, structural, civil, electrical, and instrumentation. Strong background in engineering documentation, material management, and package testing. Skilled in project control using Primavera P6 and Microsoft Project. Advanced expertise in full-stack web development with modern frameworks (React.js, Next.js, Node.js, PHP), business intelligence with Power BI, AI prompt engineering, Python data analysis, and DevOps tools. Proven track record in developing custom software solutions and automated workflows for the oil and gas industry.</p>
+            </div>
+
+            <div class="section">
+                <h3 class="section-title">Core Competencies</h3>
+                <div class="skills-container">
+                    <div class="skill-item">SQL Server & Database Design</div>
+                    <div class="skill-item">Microsoft Access & QBASE</div>
+                    <div class="skill-item">Quality Control Documentation</div>
+                    <div class="skill-item">Piping Engineering & ITP</div>
+                    <div class="skill-item">ASME & IPS Standards</div>
+                    <div class="skill-item">Primavera P6 & MS Project</div>
+                    <div class="skill-item">C# & .NET Development</div>
+                    <div class="skill-item">React.js & Next.js</div>
+                    <div class="skill-item">Node.js & PHP</div>
+                    <div class="skill-item">HTML, CSS, JavaScript</div>
+                    <div class="skill-item">MySQL & MongoDB</div>
+                    <div class="skill-item">WordPress Development</div>
+                    <div class="skill-item">SharePoint & Power Apps</div>
+                    <div class="skill-item">Power BI & Data Analytics</div>
+                    <div class="skill-item">Python (NumPy, Pandas, Matplotlib)</div>
+                    <div class="skill-item">Docker & DevOps</div>
+                    <div class="skill-item">n8n Automation</div>
+                    <div class="skill-item">Git & GitHub</div>
+                    <div class="skill-item">AI & Prompt Engineering</div>
+                    <div class="skill-item">Figma & UI/UX Design</div>
+                    <div class="skill-item">Bootstrap & TailwindCSS</div>
+                    <div class="skill-item">NDT & PWHT</div>
+                    <div class="skill-item">WJCS & Package Testing</div>
+                    <div class="skill-item">CMMS Systems</div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3 class="section-title">Professional Experience</h3>
+
+                <div class="job">
+                    <div class="job-title">Document Control & Data Analysis Specialist</div>
+                    <div class="company">Sepehr Pasargad Oil & Gas Exploitation Company</div>
+                    <div class="date-location">August 2024 - Present | Ahvaz, Khuzestan</div>
+                    <ul>
+                        <li>Designed and implemented organizational document management system in SharePoint</li>
+                        <li>Developed analytical dashboards for production, maintenance, and HSE using Power BI</li>
+                        <li>Created IDMS software for corrosion inspection and quality control in oil and gas sector</li>
+                        <li>Implemented data-driven decision-making processes across multiple departments</li>
+                    </ul>
+                </div>
+
+                <div class="job">
+                    <div class="job-title">Senior Database Specialist</div>
+                    <div class="company">Nargan Company - Dehloran Petrochemical Project</div>
+                    <div class="date-location">March 2023 - May 2024 | Dehloran, Ilam</div>
+                    <ul>
+                        <li>Designed and developed comprehensive quality control and technical office database on Access and SQL Server platforms across multiple disciplines</li>
+                        <li>Managed all WJCS activities, material control, package testing, and NDT operations</li>
+                        <li>Generated ITP-based reports for various disciplines including structure, civil, mechanical, piping, electrical, instrumentation, painting, and insulation</li>
+                        <li>Archived daily reports and produced joint history documentation for piping systems</li>
+                        <li>Delivered management reports on daily site activities and performance metrics</li>
+                        <li>Performed data analysis and optimized information management processes</li>
+                        <li>Updated database software based on evolving project requirements</li>
+                        <li>Supervised database user performance and conducted training sessions</li>
+                    </ul>
+                </div>
+
+                <div class="job">
+                    <div class="job-title">Senior Database Specialist</div>
+                    <div class="company">OEID - Mansouri Oil Field Development Project</div>
+                    <div class="date-location">August 2019 - March 2023 | Ahvaz, Khuzestan</div>
+                    <ul>
+                        <li>Architected and implemented quality control and technical office database on Access and SQL Server</li>
+                        <li>Designed ITP-based reports across all project disciplines</li>
+                        <li>Managed comprehensive WJCS, material control, package testing, and NDT operations</li>
+                        <li>Created daily report archives and joint history documentation</li>
+                        <li>Developed management dashboards using Power BI for activity tracking and performance monitoring</li>
+                        <li>Maintained and updated database systems according to project evolution</li>
+                        <li>Controlled contractor invoices for piping and NDT activities</li>
+                        <li>Monitored and optimized database user operations</li>
+                    </ul>
+                </div>
+
+                <div class="job">
+                    <div class="job-title">Database Specialist</div>
+                    <div class="company">Jahanpars Engineering & Construction - Azar Oil Field Development</div>
+                    <div class="date-location">December 2017 - August 2019 | Mehran, Ilam</div>
+                    <ul>
+                        <li>Developed quality control and technical office database using Access and SQL Server</li>
+                        <li>Handled all WJCS, package testing, NDT, and PWHT operations</li>
+                        <li>Managed ICAPS activities and documentation</li>
+                        <li>Registered daily fit-up and welding reports in DORSA software</li>
+                        <li>Produced management reports including joint history and package test status</li>
+                        <li>Updated database functionality based on project needs</li>
+                        <li>Controlled contractor invoicing for piping, NDT, and PWHT activities</li>
+                        <li>Supervised database user performance</li>
+                    </ul>
+                </div>
+
+                <div class="job">
+                    <div class="job-title">Database Specialist</div>
+                    <div class="company">Azaran Gostar Pars - South Pars Gas Field Phases 22-24</div>
+                    <div class="date-location">July 2016 - December 2017 | Kangan, Bushehr</div>
+                    <ul>
+                        <li>Designed quality control and technical office database for piping discipline on Access and SQL Server</li>
+                        <li>Registered daily fit-up and welding reports in DORSA software</li>
+                        <li>Executed all WJCS, package testing, and NDT activities</li>
+                        <li>Generated piping and NDT backlog reports</li>
+                        <li>Managed welder information control and repair rate reporting</li>
+                        <li>Delivered comprehensive management reports on daily activities</li>
+                        <li>Controlled contractor invoices for piping and NDT services</li>
+                        <li>Monitored database user performance</li>
+                    </ul>
+                </div>
+
+                <div class="job">
+                    <div class="job-title">WJCS Specialist</div>
+                    <div class="company">Eghdas Engineering Company - South Pars Phase 14</div>
+                    <div class="date-location">July 2017 - December 2017 | Kangan, Bushehr</div>
+                    <ul>
+                        <li>Designed piping quality control and technical office database on Access and SQL Server</li>
+                        <li>Registered daily fit-up and welding reports in DORSA software</li>
+                        <li>Managed WJCS, package testing, and NDT operations</li>
+                        <li>Produced management reports and package test status updates</li>
+                        <li>Controlled contractor invoices for NDT activities</li>
+                    </ul>
+                </div>
+
+                <div class="job">
+                    <div class="job-title">Database Specialist</div>
+                    <div class="company">Eghdas Engineering Company - South Pars Phases 20-21</div>
+                    <div class="date-location">February 2016 - July 2016 | Asaluyeh, Bushehr</div>
+                    <ul>
+                        <li>Developed piping quality control database and welder information control system</li>
+                        <li>Registered daily reports in OIEC Oracle software</li>
+                        <li>Generated piping and NDT backlog reports</li>
+                        <li>Controlled contractor invoices for piping, NDT, and PWHT</li>
+                        <li>Managed welder information and repair rate analysis</li>
+                        <li>Delivered management reports on site activities and package test status</li>
+                    </ul>
+                </div>
+
+                <div class="job">
+                    <div class="job-title">Piping Technical Office Specialist</div>
+                    <div class="company">Lidoma Installation & Commissioning - South Pars Phases 20-21</div>
+                    <div class="date-location">October 2015 - February 2016 | Asaluyeh, Bushehr</div>
+                    <ul>
+                        <li>Created database system for piping quality control and technical office operations</li>
+                        <li>Performed all technical office activities for oil and gas refinery installation and commissioning</li>
+                    </ul>
+                </div>
+
+                <div class="job">
+                    <div class="job-title">WJCS Specialist</div>
+                    <div class="company">Jahanpars Engineering & Construction - North Azadegan Oil Field</div>
+                    <div class="date-location">May 2015 - October 2015 | Shadegan, Khuzestan</div>
+                    <ul>
+                        <li>Registered daily reports in welding control system software</li>
+                        <li>Controlled contractor invoices for piping, NDT, and PWHT</li>
+                        <li>Generated management reports on daily activities and package test status</li>
+                    </ul>
+                </div>
+
+                <div class="job">
+                    <div class="job-title">Technical Office & Quality Control Specialist</div>
+                    <div class="company">MAPNA Pars - South Pars Phase 14</div>
+                    <div class="date-location">February 2015 - May 2015 | Kangan, Bushehr</div>
+                    <ul>
+                        <li>Delivered project control reports for support and piping design, fabrication, and installation</li>
+                        <li>Managed support technical office operations</li>
+                        <li>Developed support MTO documentation</li>
+                        <li>Issued MIV and MRV for material management</li>
+                        <li>Created WPA and controlled contractor invoicing</li>
+                    </ul>
+                </div>
+
+                <div class="job">
+                    <div class="job-title">Technical Office & Quality Control Specialist</div>
+                    <div class="company">Iran General Contracting (IGC) - South Pars Phases 17-18</div>
+                    <div class="date-location">September 2014 - February 2015 | Asaluyeh, Bushehr</div>
+                    <ul>
+                        <li>Established database for piping quality control and technical office</li>
+                        <li>Executed all operations for quality control and technical office departments</li>
+                    </ul>
+                </div>
+
+                <div class="job">
+                    <div class="job-title">PLC Specialist</div>
+                    <div class="company">Isfahan Precision Instruments Industries</div>
+                    <div class="date-location">June 2010 - September 2010 | Isfahan</div>
+                    <ul>
+                        <li>Implemented control mechanisms using Simatic Manager S7 software</li>
+                    </ul>
+                </div>
+
+                <div class="job">
+                    <div class="job-title">Technical Electrical Instructor</div>
+                    <div class="company">Technical and Vocational Training Organization - Shahinshahr Center</div>
+                    <div class="date-location">June 2009 - September 2009 | Shahinshahr, Isfahan</div>
+                    <ul>
+                        <li>Taught specialized electrical courses to job seekers at Shahinshahr Technical and Vocational Center</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3 class="section-title">Education</h3>
+                
+                <div class="education">
+                    <div class="job-title">Bachelor of Electrical Engineering - Electronics</div>
+                    <div class="company">University of Jihad - Industrial University of Isfahan</div>
+                    <div class="date-location">2007 - 2012 | Isfahan, Iran</div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3 class="section-title">Professional Certifications</h3>
+                
+                <div class="education">
+                    <div class="job-title">UI Design Course</div>
+                    <div class="company">Melina Design Agency</div>
+                    <div class="date-location">March 2024</div>
+                </div>
+
+                <div class="education">
+                    <div class="job-title">Backend Web Development (JavaScript, TypeScript, Node.js, Next.js)</div>
+                    <div class="company">BotoStart Programming Academy</div>
+                    <div class="date-location">May 2023</div>
+                    <p><a href="https://botostart.ir/dashboard" target="_blank">View Certificate</a></p>
+                </div>
+
+                <div class="education">
+                    <div class="job-title">Frontend Web Development (HTML, CSS, JS, React.js, Git, GitHub)</div>
+                    <div class="company">FrontHooks Programming Academy</div>
+                    <div class="date-location">December 2022</div>
+                    <p><a href="https://fronthooks.ir/profile/courses" target="_blank">View Certificate</a></p>
+                </div>
+
+                <div class="education">
+                    <div class="job-title">Full Stack Developer (Software, Website, Mobile App Development)</div>
+                    <div class="company">Mohajj Academy</div>
+                    <div class="date-location">February 2021</div>
+                </div>
+
+                <div class="education">
+                    <div class="job-title">PLC Training Course</div>
+                    <div class="company">Mohajjer University of Isfahan</div>
+                    <div class="date-location">September 2010</div>
+                </div>
+
+                <div class="education">
+                    <div class="job-title">Computer Skills Level 1 & 2</div>
+                    <div class="company">Mahan Computer Science Institute</div>
+                    <div class="date-location">January 2005</div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3 class="section-title">Notable Projects</h3>
+
+                <div class="project">
+                    <div class="job-title">Personal Portfolio Website</div>
+                    <div class="date-location">November 2024</div>
+                    <p>Responsive portfolio website designed with HTML, CSS, JavaScript, and Bootstrap with email functionality.</p>
+                    <p><a href="https://sajadssa.vercel.app" target="_blank">View Project</a></p>
+                </div>
+
+                <div class="project">
+                    <div class="job-title">HSE Analysis Dashboard - Oil Production</div>
+                    <div class="company">Sepehr Pasargad Oil & Gas Exploitation Company</div>
+                    <p>Comprehensive analytical dashboard for HSE monitoring in oil production using Power BI.</p>
+                </div>
+
+                <div class="project">
+                    <div class="job-title">Maintenance & Operations Analytics Dashboard</div>
+                    <div class="company">Sepehr Pasargad Oil & Gas Exploitation Company</div>
+                    <p>Advanced analytics dashboard for maintenance and operations in oil and gas sector using Power BI.</p>
+                </div>
+
+                <div class="project">
+                    <div class="job-title">Online Train Ticket Purchase System</div>
+                    <div class="date-location">June 2023</div>
+                    <p>Dynamic website for electronic train ticket purchasing with digital wallet simulation. Built with PHP, MySQL, and JavaScript. Features include ticket purchase, PDF generation, and financial transaction history.</p>
+                    <p><a href="https://github.com/Sajadssa/online_ticket_purchase" target="_blank">View on GitHub</a></p>
+                </div>
+
+                <div class="project">
+                    <div class="job-title">Herbal Medicine E-commerce Website</div>
+                    <div class="date-location">February 2023</div>
+                    <p>Dynamic e-commerce website with shopping cart functionality developed using JavaScript.</p>
+                    <p><a href="https://github.com/Sajadssa/pharmacology" target="_blank">View on GitHub</a></p>
+                </div>
+
+                <div class="project">
+                    <div class="job-title">Foreign Language Academy Website</div>
+                    <div class="date-location">February 2022</div>
+                    <p>Full-stack website for language academy with registration, edit, and delete functionalities. Features AJAX implementation for seamless page updates without refresh. Built with PHP and MySQL.</p>
+                    <p><a href="https://github.com/Sajadssa/Language_Schools" target="_blank">View on GitHub</a></p>
+                </div>
+
+                <div class="project">
+                    <div class="job-title">Medical Clinic Intelligent Patient Admission Management System (MCIS)</div>
+                    <div class="date-location">November 2021</div>
+                    <p>Software for patient information registration, appointment scheduling, and statistical reporting. Features online capabilities with patient and doctor panels, plus admin control panel. Developed with C# and SQL Server.</p>
+                    <p><a href="https://github.com/Sajadssa/Intelligent-Patient-Admission-Management-System" target="_blank">View on GitHub</a></p>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3 class="section-title">Languages</h3>
+                <div class="languages">
+                    <div class="language">
+                        <div class="language-name">English</div>
+                        <p>Reading: Advanced</p>
+                        <div class="proficiency">
+                            <div class="bar filled"></div>
+                            <div class="bar filled"></div>
+                            <div class="bar filled"></div>
+                            <div class="bar filled"></div>
+                        </div>
+                        <p>Writing: Advanced</p>
+                        <div class="proficiency">
+                            <div class="bar filled"></div>
+                            <div class="bar filled"></div>
+                            <div class="bar filled"></div>
+                            <div class="bar filled"></div>
+                        </div>
+                        <p>Speaking: Intermediate</p>
+                        <div class="proficiency">
+                            <div class="bar filled"></div>
+                            <div class="bar filled"></div>
+                            <div class="bar filled"></div>
+                            <div class="bar"></div>
+                        </div>
+                        <p>Listening: Intermediate</p>
+                        <div class="proficiency">
+                            <div class="bar filled"></div>
+                            <div class="bar filled"></div>
+                            <div class="bar filled"></div>
+                            <div class="bar"></div>
+                        </div>
+                    </div>
+                    <div class="language">
+                        <div class="language-name">Persian (Farsi)</div>
+                        <p>Native Language</p>
+                        <div class="proficiency">
+                            <div class="bar filled"></div>
+                            <div class="bar filled"></div>
+                            <div class="bar filled"></div>
+                            <div class="bar filled"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section achievements">
+                <h3 class="section-title">Achievements & Honors</h3>
+                <ul>
+                    <li>🥇 First Place - Computer Olympiad, Izeh City (May 2005)</li>
+                    <li>🏅 Fourth Place - Computer Olympiad, Khuzestan Province (June 2005)</li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h3 class="section-title">Personal Information</h3>
+                <p><strong>Date of Birth:</strong> September 11, 1988</p>
+                <p><strong>Marital Status:</strong> Married</p>
+                <p><strong>Military Service:</strong> Completed</p>
+            </div>
+        </div>
+    </div>
+
+    <button class="print-button" onclick="window.print()">📄 Print / Save as PDF</button>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const links = document.querySelectorAll('a[href^="http"]');
+            links.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    window.open(this.href, '_blank');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

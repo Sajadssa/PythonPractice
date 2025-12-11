@@ -1,0 +1,161 @@
+<?xml version="1.0" ?>
+<mxfile host="app.diagrams.net" modified="2025-11-27T00:00:00.000Z" agent="QC Workflow Generator v2.0" version="24.0.0" type="device">
+  <diagram name="QC Workflow" id="qc_workflow_1764205716431">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1000" pageHeight="800" background="#FFFFFF" math="0" shadow="0">
+      <root>
+        <mxCell id="root_1764205716431_0"/>
+        <mxCell id="parent_1764205716431_1" parent="root_1764205716431_0"/>
+        <mxCell id="title_1764205716431_1_6d64fdbd" value="&lt;div style=&quot;text-align:center;&quot;&gt;&lt;div style=&quot;font-size:22px;font-weight:bold;margin-bottom:5px;&quot;&gt;Quality Control Process Workflow&lt;/div&gt;&lt;div style=&quot;font-size:11px;font-style:italic;color:#666;&quot;&gt;Process Flow Diagram&lt;/div&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=none;align=center;verticalAlign=middle;" parent="parent_1764205716431_1" vertex="1">
+          <mxGeometry as="geometry" x="250" y="10" width="500" height="60"/>
+        </mxCell>
+        <mxCell id="box_1764205716431_2_e4d38ee0" value="Start" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#388E3C;strokeWidth=2;fontSize=12;fontColor=#212121;align=center;verticalAlign=middle;fontStyle=1;" parent="parent_1764205716431_1" vertex="1">
+          <mxGeometry as="geometry" x="60" y="80" width="90" height="40"/>
+        </mxCell>
+        <mxCell id="box_1764205716431_3_6c6b67fb" value="QC Plan" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#1976D2;strokeWidth=2;fontSize=12;fontColor=#212121;align=center;verticalAlign=middle;fontStyle=1;" parent="parent_1764205716431_1" vertex="1">
+          <mxGeometry as="geometry" x="45" y="135" width="120" height="40"/>
+        </mxCell>
+        <mxCell id="box_1764205716431_4_e507839d" value="Inspection" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#1976D2;strokeWidth=2;fontSize=10;fontColor=#212121;align=center;verticalAlign=middle;fontStyle=1;" parent="parent_1764205716431_1" vertex="1">
+          <mxGeometry as="geometry" x="100" y="180" width="80" height="25"/>
+        </mxCell>
+        <mxCell id="list_1764205716431_5_704c1140" value="&lt;div style=&quot;padding:8px;&quot;&gt;&lt;div style=&quot;margin:3px 0;font-size:10px;&quot;&gt;1. THK Measurement&lt;/div&gt;&lt;div style=&quot;margin:3px 0;font-size:10px;&quot;&gt;2. Painting Check&lt;/div&gt;&lt;div style=&quot;margin:3px 0;font-size:10px;&quot;&gt;3. CIP Check&lt;/div&gt;&lt;div style=&quot;margin:3px 0;font-size:10px;&quot;&gt;4. QC &amp; C Check&lt;/div&gt;&lt;div style=&quot;margin:3px 0;font-size:10px;&quot;&gt;5. Cathode Protection&lt;/div&gt;&lt;div style=&quot;margin:3px 0;font-size:10px;&quot;&gt;6. Lab. Result&lt;/div&gt;&lt;div style=&quot;margin:3px 0;font-size:10px;&quot;&gt;7. Calibration&lt;/div&gt;&lt;div style=&quot;margin:3px 0;font-size:10px;&quot;&gt;8. Pipeline Patrolling&lt;/div&gt;&lt;div style=&quot;margin:3px 0;font-size:10px;&quot;&gt;9. Internal/External Tank&lt;/div&gt;&lt;div style=&quot;margin:3px 0;font-size:10px;&quot;&gt;10. Internal/External Vessel&lt;/div&gt;&lt;div style=&quot;margin:3px 0;font-size:10px;&quot;&gt;11. PIG Driving&lt;/div&gt;&lt;div style=&quot;margin:3px 0;font-size:10px;&quot;&gt;12. Material Request&lt;/div&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#424242;strokeWidth=2;align=left;verticalAlign=top;" parent="parent_1764205716431_1" vertex="1">
+          <mxGeometry as="geometry" x="35" y="215" width="140" height="265"/>
+        </mxCell>
+        <mxCell id="list_1764205716431_6_96ce7c51" value="&lt;div style=&quot;padding:8px;&quot;&gt;&lt;div style=&quot;font-weight:bold;margin-bottom:8px;font-size:12px;&quot;&gt;Construction:&lt;/div&gt;&lt;div style=&quot;margin:3px 0;font-size:10px;&quot;&gt;1. New Construction&lt;/div&gt;&lt;div style=&quot;margin:3px 0;font-size:10px;&quot;&gt;2. Punch Clearance&lt;/div&gt;&lt;div style=&quot;margin:3px 0;font-size:10px;&quot;&gt;3. Overhaul&lt;/div&gt;&lt;div style=&quot;margin:3px 0;font-size:10px;&quot;&gt;4. Civil Work&lt;/div&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#F57C00;strokeWidth=2;align=left;verticalAlign=top;" parent="parent_1764205716431_1" vertex="1">
+          <mxGeometry as="geometry" x="35" y="495" width="140" height="100"/>
+        </mxCell>
+        <mxCell id="list_1764205716431_7_113404f4" value="&lt;div style=&quot;padding:8px;&quot;&gt;&lt;div style=&quot;font-weight:bold;margin-bottom:8px;font-size:12px;&quot;&gt;Subsurface:&lt;/div&gt;&lt;div style=&quot;margin:3px 0;font-size:10px;&quot;&gt;1. Well Test&lt;/div&gt;&lt;div style=&quot;margin:3px 0;font-size:10px;&quot;&gt;2. Well Service&lt;/div&gt;&lt;div style=&quot;margin:3px 0;font-size:10px;&quot;&gt;3. Equipment&lt;/div&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EDE7F6;strokeColor=#7B1FA2;strokeWidth=2;align=left;verticalAlign=top;" parent="parent_1764205716431_1" vertex="1">
+          <mxGeometry as="geometry" x="35" y="610" width="140" height="85"/>
+        </mxCell>
+        <mxCell id="box_1764205716431_8_037b3e58" value="Procedures" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#424242;strokeWidth=2;fontSize=11;fontColor=#212121;align=center;verticalAlign=middle;fontStyle=1;" parent="parent_1764205716431_1" vertex="1">
+          <mxGeometry as="geometry" x="75" y="710" width="110" height="40"/>
+        </mxCell>
+        <mxCell id="box_1764205716431_9_af1095bc" value="RFI" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#1976D2;strokeWidth=2;fontSize=10;fontColor=#212121;align=center;verticalAlign=middle;fontStyle=1;" parent="parent_1764205716431_1" vertex="1">
+          <mxGeometry as="geometry" x="195" y="295" width="45" height="25"/>
+        </mxCell>
+        <mxCell id="box_1764205716431_10_4cf5f015" value="TPI&lt;br&gt;Inspection" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#1976D2;strokeWidth=2;fontSize=13;fontColor=#212121;align=center;verticalAlign=middle;fontStyle=1;" parent="parent_1764205716431_1" vertex="1">
+          <mxGeometry as="geometry" x="220" y="325" width="130" height="65"/>
+        </mxCell>
+        <mxCell id="box_1764205716431_11_ab92c872" value="QC Report" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#424242;strokeWidth=2;fontSize=11;fontColor=#212121;align=center;verticalAlign=middle;" parent="parent_1764205716431_1" vertex="1">
+          <mxGeometry as="geometry" x="270" y="240" width="90" height="30"/>
+        </mxCell>
+        <mxCell id="list_1764205716431_12_bb4823f2" value="&lt;div style=&quot;padding:8px;&quot;&gt;&lt;div style=&quot;font-weight:bold;margin-bottom:8px;font-size:12px;&quot;&gt;IDMS:&lt;/div&gt;&lt;div style=&quot;margin:3px 0;font-size:10px;&quot;&gt;1. Process&lt;/div&gt;&lt;div style=&quot;margin:3px 0;font-size:10px;&quot;&gt;2. KPIs&lt;/div&gt;&lt;div style=&quot;margin:3px 0;font-size:10px;&quot;&gt;3. Management Status&lt;/div&gt;&lt;div style=&quot;margin:3px 0;font-size:10px;&quot;&gt;4. QC Dashboard&lt;/div&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#1976D2;strokeWidth=2;align=left;verticalAlign=top;" parent="parent_1764205716431_1" vertex="1">
+          <mxGeometry as="geometry" x="380" y="165" width="130" height="115"/>
+        </mxCell>
+        <mxCell id="cylinder_1764205716431_13_96f7dddf" value="RBI" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#E8F5E9;strokeColor=#388E3C;strokeWidth=2;fontSize=13;fontStyle=1;fontColor=#212121;" parent="parent_1764205716431_1" vertex="1">
+          <mxGeometry as="geometry" x="390" y="360" width="110" height="75"/>
+        </mxCell>
+        <mxCell id="box_1764205716431_14_b351ce7f" value="Engineering" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#1976D2;strokeWidth=2;fontSize=13;fontColor=#212121;align=center;verticalAlign=middle;fontStyle=1;" parent="parent_1764205716431_1" vertex="1">
+          <mxGeometry as="geometry" x="260" y="490" width="140" height="85"/>
+        </mxCell>
+        <mxCell id="list_1764205716431_15_ca7705e2" value="&lt;div style=&quot;padding:8px;&quot;&gt;&lt;div style=&quot;margin:3px 0;font-size:10px;&quot;&gt;1. Technical Office&lt;/div&gt;&lt;div style=&quot;margin:3px 0;font-size:10px;&quot;&gt;2. I.TP&lt;/div&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#424242;strokeWidth=2;align=left;verticalAlign=top;" parent="parent_1764205716431_1" vertex="1">
+          <mxGeometry as="geometry" x="435" y="505" width="115" height="60"/>
+        </mxCell>
+        <mxCell id="list_1764205716431_16_7aee8c4e" value="&lt;div style=&quot;padding:8px;&quot;&gt;&lt;div style=&quot;margin:3px 0;font-size:10px;&quot;&gt;1. MOC&lt;/div&gt;&lt;div style=&quot;margin:3px 0;font-size:10px;&quot;&gt;2. Modification Of Design&lt;/div&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#424242;strokeWidth=2;align=left;verticalAlign=top;" parent="parent_1764205716431_1" vertex="1">
+          <mxGeometry as="geometry" x="275" y="620" width="135" height="60"/>
+        </mxCell>
+        <mxCell id="box_1764205716431_17_3cb5e460" value="WRFM" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#1976D2;strokeWidth=2;fontSize=14;fontColor=#212121;align=center;verticalAlign=middle;fontStyle=1;" parent="parent_1764205716431_1" vertex="1">
+          <mxGeometry as="geometry" x="615" y="145" width="105" height="85"/>
+        </mxCell>
+        <mxCell id="list_1764205716431_18_7b94368a" value="&lt;div style=&quot;padding:8px;&quot;&gt;&lt;div style=&quot;font-weight:bold;margin-bottom:8px;font-size:12px;&quot;&gt;Min Inspection:&lt;/div&gt;&lt;div style=&quot;margin:3px 0;font-size:10px;&quot;&gt;1. Cost Control&lt;/div&gt;&lt;div style=&quot;margin:3px 0;font-size:10px;&quot;&gt;2. Preventive Corrosion&lt;/div&gt;&lt;div style=&quot;margin:3px 0;font-size:10px;&quot;&gt;3. Preventive Of Material&lt;/div&gt;&lt;div style=&quot;margin:3px 0;font-size:10px;&quot;&gt;4. Anti-Corrosion&lt;/div&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#1976D2;strokeWidth=2;align=left;verticalAlign=top;" parent="parent_1764205716431_1" vertex="1">
+          <mxGeometry as="geometry" x="795" y="105" width="140" height="120"/>
+        </mxCell>
+        <mxCell id="box_1764205716431_19_5f1e310a" value="IOW" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#424242;strokeWidth=2;fontSize=12;fontColor=#212121;align=center;verticalAlign=middle;fontStyle=1;" parent="parent_1764205716431_1" vertex="1">
+          <mxGeometry as="geometry" x="640" y="285" width="70" height="55"/>
+        </mxCell>
+        <mxCell id="box_1764205716431_20_fd642f82" value="RBI Module" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#424242;strokeWidth=2;fontSize=10;fontColor=#212121;align=center;verticalAlign=middle;" parent="parent_1764205716431_1" vertex="1">
+          <mxGeometry as="geometry" x="860" y="305" width="90" height="25"/>
+        </mxCell>
+        <mxCell id="list_1764205716431_21_fb671984" value="&lt;div style=&quot;padding:8px;&quot;&gt;&lt;div style=&quot;font-weight:bold;margin-bottom:8px;font-size:12px;&quot;&gt;Material Check:&lt;/div&gt;&lt;div style=&quot;margin:3px 0;font-size:10px;&quot;&gt;1. IN&lt;/div&gt;&lt;div style=&quot;margin:3px 0;font-size:10px;&quot;&gt;2. I/R&lt;/div&gt;&lt;div style=&quot;margin:3px 0;font-size:10px;&quot;&gt;3. IRN&lt;/div&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#424242;strokeWidth=2;align=left;verticalAlign=top;" parent="parent_1764205716431_1" vertex="1">
+          <mxGeometry as="geometry" x="560" y="510" width="125" height="85"/>
+        </mxCell>
+        <mxCell id="box_1764205716431_22_aacbf8ec" value="Warehouse" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#F57C00;strokeWidth=2;fontSize=13;fontColor=#212121;align=center;verticalAlign=middle;fontStyle=1;" parent="parent_1764205716431_1" vertex="1">
+          <mxGeometry as="geometry" x="715" y="510" width="105" height="65"/>
+        </mxCell>
+        <mxCell id="cylinder_1764205716431_23_7344a0af" value="CMMS" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#E8F5E9;strokeColor=#388E3C;strokeWidth=2;fontSize=13;fontStyle=1;fontColor=#212121;" parent="parent_1764205716431_1" vertex="1">
+          <mxGeometry as="geometry" x="655" y="390" width="100" height="65"/>
+        </mxCell>
+        <mxCell id="list_1764205716431_24_4003f2ea" value="&lt;div style=&quot;padding:8px;&quot;&gt;&lt;div style=&quot;font-weight:bold;margin-bottom:8px;font-size:12px;&quot;&gt;RCA:&lt;/div&gt;&lt;div style=&quot;margin:3px 0;font-size:10px;&quot;&gt;1. PM change&lt;/div&gt;&lt;div style=&quot;margin:3px 0;font-size:10px;&quot;&gt;2. Min CM&lt;/div&gt;&lt;div style=&quot;margin:3px 0;font-size:10px;&quot;&gt;3. Failure Analysis&lt;/div&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#424242;strokeWidth=2;align=left;verticalAlign=top;" parent="parent_1764205716431_1" vertex="1">
+          <mxGeometry as="geometry" x="805" y="365" width="125" height="90"/>
+        </mxCell>
+        <mxCell id="box_1764205716431_25_76075e80" value="Scope Of Work" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EDE7F6;strokeColor=#7B1FA2;strokeWidth=2;fontSize=12;fontColor=#212121;align=center;verticalAlign=middle;fontStyle=1;" parent="parent_1764205716431_1" vertex="1">
+          <mxGeometry as="geometry" x="805" y="610" width="125" height="65"/>
+        </mxCell>
+        <mxCell id="arrow_1764205716431_26_5b3e46ab" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;endFill=1;strokeColor=#424242;strokeWidth=2;" parent="parent_1764205716431_1" edge="1" source="box_1764205716431_2_e4d38ee0" target="box_1764205716431_3_6c6b67fb">
+          <mxGeometry as="geometry" relative="1"/>
+        </mxCell>
+        <mxCell id="arrow_1764205716431_27_fd8cce4c" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;endFill=1;strokeColor=#424242;strokeWidth=2;" parent="parent_1764205716431_1" edge="1" source="list_1764205716431_5_704c1140" target="box_1764205716431_10_4cf5f015">
+          <mxGeometry as="geometry" relative="1"/>
+        </mxCell>
+        <mxCell id="arrow_1764205716431_28_974f1319" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;endFill=1;strokeColor=#424242;strokeWidth=2;" parent="parent_1764205716431_1" edge="1" source="list_1764205716431_6_96ce7c51" target="box_1764205716431_10_4cf5f015">
+          <mxGeometry as="geometry" relative="1"/>
+        </mxCell>
+        <mxCell id="arrow_1764205716431_29_53c55869" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;endFill=1;strokeColor=#424242;strokeWidth=2;" parent="parent_1764205716431_1" edge="1" source="box_1764205716431_10_4cf5f015" target="list_1764205716431_12_bb4823f2">
+          <mxGeometry as="geometry" relative="1"/>
+        </mxCell>
+        <mxCell id="arrow_1764205716431_30_e06e0b97" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;endFill=1;strokeColor=#424242;strokeWidth=2;" parent="parent_1764205716431_1" edge="1" source="box_1764205716431_11_ab92c872" target="list_1764205716431_12_bb4823f2">
+          <mxGeometry as="geometry" relative="1"/>
+        </mxCell>
+        <mxCell id="arrow_1764205716431_31_2bf18a5d" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;endFill=1;strokeColor=#424242;strokeWidth=2;" parent="parent_1764205716431_1" edge="1" source="list_1764205716431_12_bb4823f2" target="cylinder_1764205716431_13_96f7dddf">
+          <mxGeometry as="geometry" relative="1"/>
+        </mxCell>
+        <mxCell id="arrow_1764205716431_32_657055db" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;endFill=1;strokeColor=#424242;strokeWidth=2;" parent="parent_1764205716431_1" edge="1" source="list_1764205716431_12_bb4823f2" target="box_1764205716431_17_3cb5e460">
+          <mxGeometry as="geometry" relative="1"/>
+        </mxCell>
+        <mxCell id="arrow_1764205716431_33_cf923efd" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;endFill=1;strokeColor=#424242;strokeWidth=2;" parent="parent_1764205716431_1" edge="1" source="box_1764205716431_17_3cb5e460" target="list_1764205716431_18_7b94368a">
+          <mxGeometry as="geometry" relative="1"/>
+        </mxCell>
+        <mxCell id="arrow_1764205716431_34_736d4ed3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;endFill=1;strokeColor=#757575;strokeWidth=2;dashed=1;dashPattern=5 5;" parent="parent_1764205716431_1" edge="1" source="box_1764205716431_17_3cb5e460" target="box_1764205716431_19_5f1e310a">
+          <mxGeometry as="geometry" relative="1"/>
+        </mxCell>
+        <mxCell id="arrow_1764205716431_35_c801b736" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;endFill=1;strokeColor=#757575;strokeWidth=2;dashed=1;dashPattern=5 5;" parent="parent_1764205716431_1" edge="1" source="box_1764205716431_19_5f1e310a" target="box_1764205716431_17_3cb5e460">
+          <mxGeometry as="geometry" relative="1"/>
+        </mxCell>
+        <mxCell id="arrow_1764205716431_36_d617461c" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;endFill=1;strokeColor=#424242;strokeWidth=2;" parent="parent_1764205716431_1" edge="1" source="cylinder_1764205716431_13_96f7dddf" target="box_1764205716431_14_b351ce7f">
+          <mxGeometry as="geometry" relative="1"/>
+        </mxCell>
+        <mxCell id="arrow_1764205716431_37_b156dfa8" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;endFill=1;strokeColor=#757575;strokeWidth=2;dashed=1;dashPattern=5 5;" parent="parent_1764205716431_1" edge="1" source="cylinder_1764205716431_13_96f7dddf" target="cylinder_1764205716431_23_7344a0af">
+          <mxGeometry as="geometry" relative="1"/>
+        </mxCell>
+        <mxCell id="arrow_1764205716431_38_9f43f3e8" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;endFill=1;strokeColor=#757575;strokeWidth=2;dashed=1;dashPattern=5 5;" parent="parent_1764205716431_1" edge="1" source="cylinder_1764205716431_23_7344a0af" target="cylinder_1764205716431_13_96f7dddf">
+          <mxGeometry as="geometry" relative="1"/>
+        </mxCell>
+        <mxCell id="arrow_1764205716431_39_dbb6499c" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;endFill=1;strokeColor=#757575;strokeWidth=2;dashed=1;dashPattern=5 5;" parent="parent_1764205716431_1" edge="1" source="cylinder_1764205716431_13_96f7dddf" target="box_1764205716431_19_5f1e310a">
+          <mxGeometry as="geometry" relative="1"/>
+        </mxCell>
+        <mxCell id="arrow_1764205716431_40_797e250f" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;endFill=1;strokeColor=#424242;strokeWidth=2;" parent="parent_1764205716431_1" edge="1" source="box_1764205716431_14_b351ce7f" target="list_1764205716431_15_ca7705e2">
+          <mxGeometry as="geometry" relative="1"/>
+        </mxCell>
+        <mxCell id="arrow_1764205716431_41_e01306ca" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;endFill=1;strokeColor=#424242;strokeWidth=2;" parent="parent_1764205716431_1" edge="1" source="box_1764205716431_14_b351ce7f" target="list_1764205716431_16_7aee8c4e">
+          <mxGeometry as="geometry" relative="1"/>
+        </mxCell>
+        <mxCell id="arrow_1764205716431_42_6e727a77" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;endFill=1;strokeColor=#424242;strokeWidth=2;" parent="parent_1764205716431_1" edge="1" source="box_1764205716431_14_b351ce7f" target="box_1764205716431_8_037b3e58">
+          <mxGeometry as="geometry" relative="1"/>
+        </mxCell>
+        <mxCell id="arrow_1764205716431_43_686f0c64" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;endFill=1;strokeColor=#424242;strokeWidth=2;" parent="parent_1764205716431_1" edge="1" source="list_1764205716431_15_ca7705e2" target="list_1764205716431_21_fb671984">
+          <mxGeometry as="geometry" relative="1"/>
+        </mxCell>
+        <mxCell id="arrow_1764205716431_44_5a2fe0f8" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;endFill=1;strokeColor=#424242;strokeWidth=2;" parent="parent_1764205716431_1" edge="1" source="list_1764205716431_21_fb671984" target="box_1764205716431_22_aacbf8ec">
+          <mxGeometry as="geometry" relative="1"/>
+        </mxCell>
+        <mxCell id="arrow_1764205716431_45_6f43efb4" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;endFill=1;strokeColor=#424242;strokeWidth=2;" parent="parent_1764205716431_1" edge="1" source="box_1764205716431_22_aacbf8ec" target="cylinder_1764205716431_23_7344a0af">
+          <mxGeometry as="geometry" relative="1"/>
+        </mxCell>
+        <mxCell id="arrow_1764205716431_46_34702183" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;endFill=1;strokeColor=#424242;strokeWidth=2;" parent="parent_1764205716431_1" edge="1" source="cylinder_1764205716431_23_7344a0af" target="list_1764205716431_24_4003f2ea">
+          <mxGeometry as="geometry" relative="1"/>
+        </mxCell>
+        <mxCell id="arrow_1764205716431_47_cf694ec5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;endFill=1;strokeColor=#757575;strokeWidth=2;dashed=1;dashPattern=5 5;" parent="parent_1764205716431_1" edge="1" source="list_1764205716431_16_7aee8c4e" target="box_1764205716431_25_76075e80">
+          <mxGeometry as="geometry" relative="1"/>
+        </mxCell>
+        <mxCell id="arrow_1764205716431_48_b72b03df" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;endFill=1;strokeColor=#757575;strokeWidth=2;dashed=1;dashPattern=5 5;" parent="parent_1764205716431_1" edge="1" source="box_1764205716431_22_aacbf8ec" target="box_1764205716431_25_76075e80">
+          <mxGeometry as="geometry" relative="1"/>
+        </mxCell>
+        <mxCell id="arrow_1764205716431_49_5b5068ef" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;endFill=1;strokeColor=#424242;strokeWidth=2;" parent="parent_1764205716431_1" edge="1" source="list_1764205716431_7_113404f4" target="box_1764205716431_8_037b3e58">
+          <mxGeometry as="geometry" relative="1"/>
+        </mxCell>
+        <mxCell id="arrow_1764205716431_50_c54737ab" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;endFill=1;strokeColor=#424242;strokeWidth=2;" parent="parent_1764205716431_1" edge="1" source="box_1764205716431_8_037b3e58" target="box_1764205716431_14_b351ce7f">
+          <mxGeometry as="geometry" relative="1"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

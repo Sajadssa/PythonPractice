@@ -142,8 +142,8 @@ def convert_excel_to_pdf(source_dir, pdf_output_dir):
     print("="*50)
 
 # تنظیمات
-source_directory = r"D:\Sepher_Pasargad\works\Production\7-Delivery & Acceptance Reports"
-extracted_files_dir = r"D:\Sepher_Pasargad\works\Production\All_Extracted_Files"
+source_directory = r"D:\Sepher_Pasargad\works\Production\Daily_Acceptance"
+extracted_files_dir = r"D:\Sepher_Pasargad\works\Production\Daily_Acceptance"
 pdf_output_dir = r"D:\Sepher_Pasargad\works\Production\Converted_Excel_to_PDF"
 
 # اجرای برنامه

@@ -249,6 +249,7 @@ class ExcelToPdfProcessor:
                     # مرتب‌سازی: Heavy اول، بعد Light
                     files_sorted = sorted(files, key=lambda x: 0 if 'Heavy' in x['type'] else 1)
                     
+                    
                     for f in files_sorted:
                         merger.append(f['temp_pdf'])
                     

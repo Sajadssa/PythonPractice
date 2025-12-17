@@ -120,8 +120,8 @@ def extract_report_title_from_pdf(pdf_path):
             first_page = pdf_reader.pages[0]
             text = first_page.extract_text()
             
-            if "PRODUCTION ENGINEERING MONTHLY REPORT" in text.upper():
-                return "PRODUCTION ENGINEERING MONTHLY REPORT"
+            if "MAINTENANCE MONTHLY REPORT" in text.upper():
+                return "MAINTENANCE MONTHLY REPORT"
             elif "JCTION ENGINEERING MONTHLY REPORT" in text.upper():
                 return "JCTION ENGINEERING MONTHLY REPORT"
             else:
@@ -145,8 +145,8 @@ def extract_report_title_from_word(doc_path):
                 for cell in row.cells:
                     full_text += cell.text.upper() + " "
         
-        if "PRODUCTION ENGINEERING MONTHLY REPORT" in full_text:
-            return "PRODUCTION ENGINEERING MONTHLY REPORT"
+        if "MAINTENANCE MONTHLY REPORT" in full_text:
+            return "MAINTENANCE REPORT"
         elif "JCTION ENGINEERING MONTHLY REPORT" in full_text:
             return "JCTION ENGINEERING MONTHLY REPORT"
         else:
@@ -284,7 +284,7 @@ def create_excel_report(folder_path, output_file="Weekly_Reports.xlsx"):
         print(f"\n❌ خطا در ذخیره فایل: {e}")
 
 if __name__ == "__main__":
-    folder_path = r"D:\Sepher_Pasargad\works\Production\Quarterly"
+    folder_path = r"D:\Sepher_Pasargad\works\Maintenace\Maintenance Report\All_Extracted\monthly"
     
     if not os.path.exists(folder_path):
         print(f"❌ مسیر {folder_path} وجود ندارد!")

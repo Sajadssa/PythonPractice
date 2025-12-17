@@ -47,8 +47,8 @@ def extract_all_files(source_dir, destination_dir):
     print("="*50)
 
 # تنظیمات
-source_directory = r"D:\Sepher_Pasargad\works\Production\7-Delivery & Acceptance Reports"
-destination_directory = r"D:\Sepher_Pasargad\works\Production\All_Extracted_Files"
+source_directory = r"D:\Sepher_Pasargad\works\Production\Production Operation Report"
+destination_directory = r"D:\Sepher_Pasargad\works\Production\Production Operation Report\weekly"
 
 # اجرای برنامه
 if __name__ == "__main__":

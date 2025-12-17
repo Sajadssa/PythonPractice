@@ -294,7 +294,7 @@ def process_pdfs(directory_path):
             info = processor.extract_doc_info(text)
             
             if info['number'] and info['rev']:
-                new_name = f"SJSC-GGNRSP-MOWP-REDA-{info['number']}-{info['rev']}.pdf"
+                new_name = f"SJSC-GGNRSP-MADR-REWK-{info['number']}-{info['rev']}.pdf"
                 new_path = os.path.join(directory_path, new_name)
                 
                 if not os.path.exists(new_path) and pdf_file != new_name:
@@ -382,7 +382,7 @@ def process_pdfs(directory_path):
 
 
 if __name__ == "__main__":
-    folder_path = r"D:\Sepher_Pasargad\works\Production\Daily_Acceptance"
+    folder_path = r"D:\Sepher_Pasargad\works\Maintenace\Maintenance Report\All_Extracted\weekly"
     
     print("🚀 شروع پردازش فایل‌های PDF...")
     print("="*70)

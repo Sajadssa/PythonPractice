@@ -49,6 +49,7 @@ def extract_all_files(source_dir, destination_dir):
 def convert_excel_to_pdf(source_dir, pdf_output_dir):
     """
     فایل‌های اکسلی که نسخه PDF ندارند را به PDF تبدیل می‌کند
+    با تنظیمات Fit-to-Page و حفظ جهت صفحه (Landscape/Portrait)
     """
     try:
         import win32com.client
@@ -117,8 +118,60 @@ def convert_excel_to_pdf(source_dir, pdf_output_dir):
                 # باز کردن فایل اکسل
                 wb = excel.Workbooks.Open(excel_path)
                 
-                # تبدیل به PDF (0 = xlTypePDF)
-                wb.ExportAsFixedFormat(0, pdf_path)
+                # تنظیمات برای همه شیت‌ها
+                for sheet in wb.Worksheets:
+                    try:
+                        # تشخیص جهت صفحه بر اساس محتوا
+                        used_range = sheet.UsedRange
+                        rows_count = used_range.Rows.Count
+                        cols_count = used_range.Columns.Count
+                        
+                        # محاسبه نسبت ابعاد محتوا
+                        # اگر تعداد ستون‌ها بیشتر باشد -> Landscape
+                        # اگر تعداد سطرها بیشتر باشد -> Portrait
+                        if cols_count > rows_count * 1.3:
+                            sheet.PageSetup.Orientation = 2  # xlLandscape
+                            print(f"  → شیت '{sheet.Name}': افقی (Landscape)")
+                        else:
+                            sheet.PageSetup.Orientation = 1  # xlPortrait
+                            print(f"  → شیت '{sheet.Name}': عمودی (Portrait)")
+                        
+                        # تنظیمات Fit-to-Page برای جلوگیری از تقسیم محتوا
+                        sheet.PageSetup.Zoom = False  # غیرفعال کردن زوم دستی
+                        sheet.PageSetup.FitToPagesWide = 1  # فشرده‌سازی به 1 صفحه عرض
+                        sheet.PageSetup.FitToPagesTall = 1  # فشرده‌سازی به 1 صفحه ارتفاع
+                        
+                        # تنظیمات بهینه برای PDF
+                        sheet.PageSetup.PaperSize = 9  # xlPaperA4
+                        sheet.PageSetup.CenterHorizontally = True
+                        sheet.PageSetup.CenterVertically = True
+                        
+                        # حاشیه‌ها (به اینچ)
+                        sheet.PageSetup.LeftMargin = excel.InchesToPoints(0.25)
+                        sheet.PageSetup.RightMargin = excel.InchesToPoints(0.25)
+                        sheet.PageSetup.TopMargin = excel.InchesToPoints(0.25)
+                        sheet.PageSetup.BottomMargin = excel.InchesToPoints(0.25)
+                        sheet.PageSetup.HeaderMargin = excel.InchesToPoints(0.1)
+                        sheet.PageSetup.FooterMargin = excel.InchesToPoints(0.1)
+                        
+                        # تنظیمات کیفیت چاپ
+                        sheet.PageSetup.PrintQuality = 600  # DPI
+                        sheet.PageSetup.Draft = False
+                        
+                    except Exception as e:
+                        print(f"  ⚠️ خطا در تنظیمات شیت '{sheet.Name}': {str(e)}")
+                
+                # تبدیل به PDF
+                # 0 = xlTypePDF
+                # Quality=0 means standard quality
+                wb.ExportAsFixedFormat(
+                    Type=0,  # xlTypePDF
+                    Filename=pdf_path,
+                    Quality=0,  # xlQualityStandard
+                    IncludeDocProperties=True,
+                    IgnorePrintAreas=False,
+                    OpenAfterPublish=False
+                )
                 
                 # بستن فایل
                 wb.Close(False)
@@ -142,9 +195,9 @@ def convert_excel_to_pdf(source_dir, pdf_output_dir):
     print("="*50)
 
 # تنظیمات
-source_directory = r"D:\Sepher_Pasargad\works\Production\Daily_Acceptance"
-extracted_files_dir = r"D:\Sepher_Pasargad\works\Production\Daily_Acceptance"
-pdf_output_dir = r"D:\Sepher_Pasargad\works\Production\Converted_Excel_to_PDF"
+source_directory = r"D:\Sepher_Pasargad\works\Production\02-Operation Daily Activity Report"
+extracted_files_dir = r"D:\Sepher_Pasargad\works\Production\02-Operation Daily Activity Report"
+pdf_output_dir = r"D:\Sepher_Pasargad\works\Production\02-Operation Daily Activity Report"
 
 # اجرای برنامه
 if __name__ == "__main__":

@@ -90,7 +90,7 @@ def process_files(directory):
             seq, rev, date = extract_docx(file)
         
         if seq and rev:
-            new_name = f"SJSC-GGNRSP-MADR-REMO-{seq}-{rev}{ext}"
+            new_name = f"SJSC-GGNRSP-EPWC-REDA-{seq}-{rev}{ext}"
             results.append({
                 'old_name': file.name,
                 'new_name': new_name,
@@ -145,8 +145,8 @@ def rename_files(results):
 
 
 def main():
-    DIR = r"D:\Sepher_Pasargad\works\Maintenace\Maintenance Report\All_Extracted\monthly"
-    EXCEL = r"D:\Sepher_Pasargad\works\Maintenace\Maintenance Report\All_Extracted\renamed_files.xlsx"
+    DIR = r"D:\Sepher_Pasargad\works\Production\01-CWPD"
+    EXCEL = r"D:\Sepher_Pasargad\works\Production\01-CWPD\renamed_files.xlsx"
     
     print("Processing files...\n")
     results = process_files(DIR)
